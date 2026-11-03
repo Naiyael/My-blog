@@ -6,6 +6,7 @@ export const posts = sqliteTable('posts', {
   cover: text('cover').notNull().default(''), authorId: text('author_id').notNull(),
   createdAt: text('created_at').notNull(), updatedAt: text('updated_at').notNull(),
   publishedAt: text('published_at'), version: integer('version').notNull().default(1),
+  pageKey: text('page_key'), trashedAt: text('trashed_at'), previousStatus: text('previous_status'),
 }, t => [index('posts_public').on(t.status,t.publishedAt)]);
 export const uploads = sqliteTable('uploads', {
   id: text('id').primaryKey(), objectKey: text('object_key').notNull(),
