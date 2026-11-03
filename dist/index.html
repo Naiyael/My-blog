@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Naiyael 的个人空间：关于算法、代码，以及屏幕之外的日常。">
+  <meta name="theme-color" content="#f6f5f0"><title>Naiyael · 代码与日常</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23e95736'/%3E%3Ctext x='13' y='46' font-family='monospace' font-size='42' font-weight='bold' fill='white'%3EN%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="header wrap">
+  <a class="brand" href="#" aria-label="Naiyael 首页">n<span>.</span></a>
+  <nav aria-label="主导航"><a href="#main" class="nav-home">首页</a><a href="#notes">笔记与日常</a><a href="#about">关于我 <span>↗</span></a></nav>
+  <span class="header-note"><i></i> A little space on the internet</span>
+</header>
+<main id="main">
+<section class="hero wrap" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <div class="eyebrow"><span class="small-cross">✳</span> HELLO, WORLD. I'M NAIYAEL.</div>
+    <h1 id="hero-title">写点代码，<br>记点<span class="accent">日常。</span><span class="title-dot"></span></h1>
+    <p class="intro">你好，我是 Naiyael，一名 ACMer。<br>这里装着算法里的思考，也留给生活一点空白。</p>
+    <div class="hero-actions"><a class="button" href="#notes">翻翻我的笔记 <span>↗</span></a><a class="text-link" href="#about">认识一下 <span>→</span></a></div>
+    <div class="hero-tags"><span>C++</span><span>ALGORITHMS</span><span>EVERYDAY LIFE</span></div>
+  </div>
+  <div class="hero-art" aria-label="算法节点与代码的插画">
+    <div class="art-caption">FIG. 01 — CONNECTING THE DOTS</div>
+    <svg class="graph" viewBox="0 0 500 400" role="img" aria-label="由起点连接到终点的图结构，寓意探索与思考">
+      <defs><pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#d8d7ce"/></pattern></defs>
+      <rect width="500" height="400" fill="url(#dots)"/>
+      <g stroke="#b9b9ab" stroke-width="1.5" fill="none"><path d="M87 230L176 119L294 180L396 77M176 119L287 63M87 230L236 294L294 180L410 279M236 294L410 279M294 180L287 63"/></g>
+      <path d="M87 230L176 119L294 180L410 279" stroke="#e95736" stroke-width="3" fill="none"/>
+      <g fill="#f6f5f0" stroke="#b9b9ab" stroke-width="1.5"><circle cx="287" cy="63" r="12"/><circle cx="396" cy="77" r="12"/><circle cx="236" cy="294" r="12"/></g>
+      <g fill="#e95736"><circle cx="87" cy="230" r="16"/><circle cx="176" cy="119" r="16"/><circle cx="294" cy="180" r="16"/><circle cx="410" cy="279" r="16"/></g>
+      <g fill="#fff" font-family="monospace" font-size="11" text-anchor="middle"><text x="87" y="234">s</text><text x="176" y="123">1</text><text x="294" y="184">2</text><text x="410" y="283">t</text></g>
+      <g fill="#818174" font-family="monospace" font-size="11"><text x="111" y="169">think</text><text x="230" y="137">try</text><text x="353" y="218">repeat</text><text x="205" y="327">there is always a path.</text></g>
+    </svg>
+    <div class="code-sticker"><div class="terminal-top"><span><b></b><b></b><b></b></span><span>life.cpp</span></div><code><span class="code-muted">// 保持好奇，继续探索</span><br><span class="code-orange">while</span> (curious) {<br>&nbsp; learn();<br>&nbsp; live();<br>}</code><span class="terminal-cursor">▋</span></div>
+    <span class="art-spark" aria-hidden="true">✳</span><span class="art-index">001 / ∞</span>
+  </div>
+</section>
+<div class="ticker" aria-hidden="true"><div class="wrap ticker-inner"><span>THINK DEEPLY</span><b>✳</b><span>BUILD SOMETHING</span><b>✳</b><span>ENJOY THE ORDINARY</span><b>✳</b><span>STAY CURIOUS</span><b>✳</b></div></div>
+<section class="notes wrap" id="notes" aria-labelledby="notes-title">
+  <div class="section-head"><div><div class="eyebrow muted">THE NOTEBOOK</div><h2 id="notes-title">思考的碎片<span class="accent"> /</span></h2></div><p>从一个解法，到一个平凡的瞬间。</p></div>
+  <div class="note-toolbar"><div class="filters" role="group" aria-label="按笔记类型筛选"><button class="active" data-filter="all" aria-pressed="true">全部 <span>04</span></button><button data-filter="algorithm" aria-pressed="false">算法笔记 <span>02</span></button><button data-filter="daily" aria-pressed="false">日常碎片 <span>02</span></button></div><span class="example-label">内容预览 · 以下为示例笔记</span></div>
+  <div class="note-grid" id="note-grid">
+    <button class="note-card" data-category="algorithm" data-note="binary"><div class="card-art binary-art"><div class="binary-title">一半，再一半。</div><div class="binary-blocks"><i></i><i></i><i></i><i class="chosen"></i><i></i><i></i><i></i><i></i></div><span class="art-mini">l → &nbsp;&nbsp; mid &nbsp;&nbsp; ← r</span><strong>O(log n)</strong></div><div class="card-body"><div class="card-meta"><span>ALGORITHM</span><span>示例 / 01</span></div><h3>二分的边界，和一点直觉 <span>↗</span></h3><p>从循环不变量出发，让每一次区间收缩都有据可依。</p><div class="card-bottom"><span>二分查找 · C++</span><span>3 分钟阅读</span></div></div></button>
+    <button class="note-card" data-category="daily" data-note="ordinary"><div class="card-art daily-art"><div class="window"><div class="window-frame"></div><div class="sun"></div><div class="hill hill-one"></div><div class="hill hill-two"></div><div class="window-cross"></div></div><div class="cup"><i></i></div><span class="art-mini">a pause between the lines.</span></div><div class="card-body"><div class="card-meta"><span>DAILY LIFE</span><span>示例 / 02</span></div><h3>屏幕之外，也有好风景 <span>↗</span></h3><p>给日常留一个位置，记录那些很小、但值得记住的事情。</p><div class="card-bottom"><span>生活 · 随想</span><span>2 分钟阅读</span></div></div></button>
+    <button class="note-card compact" data-category="algorithm" data-note="graph"><div class="card-body"><div class="card-meta"><span>ALGORITHM</span><span>示例 / 03</span></div><h3>从一个点出发：BFS 与 DFS <span>↗</span></h3><p>队列与递归，两种不同的探索节奏。</p><div class="card-bottom"><span>图论 · 搜索</span><span>3 分钟阅读</span></div></div></button>
+    <button class="note-card compact" data-category="daily" data-note="record"><div class="card-body"><div class="card-meta"><span>DAILY LIFE</span><span>示例 / 04</span></div><h3>关于记录这件小事 <span>↗</span></h3><p>不必等想清楚一切，再写下第一行。</p><div class="card-bottom"><span>记录 · 个人空间</span><span>2 分钟阅读</span></div></div></button>
+  </div><p class="filter-status sr-only" aria-live="polite"></p>
+</section>
+<section class="about wrap" id="about" aria-labelledby="about-title"><div class="about-symbol" aria-hidden="true">n<span>.</span><small>KEEP EXPLORING</small></div><div class="about-copy"><div class="eyebrow muted">A BIT ABOUT ME</div><h2 id="about-title">ACMer，也记录日常。</h2><p>我是 Naiyael。这个小站是我的个人空间：一边琢磨算法与代码，一边收集日常里的片段。</p><p>把想法写下来，把问题慢慢想明白。希望这里能留下解题的思路，也留下自己的节奏。</p><div class="about-tags"><span><i></i> 算法与代码</span><span><i></i> 日常与记录</span><span><i></i> 持续探索中</span></div></div></section>
+<section class="outro wrap"><span class="eyebrow muted">TO BE CONTINUED</span><h2>下一行，<span>继续。</span><span class="outro-star" aria-hidden="true">✳</span></h2><div class="outro-bottom"><p>代码会有下一行，生活也会有新的故事。</p><a class="text-link" href="#main">回到开头 <span>↑</span></a></div></section>
+</main>
+<footer class="footer wrap"><a href="#" class="footer-brand">Naiyael<span>.</span></a><span>代码、日常，以及一点好奇心。</span><span>© <span id="year">2026</span> NAIYAEL</span></footer>
+<dialog id="article-dialog" aria-labelledby="article-title"><div class="dialog-bar"><span>NAIYAEL / NOTEBOOK</span><button id="close-dialog" aria-label="关闭文章">关闭 <span>×</span></button></div><article><p id="article-category" class="eyebrow muted"></p><h2 id="article-title"></h2><p class="article-notice">示例内容 · 用于展示笔记阅读效果，非个人经历记录。</p><div id="article-content"></div></article></dialog>
+</body></html>
