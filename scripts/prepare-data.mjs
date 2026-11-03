@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+const read = name => JSON.parse(fs.readFileSync(`research/cf-${name}.json`, 'utf8').replace(/^\uFEFF/, '')).result;
+const user = read('user')[0], history = read('rating'), submissions = read('submissions');
+const solved = new Map();
+for (const s of submissions) if (s.verdict === 'OK' && !solved.has(`${s.problem.contestId}-${s.problem.index}`)) solved.set(`${s.problem.contestId}-${s.problem.index}`, s);
+const records = [...solved.values()].map(s => ({ id: `${s.problem.contestId}${s.problem.index}`, name: s.problem.name, rating: s.problem.rating ?? null, tags: s.problem.tags, contestId: s.problem.contestId, index: s.problem.index, submissionId: s.id, date: new Date(s.creationTimeSeconds * 1000).toISOString().slice(0, 10), gym: s.problem.contestId >= 100000 }));
+const tags = {};
+for (const p of records) for (const tag of p.tags) tags[tag] = (tags[tag] ?? 0) + 1;
+const data = { handle: user.handle, rating: user.rating, maxRating: user.maxRating, rank: user.rank, totalSubmissions: submissions.length, solved: records.length, maxDifficulty: Math.max(...records.map(p => p.rating ?? 0)), updatedAt: '2026-11-03', history, tags, problems: records.sort((a,b) => (b.rating ?? 0) - (a.rating ?? 0)) };
+fs.mkdirSync('src/data', {recursive:true}); fs.writeFileSync('src/data/codeforces.json', JSON.stringify(data,null,2));
+console.log(JSON.stringify({solved:data.solved,ratedContests:history.length,maxDifficulty:data.maxDifficulty}));

@@ -1,58 +1,110 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Naiyael 的个人空间：关于算法、代码，以及屏幕之外的日常。">
-  <meta name="theme-color" content="#f6f5f0"><title>Naiyael · 代码与日常</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23e95736'/%3E%3Ctext x='13' y='46' font-family='monospace' font-size='42' font-weight='bold' fill='white'%3EN%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
-</head>
-<body>
-<a class="skip" href="#main">跳到正文</a>
-<header class="header wrap">
-  <a class="brand" href="#" aria-label="Naiyael 首页">n<span>.</span></a>
-  <nav aria-label="主导航"><a href="#main" class="nav-home">首页</a><a href="#notes">笔记与日常</a><a href="#about">关于我 <span>↗</span></a></nav>
-  <span class="header-note"><i></i> A little space on the internet</span>
-</header>
-<main id="main">
-<section class="hero wrap" aria-labelledby="hero-title">
-  <div class="hero-copy">
-    <div class="eyebrow"><span class="small-cross">✳</span> HELLO, WORLD. I'M NAIYAEL.</div>
-    <h1 id="hero-title">写点代码，<br>记点<span class="accent">日常。</span><span class="title-dot"></span></h1>
-    <p class="intro">你好，我是 Naiyael，一名 ACMer。<br>这里装着算法里的思考，也留给生活一点空白。</p>
-    <div class="hero-actions"><a class="button" href="#notes">翻翻我的笔记 <span>↗</span></a><a class="text-link" href="#about">认识一下 <span>→</span></a></div>
-    <div class="hero-tags"><span>C++</span><span>ALGORITHMS</span><span>EVERYDAY LIFE</span></div>
-  </div>
-  <div class="hero-art" aria-label="算法节点与代码的插画">
-    <div class="art-caption">FIG. 01 — CONNECTING THE DOTS</div>
-    <svg class="graph" viewBox="0 0 500 400" role="img" aria-label="由起点连接到终点的图结构，寓意探索与思考">
-      <defs><pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#d8d7ce"/></pattern></defs>
-      <rect width="500" height="400" fill="url(#dots)"/>
-      <g stroke="#b9b9ab" stroke-width="1.5" fill="none"><path d="M87 230L176 119L294 180L396 77M176 119L287 63M87 230L236 294L294 180L410 279M236 294L410 279M294 180L287 63"/></g>
-      <path d="M87 230L176 119L294 180L410 279" stroke="#e95736" stroke-width="3" fill="none"/>
-      <g fill="#f6f5f0" stroke="#b9b9ab" stroke-width="1.5"><circle cx="287" cy="63" r="12"/><circle cx="396" cy="77" r="12"/><circle cx="236" cy="294" r="12"/></g>
-      <g fill="#e95736"><circle cx="87" cy="230" r="16"/><circle cx="176" cy="119" r="16"/><circle cx="294" cy="180" r="16"/><circle cx="410" cy="279" r="16"/></g>
-      <g fill="#fff" font-family="monospace" font-size="11" text-anchor="middle"><text x="87" y="234">s</text><text x="176" y="123">1</text><text x="294" y="184">2</text><text x="410" y="283">t</text></g>
-      <g fill="#818174" font-family="monospace" font-size="11"><text x="111" y="169">think</text><text x="230" y="137">try</text><text x="353" y="218">repeat</text><text x="205" y="327">there is always a path.</text></g>
-    </svg>
-    <div class="code-sticker"><div class="terminal-top"><span><b></b><b></b><b></b></span><span>life.cpp</span></div><code><span class="code-muted">// 保持好奇，继续探索</span><br><span class="code-orange">while</span> (curious) {<br>&nbsp; learn();<br>&nbsp; live();<br>}</code><span class="terminal-cursor">▋</span></div>
-    <span class="art-spark" aria-hidden="true">✳</span><span class="art-index">001 / ∞</span>
-  </div>
-</section>
-<div class="ticker" aria-hidden="true"><div class="wrap ticker-inner"><span>THINK DEEPLY</span><b>✳</b><span>BUILD SOMETHING</span><b>✳</b><span>ENJOY THE ORDINARY</span><b>✳</b><span>STAY CURIOUS</span><b>✳</b></div></div>
-<section class="notes wrap" id="notes" aria-labelledby="notes-title">
-  <div class="section-head"><div><div class="eyebrow muted">THE NOTEBOOK</div><h2 id="notes-title">思考的碎片<span class="accent"> /</span></h2></div><p>从一个解法，到一个平凡的瞬间。</p></div>
-  <div class="note-toolbar"><div class="filters" role="group" aria-label="按笔记类型筛选"><button class="active" data-filter="all" aria-pressed="true">全部 <span>04</span></button><button data-filter="algorithm" aria-pressed="false">算法笔记 <span>02</span></button><button data-filter="daily" aria-pressed="false">日常碎片 <span>02</span></button></div><span class="example-label">内容预览 · 以下为示例笔记</span></div>
-  <div class="note-grid" id="note-grid">
-    <button class="note-card" data-category="algorithm" data-note="binary"><div class="card-art binary-art"><div class="binary-title">一半，再一半。</div><div class="binary-blocks"><i></i><i></i><i></i><i class="chosen"></i><i></i><i></i><i></i><i></i></div><span class="art-mini">l → &nbsp;&nbsp; mid &nbsp;&nbsp; ← r</span><strong>O(log n)</strong></div><div class="card-body"><div class="card-meta"><span>ALGORITHM</span><span>示例 / 01</span></div><h3>二分的边界，和一点直觉 <span>↗</span></h3><p>从循环不变量出发，让每一次区间收缩都有据可依。</p><div class="card-bottom"><span>二分查找 · C++</span><span>3 分钟阅读</span></div></div></button>
-    <button class="note-card" data-category="daily" data-note="ordinary"><div class="card-art daily-art"><div class="window"><div class="window-frame"></div><div class="sun"></div><div class="hill hill-one"></div><div class="hill hill-two"></div><div class="window-cross"></div></div><div class="cup"><i></i></div><span class="art-mini">a pause between the lines.</span></div><div class="card-body"><div class="card-meta"><span>DAILY LIFE</span><span>示例 / 02</span></div><h3>屏幕之外，也有好风景 <span>↗</span></h3><p>给日常留一个位置，记录那些很小、但值得记住的事情。</p><div class="card-bottom"><span>生活 · 随想</span><span>2 分钟阅读</span></div></div></button>
-    <button class="note-card compact" data-category="algorithm" data-note="graph"><div class="card-body"><div class="card-meta"><span>ALGORITHM</span><span>示例 / 03</span></div><h3>从一个点出发：BFS 与 DFS <span>↗</span></h3><p>队列与递归，两种不同的探索节奏。</p><div class="card-bottom"><span>图论 · 搜索</span><span>3 分钟阅读</span></div></div></button>
-    <button class="note-card compact" data-category="daily" data-note="record"><div class="card-body"><div class="card-meta"><span>DAILY LIFE</span><span>示例 / 04</span></div><h3>关于记录这件小事 <span>↗</span></h3><p>不必等想清楚一切，再写下第一行。</p><div class="card-bottom"><span>记录 · 个人空间</span><span>2 分钟阅读</span></div></div></button>
-  </div><p class="filter-status sr-only" aria-live="polite"></p>
-</section>
-<section class="about wrap" id="about" aria-labelledby="about-title"><div class="about-symbol" aria-hidden="true">n<span>.</span><small>KEEP EXPLORING</small></div><div class="about-copy"><div class="eyebrow muted">A BIT ABOUT ME</div><h2 id="about-title">ACMer，也记录日常。</h2><p>我是 Naiyael。这个小站是我的个人空间：一边琢磨算法与代码，一边收集日常里的片段。</p><p>把想法写下来，把问题慢慢想明白。希望这里能留下解题的思路，也留下自己的节奏。</p><div class="about-tags"><span><i></i> 算法与代码</span><span><i></i> 日常与记录</span><span><i></i> 持续探索中</span></div></div></section>
-<section class="outro wrap"><span class="eyebrow muted">TO BE CONTINUED</span><h2>下一行，<span>继续。</span><span class="outro-star" aria-hidden="true">✳</span></h2><div class="outro-bottom"><p>代码会有下一行，生活也会有新的故事。</p><a class="text-link" href="#main">回到开头 <span>↑</span></a></div></section>
-</main>
-<footer class="footer wrap"><a href="#" class="footer-brand">Naiyael<span>.</span></a><span>代码、日常，以及一点好奇心。</span><span>© <span id="year">2026</span> NAIYAEL</span></footer>
-<dialog id="article-dialog" aria-labelledby="article-title"><div class="dialog-bar"><span>NAIYAEL / NOTEBOOK</span><button id="close-dialog" aria-label="关闭文章">关闭 <span>×</span></button></div><article><p id="article-category" class="eyebrow muted"></p><h2 id="article-title"></h2><p class="article-notice">示例内容 · 用于展示笔记阅读效果，非个人经历记录。</p><div id="article-content"></div></article></dialog>
-</body></html>
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Naiyael</title>
+    <meta name="description" content="Naiyael 的个人主页。ACMer，Codeforces qiushan233，记录算法与日常。">
+    <meta name="generator" content="VitePress v1.6.4">
+    <link rel="preload stylesheet" href="/assets/style.u-F_dsuR.css" as="style">
+    <link rel="preload stylesheet" href="/vp-icons.css" as="style">
+    <script type="module" src="/assets/chunks/metadata.fd363663.js"></script>
+    <script type="module" src="/assets/app.Cv_LxSDz.js"></script>
+    <link rel="preload" href="/assets/inter-roman-latin.Di8DUHzh.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="modulepreload" href="/assets/chunks/theme.D8M4tDym.js">
+    <link rel="modulepreload" href="/assets/chunks/framework.C1gZXFVa.js">
+    <link rel="modulepreload" href="/assets/index.md.BzcZVb-U.lean.js">
+    <link rel="icon" type="image/jpeg" href="/images/avatar.jpg">
+    <meta name="theme-color" content="#f6f7f8">
+    <meta property="og:image" content="https://folio-studio-20261103-n7x.cuteagate.chatgpt.site/images/avatar.jpg">
+    <script id="check-mac-os">document.documentElement.classList.toggle("mac",/Mac|iPhone|iPod|iPad/i.test(navigator.platform));</script>
+  </head>
+  <body>
+    <div id="app"><!--[--><!--v-if--><!--v-if--><!--v-if--><!--[--><!--v-if--><!----><!--v-if--><div class="tk-right-bottom-button tk-wallpaper-outside flx-column"><!--[--><!--]--><div title="返回顶部" class="tk-right-bottom-button__button back-top" style="--tk-progress:0;display:none;" role="button" aria-label="返回顶部" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><span class="content">0</span></div><!--v-if--><!--v-if--><!--[--><!--]--></div><!--]--><div class="Layout tk-layout tk-layout--hide-vp-home" data-v-5d98c3a5><!--[--><!--]--><!--[--><span tabindex="-1" data-v-0b0ada53></span><a href="#VPContent" class="VPSkipLink visually-hidden" data-v-0b0ada53>Skip to content</a><!--]--><!----><header class="VPNav" data-v-5d98c3a5 data-v-ae24b3ad><div class="VPNavBar" data-v-ae24b3ad data-v-6aa21345><div class="wrapper" data-v-6aa21345><div class="container" data-v-6aa21345><div class="title" data-v-6aa21345><div class="VPNavBarTitle" data-v-6aa21345 data-v-1168a8e4><a class="title" href="/" data-v-1168a8e4><!--[--><!--]--><!----><span data-v-1168a8e4>Naiyael</span><!--[--><!--]--></a></div></div><div class="content" data-v-6aa21345><div class="content-body" data-v-6aa21345><!--[--><!--]--><div class="VPNavBarSearch search" data-v-6aa21345><!--[--><!----><div id="local-search"><button type="button" class="DocSearch DocSearch-Button" aria-label="搜索本站"><span class="DocSearch-Button-Container"><span class="vp-icon DocSearch-Search-Icon"></span><span class="DocSearch-Button-Placeholder">搜索</span></span><span class="DocSearch-Button-Keys"><kbd class="DocSearch-Button-Key"></kbd><kbd class="DocSearch-Button-Key">K</kbd></span></button></div><!--]--></div><nav aria-labelledby="main-nav-aria-label" class="VPNavBarMenu menu" data-v-6aa21345 data-v-dc692963><span id="main-nav-aria-label" class="visually-hidden" data-v-dc692963> Main Navigation </span><!--[--><!--[--><a class="VPLink link VPNavBarMenuLink active" href="/" tabindex="0" data-v-dc692963 data-v-e56f3d57><!--[--><span data-v-e56f3d57>首页</span><!--]--></a><!--]--><!--[--><div class="VPFlyout VPNavBarMenuGroup" data-v-dc692963 data-v-cf11d7a2><button type="button" class="button" aria-haspopup="true" aria-expanded="false" data-v-cf11d7a2><span class="text" data-v-cf11d7a2><!----><span data-v-cf11d7a2>算法</span><span class="vpi-chevron-down text-icon" data-v-cf11d7a2></span></span></button><div class="menu" data-v-cf11d7a2><div class="VPMenu" data-v-cf11d7a2 data-v-b98bc113><div class="items" data-v-b98bc113><!--[--><!--[--><div class="VPMenuLink" data-v-b98bc113 data-v-35975db6><a class="VPLink link" href="/codeforces.html" data-v-35975db6><!--[--><span data-v-35975db6>Codeforces</span><!--]--></a></div><!--]--><!--[--><div class="VPMenuLink" data-v-b98bc113 data-v-35975db6><a class="VPLink link" href="/luogu.html" data-v-35975db6><!--[--><span data-v-35975db6>洛谷</span><!--]--></a></div><!--]--><!--]--></div><!--[--><!--]--></div></div></div><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/daily.html" tabindex="0" data-v-dc692963 data-v-e56f3d57><!--[--><span data-v-e56f3d57>日常</span><!--]--></a><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/about.html" tabindex="0" data-v-dc692963 data-v-e56f3d57><!--[--><span data-v-e56f3d57>关于</span><!--]--></a><!--]--><!--[--><a class="VPLink link vp-external-link-icon VPNavBarMenuLink" href="https://codeforces.com/profile/qiushan233" target="_blank" rel="noreferrer" tabindex="0" data-v-dc692963 data-v-e56f3d57><!--[--><span data-v-e56f3d57>Codeforces ↗</span><!--]--></a><!--]--><!--]--></nav><!----><!----><!----><!----><!--[--><!--]--><button type="button" class="VPNavBarHamburger hamburger" aria-label="mobile navigation" aria-expanded="false" aria-controls="VPNavScreen" data-v-6aa21345 data-v-e5dd9c1c><span class="container" data-v-e5dd9c1c><span class="top" data-v-e5dd9c1c></span><span class="middle" data-v-e5dd9c1c></span><span class="bottom" data-v-e5dd9c1c></span></span></button></div></div></div></div><div class="divider" data-v-6aa21345><div class="divider-line" data-v-6aa21345></div></div></div><!----></header><!----><!----><div class="VPContent is-home" id="VPContent" data-v-5d98c3a5 data-v-1428d186><div class="VPHome" data-v-1428d186 data-v-8b561e3d><!--[--><!--[--><!--[--><!--[--><!--]--><!--[--><!--]--><!-- 自定义首页 --><div class="tk-home-main" role="main" aria-label="首页"><div><!--[--><!--[--><!--]--><div class="tk-banner is-part-img" style="--tk-banner-title-text:3.5rem;--tk-banner-desc-text:1.05rem;--tk-banner-text-color:#ffffff;" aria-label="首页横幅"><!--[--><div class="tk-banner-bg-image part" style="--tk-banner-img-bg:url(/images/mountain-lake.jpg) center center / cover no-repeat;--tk-banner-mask-bg-color:rgba(13, 30, 35, 0.27);--tk-banner-img-switch-interval-s:15s;" aria-label="首页横幅背景图"><div class="mask" aria-label="首页横幅遮罩层"></div><!--[--><div class="tk-banner__content no-feature"><!--[--><!--]--><div class="tk-banner-content" aria-label="首页横幅内容"><!-- 首页 banner 图文字插槽 --><!--[--><!-- 如果没有传入插槽，则渲染默认的 h1 标签及内容 --><h1 class="tk-banner-content__title" aria-label="首页横幅标题">Naiyael</h1><!--]--><p class="tk-banner-content__desc" aria-label="首页横幅描述"><span>ACMer，写代码，也记日常。</span></p></div><!--[--><!--]--><!--[--><!--]--><!--v-if--><!--[--><!--]--></div><!--]--></div><!--v-if--><!--]--><!--v-if--></div><!--[--><!--]--><!--]--></div><div class="tk-home-main__content tk-wallpaper-outside flx-start-justify-center"><div class="tk-home-main__content__post" aria-label="文章列表"><!--[--><!--]--><div class="tk-post is-list"><!--[--><!--[--><ul aria-label="文章列表"></ul><!--]--><div class="tk-post__pagination flx-justify-center" aria-label="分页导航"><!--v-if--></div><!--]--></div><!--[--><!--]--></div><div class="tk-home-main__content__info is-right" aria-label="侧边卡片栏"><div class="tk-home-card flx-column"><!--[--><!--]--><!--[--><!--[--><!--[--><!-- 使用淡入动画 --><!--[--><!-- 不使用淡入动画 --><!--[--><!--]--><!--[--><div class="tk-page-card card tk-my" aria-label="我的信息卡片" style=""><!--v-if--><!--[--><!--v-if--><!--[--><!--]--><div class="tk-my__avatar circle flx-center"><div><span class="tk-avatar tk-avatar--circle" style="--tk-avatar-size:105px;--tk-avatar-bg-color:transparent;--tk-avatar-text-size:;--tk-avatar-icon-size:;" title="我好看吗" aria-hidden="true"><img src="/images/avatar.jpg" alt="博主头像" style="object-fit:cover;"></span><!--v-if--></div></div><!--[--><!--]--><!--v-if--><div class="tk-my__blogger" aria-label="博主信息"><h3 class="name">Naiyael</h3><span class="slogan">ACMer / qiushan233</span></div><!--]--></div><!--]--><!--[--><!--]--><!--]--><!--]--><!--[--><!-- 使用淡入动画 --><!--[--><!-- 不使用淡入动画 --><!--[--><!--]--><!--[--><!--v-if--><!--]--><!--[--><!--]--><!--]--><!--]--><!--[--><!-- 使用淡入动画 --><!--[--><!-- 不使用淡入动画 --><!--[--><!--]--><!--[--><div class="tk-page-card card tk-category" aria-label="首页分类卡片"><div class="tk-page-card__header flx-justify-between"><!--[--><a class="tk-pointer" aria-label="文章分类"><span class="title flx-align-center"><svg
+    t="1738937526967"
+    class="icon"
+    viewBox="0 0 1024 1024"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    p-id="6716"
+    width="200"
+    height="200"
+  >
+    <path
+      d="M918.673 883H104.327C82.578 883 65 867.368 65 848.027V276.973C65 257.632 82.578 242 104.327 242h814.346C940.422 242 958 257.632 958 276.973v571.054C958 867.28 940.323 883 918.673 883z"
+      fill="#FFE9B4"
+      p-id="6717"
+    ></path>
+    <path
+      d="M512 411H65V210.37C65 188.597 82.598 171 104.371 171h305.92c17.4 0 32.71 11.334 37.681 28.036L512 411z"
+      fill="#FFB02C"
+      p-id="6718"
+    ></path>
+    <path
+      d="M918.673 883H104.327C82.578 883 65 865.42 65 843.668V335.332C65 313.58 82.578 296 104.327 296h814.346C940.422 296 958 313.58 958 335.332v508.336C958 865.32 940.323 883 918.673 883z"
+      fill="#FFCA28"
+      p-id="6719"
+    ></path>
+  </svg>文章分类</span></a><!--]--><!--[--><div><!--[--><span class="page-button disabled" role="button" aria-label="上一页" aria-disabled="true"><i class="tk-icon" style="--icon-size:14px;--icon-color-hover:var(--tk-theme-color);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+    <path
+      fill="currentColor"
+      d="M609.408 149.376 277.76 489.6a32 32 0 0 0 0 44.672l331.648 340.352a29.12 29.12 0 0 0 41.728 0 30.592 30.592 0 0 0 0-42.752L339.264 511.936l311.872-319.872a30.592 30.592 0 0 0 0-42.688 29.12 29.12 0 0 0-41.728 0z"
+    ></path>
+  </svg></i></span><!--]--><!--[--><span class="page-button disabled" role="button" aria-label="下一页" aria-disabled="true"><i class="tk-icon" style="--icon-size:14px;--icon-color-hover:var(--tk-theme-color);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+    <path
+      fill="currentColor"
+      d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z"
+    ></path>
+  </svg></i></span><!--]--></div><!--]--></div><!--[--><div mode="out-in" class="tk-category__list flx-column" aria-label="分类列表"><a class="hover-color" style="top:0px;" aria-label="算法"><span class="sle">算法</span><span>2</span></a><a class="hover-color" style="top:0px;" aria-label="关于"><span class="sle">关于</span><span>1</span></a></div><!--]--></div><!--]--><!--[--><!--]--><!--]--><!--]--><!--[--><!-- 使用淡入动画 --><!--[--><!-- 不使用淡入动画 --><!--[--><!--]--><!--[--><div class="tk-page-card card tk-tag" aria-label="首页标签卡片"><div class="tk-page-card__header flx-justify-between"><!--[--><a class="tk-pointer" aria-label="热门标签"><span class="title flx-align-center"><svg
+  t="1695048840129" class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" p-id="4290" width="200" height="200"
+  >
+  <path
+    d="M810.88 245.888a118.432 118.432 0 1 0 0 236.864 118.432 118.432 0 0 0 0-236.864z m-151.008 118.432a151.008 151.008 0 1 1 302.016 0 151.008 151.008 0 0 1-302.016 0z"
+    fill="#D3D3D3" p-id="4291"
+  />
+  <path
+    d="M774.08 565.6l61.76-160.64c6.4-16.64 2.56-35.84-10.24-48.64l-151.04-151.04c-12.8-12.8-31.68-16.64-48.64-10.24l-160.64 61.76c-12.16 4.8-23.36 11.84-32.64 21.12l-355.2 355.2c-17.92 17.92-17.92 46.72 0 64.32l256 256c17.92 17.92 46.72 17.92 64.32 0l355.2-355.2c9.28-9.28 16.32-20.16 21.12-32.64z m-159.36-149.12c-22.08-22.08-22.08-57.6 0-79.68 22.08-22.08 57.6-22.08 79.68 0 22.08 22.08 22.08 57.6 0 79.68-22.08 21.76-57.92 21.76-79.68 0z"
+    fill="#FCD53F" p-id="4292"
+  />
+  <path
+    d="M654.4 320.48c14.4 0 28.8 5.44 39.68 16.64 22.08 22.08 22.08 57.6 0 79.68-10.88 10.88-25.28 16.64-39.68 16.64-14.4 0-28.8-5.44-39.68-16.64-22.08-22.08-22.08-57.6 0-79.68 10.88-11.2 25.28-16.64 39.68-16.64z m0-30.08c-23.04 0-44.8 8.96-61.12 25.28a86.72 86.72 0 0 0 0 122.24c16.32 16.32 38.08 25.28 61.12 25.28s44.8-8.96 61.12-25.28a86.72 86.72 0 0 0 0-122.24c-16.32-16.32-38.08-25.28-61.12-25.28z"
+    fill="#F8312F" p-id="4293"
+  />
+  <path
+    d="M676.16 348.032c8.992 0 16.288 7.296 16.288 16.288a118.144 118.144 0 0 0 64.288 105.44h0.064c22.24 11.296 47.36 15.264 71.68 11.84a16.288 16.288 0 0 1 4.48 32.32 154.24 154.24 0 0 1-90.848-15.04 150.72 150.72 0 0 1-82.24-134.56c0-8.992 7.296-16.288 16.288-16.288z"
+    fill="#D3D3D3" p-id="4294"
+  />
+  </svg>热门标签</span></a><!--]--><!--[--><div><!--[--><span class="page-button disabled" role="button" aria-label="上一页" aria-disabled="true"><i class="tk-icon" style="--icon-size:14px;--icon-color-hover:var(--tk-theme-color);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+    <path
+      fill="currentColor"
+      d="M609.408 149.376 277.76 489.6a32 32 0 0 0 0 44.672l331.648 340.352a29.12 29.12 0 0 0 41.728 0 30.592 30.592 0 0 0 0-42.752L339.264 511.936l311.872-319.872a30.592 30.592 0 0 0 0-42.688 29.12 29.12 0 0 0-41.728 0z"
+    ></path>
+  </svg></i></span><!--]--><!--[--><span class="page-button disabled" role="button" aria-label="下一页" aria-disabled="true"><i class="tk-icon" style="--icon-size:14px;--icon-color-hover:var(--tk-theme-color);" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+    <path
+      fill="currentColor"
+      d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z"
+    ></path>
+  </svg></i></span><!--]--></div><!--]--></div><!--[--><div mode="out-in" class="tk-tag__list" aria-label="标签列表"><a style="--tk-home-tag-bg-color:#eff6ff;background-color:#eff6ff;color:#2563eb;border-color:#bfdbfe;" class="tk-pointer" aria-label="Codeforces"><span>Codeforces</span><span class="num">1</span></a><a style="--tk-home-tag-bg-color:#faf5ff;background-color:#faf5ff;color:#9333ea;border-color:#e9d5ff;" class="tk-pointer" aria-label="图论"><span>图论</span><span class="num">1</span></a><a style="--tk-home-tag-bg-color:#fdf2f8;background-color:#fdf2f8;color:#db2777;border-color:#fbcfe8;" class="tk-pointer" aria-label="动态规划"><span>动态规划</span><span class="num">1</span></a><a style="--tk-home-tag-bg-color:#ecfdf5;background-color:#ecfdf5;color:#059669;border-color:#a7f3d0;" class="tk-pointer" aria-label="洛谷"><span>洛谷</span><span class="num">1</span></a><a style="--tk-home-tag-bg-color:#fffbeb;background-color:#fffbeb;color:#d97706;border-color:#fde68a;" class="tk-pointer" aria-label="练习记录"><span>练习记录</span><span class="num">1</span></a><a style="--tk-home-tag-bg-color:#ecfeff;background-color:#ecfeff;color:#0891b2;border-color:#a5f3fc;" class="tk-pointer" aria-label="我"><span>我</span><span class="num">1</span></a></div><!--]--></div><!--]--><!--[--><!--]--><!--]--><!--]--><!--[--><!-- 使用淡入动画 --><!--[--><!-- 不使用淡入动画 --><!--[--><!--]--><!--[--><!--v-if--><!--]--><!--[--><!--]--><!--]--><!--]--><!--[--><!-- 使用淡入动画 --><!--[--><!-- 不使用淡入动画 --><!--[--><!--]--><!--[--><!--v-if--><!--]--><!--[--><!--]--><!--]--><!--]--><!--]--><!--]--><!--[--><!--]--></div></div></div><!--v-if--></div><!--[--><!--]--><!--]--><!--]--><!--]--><!----><!--[--><!--]--><!--[--><!--]--><!----><!--[--><!--]--><div class="vp-doc container" style="" data-v-8b561e3d data-v-8e2d4988><!--[--><div style="position:relative;" data-v-8b561e3d><div></div></div><!--]--></div></div></div><!----><!--[--><!--[--><!--[--><!--]--><!--v-if--><!--[--><!--]--><!--[--><!--]--><!--[--><div class="tk-footer-info tk-wallpaper-outside" role="contentinfo" aria-label="页脚信息"><!--v-if--><!--[--><!--[--><!--]--><div class="tk-footer-info__list flx-wrap-justify-center" role="list" aria-label="页脚内容"><!--[--><div class="tk-footer-info__list__item flx-align-center" role="listitem"><i class="tk-icon" style="--icon-color:var(--vp-c-text-2);--icon-size:16px;--icon-color-hover:var(--tk-theme-color);" aria-hidden="true"><svg width="128" height="128" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <title>主题</title>
+  <path d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10a2.5 2.5 0 0 0 2.5-2.5c0-.61-.23-1.2-.64-1.67a.528.528 0 0 1-.13-.33c0-.28.22-.5.5-.5H16c3.31 0 6-2.69 6-6c0-4.96-4.49-9-10-9zm5.5 11c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5s1.5.67 1.5 1.5s-.67 1.5-1.5 1.5zm-3-4c-.83 0-1.5-.67-1.5-1.5S13.67 6 14.5 6s1.5.67 1.5 1.5S15.33 9 14.5 9zM5 11.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5S7.33 13 6.5 13S5 12.33 5 11.5zm6-4c0 .83-.67 1.5-1.5 1.5S8 8.33 8 7.5S8.67 6 9.5 6s1.5.67 1.5 1.5z"/>
+  </svg></i><a href="https://github.com/Kele-Bingtang/vitepress-theme-teek" target="_blank" aria-label="Teek">Teek</a></div><div class="tk-footer-info__list__item flx-align-center" role="listitem"><i class="tk-icon" style="--icon-color:var(--vp-c-text-2);--icon-size:16px;--icon-color-hover:var(--tk-theme-color);" aria-hidden="true"><svg
+    t="1695543755857"
+    class="icon"
+    viewBox="0 0 1024 1024"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    p-id="89399"
+    width="200"
+    height="200"
+  >
+    <path
+      fill="currentColor"
+      d="M512 16C238.066 16 16 238.066 16 512s222.066 496 496 496 496-222.066 496-496S785.934 16 512 16z m234.268 693.506c-3.184 3.734-79.552 91.462-219.702 91.462-169.384 0-288.968-126.52-288.968-291.134 0-162.606 124.008-286.802 287.524-286.802 133.914 0 203.93 74.63 206.844 77.808a24 24 0 0 1 2.476 29.246l-44.76 69.31c-8.098 12.534-25.548 14.702-36.468 4.59-0.466-0.428-53.058-47.76-123.76-47.76-92.232 0-147.832 67.15-147.832 152.164 0 79.204 51.028 159.384 148.554 159.384 77.394 0 130.56-56.676 131.088-57.25 10.264-11.13 28.118-10.066 37.016 2.106l49.094 67.144a24.002 24.002 0 0 1-1.106 29.732z"
+      p-id="89400"
+    />
+  </svg></i><a href="/about.html" target="_blank" aria-label="Naiyael">Naiyael</a></div><!--]--><!--v-if--></div><!--[--><p class="flx-wrap-justify-center"><a href="/sources.html">数据与图片来源</a></p><!--]--><!--]--></div><!--]--><!--[--><!--]--><!--]--><!--[--><!--]--><!--]--></div><!--]--></div>
+    
+    
+  </body>
+</html>

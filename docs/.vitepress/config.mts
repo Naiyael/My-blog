@@ -1,0 +1,87 @@
+import { defineConfig } from 'vitepress';
+import { defineTeekConfig } from 'vitepress-theme-teek/config';
+import { fileURLToPath } from 'node:url';
+
+const teek = defineTeekConfig({
+  teekHome: true,
+  vpHome: false,
+  themeSize: 'default',
+  pageStyle: 'default',
+  homeCardListPosition: 'right',
+  windowTransition: false,
+  author: { name: 'Naiyael', link: '/about.html' },
+  banner: {
+    name: 'Naiyael',
+    description: 'ACMer，写代码，也记日常。',
+    bgStyle: 'partImg',
+    imgSrc: '/images/mountain-lake.jpg',
+    mask: true,
+    maskBg: 'rgba(13, 30, 35, 0.27)',
+    imgWaves: false,
+    titleFontSize: '3.5rem',
+    descFontSize: '1.05rem',
+    descStyle: 'default',
+  },
+  blogger: {
+    name: 'Naiyael',
+    slogan: 'ACMer / qiushan233',
+    avatar: '/images/avatar.jpg',
+    shape: 'circle',
+    circleSize: 105,
+  },
+  post: { postStyle: 'list', coverImgMode: 'small', showMore: true, moreLabel: '查看记录', showCapture: false, transition: false },
+  page: { pageSize: 6 },
+  category: { enabled: true },
+  tag: { enabled: true },
+  topArticle: { enabled: false },
+  friendLink: { enabled: false },
+  docAnalysis: { enabled: false, wordCount: false, readingTime: false },
+  articleAnalyze: { showInfo: true, showAuthor: false, showCreateDate: true, showCategory: true, showTag: true },
+  articleShare: { enabled: false },
+  articleUpdate: { enabled: false },
+  themeEnhance: { enabled: false },
+  comment: false,
+  vitePlugins: { sidebar: false, permalink: false, docAnalysis: false, autoFrontmatter: false },
+  footerInfo: {
+    copyright: { createYear: 2026, name: 'Naiyael', link: '/about.html' },
+    theme: { show: true, name: 'Teek', link: 'https://github.com/Kele-Bingtang/vitepress-theme-teek' },
+    bottomMessage: '<a href="/sources.html">数据与图片来源</a>',
+  },
+});
+
+export default defineConfig({
+  extends: teek,
+  title: 'Naiyael',
+  description: 'Naiyael 的个人主页。ACMer，Codeforces qiushan233，记录算法与日常。',
+  lang: 'zh-CN',
+  appearance: false,
+  cleanUrls: false,
+  outDir: fileURLToPath(new URL('../../dist', import.meta.url)),
+  cacheDir: fileURLToPath(new URL('./cache', import.meta.url)),
+  ignoreDeadLinks: false,
+  lastUpdated: false,
+  head: [
+    ['link', { rel: 'icon', type: 'image/jpeg', href: '/images/avatar.jpg' }],
+    ['meta', { name: 'theme-color', content: '#f6f7f8' }],
+    ['meta', { property: 'og:image', content: 'https://folio-studio-20261103-n7x.cuteagate.chatgpt.site/images/avatar.jpg' }],
+  ],
+  markdown: { lineNumbers: true, image: { lazyLoading: true } },
+  themeConfig: {
+    nav: [
+      { text: '首页', link: '/' },
+      { text: '算法', items: [{ text: 'Codeforces', link: '/codeforces.html' }, { text: '洛谷', link: '/luogu.html' }] },
+      { text: '日常', link: '/daily.html' },
+      { text: '关于', link: '/about.html' },
+      { text: 'Codeforces ↗', link: 'https://codeforces.com/profile/qiushan233' },
+    ],
+    sidebar: false,
+    outline: { level: [2, 3], label: '本页目录' },
+    docFooter: { prev: '上一篇', next: '下一篇' },
+    search: {
+      provider: 'local',
+      options: { locales: { root: { translations: { button: { buttonText: '搜索', buttonAriaLabel: '搜索本站' }, modal: { noResultsText: '没有找到相关内容', resetButtonTitle: '清除搜索', footer: { selectText: '选择', navigateText: '切换', closeText: '关闭' } } } } } },
+    },
+    returnToTopLabel: '回到顶部',
+    sidebarMenuLabel: '目录',
+  },
+});

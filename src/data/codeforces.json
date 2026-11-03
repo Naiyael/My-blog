@@ -1,0 +1,2990 @@
+{
+  "handle": "qiushan233",
+  "rating": 1410,
+  "maxRating": 1410,
+  "rank": "specialist",
+  "totalSubmissions": 381,
+  "solved": 204,
+  "maxDifficulty": 2100,
+  "updatedAt": "2026-11-03",
+  "history": [
+    {
+      "contestId": 2125,
+      "contestName": "Educational Codeforces Round 181 (Rated for Div. 2)",
+      "handle": "qiushan233",
+      "rank": 9507,
+      "ratingUpdateTimeSeconds": 1753202100,
+      "oldRating": 0,
+      "newRating": 442
+    },
+    {
+      "contestId": 2128,
+      "contestName": "Codeforces Round 1039 (Div. 2)",
+      "handle": "qiushan233",
+      "rank": 5784,
+      "ratingUpdateTimeSeconds": 1753634100,
+      "oldRating": 442,
+      "newRating": 784
+    },
+    {
+      "contestId": 2130,
+      "contestName": "Codeforces Round 1040 (Div. 2)",
+      "handle": "qiushan233",
+      "rank": 7469,
+      "ratingUpdateTimeSeconds": 1753983300,
+      "oldRating": 784,
+      "newRating": 1000
+    },
+    {
+      "contestId": 2132,
+      "contestName": "Codeforces Round 1043 (Div. 3)",
+      "handle": "qiushan233",
+      "rank": 2892,
+      "ratingUpdateTimeSeconds": 1755795000,
+      "oldRating": 1000,
+      "newRating": 1201
+    },
+    {
+      "contestId": 2134,
+      "contestName": "Codeforces Round 1045 (Div. 2)",
+      "handle": "qiushan233",
+      "rank": 4752,
+      "ratingUpdateTimeSeconds": 1756226100,
+      "oldRating": 1201,
+      "newRating": 1321
+    },
+    {
+      "contestId": 2151,
+      "contestName": "Codeforces Round 1053 (Div. 2)",
+      "handle": "qiushan233",
+      "rank": 5849,
+      "ratingUpdateTimeSeconds": 1758725400,
+      "oldRating": 1321,
+      "newRating": 1291
+    },
+    {
+      "contestId": 2226,
+      "contestName": "Codeforces Round 1095 (Div. 2)",
+      "handle": "qiushan233",
+      "rank": 1137,
+      "ratingUpdateTimeSeconds": 1777395000,
+      "oldRating": 1291,
+      "newRating": 1410
+    }
+  ],
+  "tags": {
+    "constructive algorithms": 16,
+    "math": 42,
+    "brute force": 35,
+    "dp": 31,
+    "greedy": 57,
+    "data structures": 20,
+    "two pointers": 18,
+    "binary search": 20,
+    "implementation": 58,
+    "dsu": 9,
+    "trees": 6,
+    "sortings": 23,
+    "strings": 42,
+    "number theory": 11,
+    "dfs and similar": 17,
+    "combinatorics": 5,
+    "graphs": 23,
+    "shortest paths": 10,
+    "games": 2,
+    "*special": 2,
+    "bitmasks": 5,
+    "flows": 1,
+    "hashing": 2,
+    "graph matchings": 1,
+    "geometry": 4,
+    "probabilities": 1
+  },
+  "problems": [
+    {
+      "id": "1195E",
+      "name": "OpenStreetMap",
+      "rating": 2100,
+      "tags": [
+        "data structures",
+        "two pointers"
+      ],
+      "contestId": 1195,
+      "index": "E",
+      "submissionId": 377906022,
+      "date": "2026-06-09",
+      "gym": false
+    },
+    {
+      "id": "514D",
+      "name": "R2D2 and Droid Army",
+      "rating": 2000,
+      "tags": [
+        "binary search",
+        "data structures",
+        "two pointers"
+      ],
+      "contestId": 514,
+      "index": "D",
+      "submissionId": 377296405,
+      "date": "2026-06-04",
+      "gym": false
+    },
+    {
+      "id": "540C",
+      "name": "Ice Cave",
+      "rating": 2000,
+      "tags": [
+        "dfs and similar"
+      ],
+      "contestId": 540,
+      "index": "C",
+      "submissionId": 374389993,
+      "date": "2026-05-13",
+      "gym": false
+    },
+    {
+      "id": "449B",
+      "name": "Jzzhu and Cities",
+      "rating": 2000,
+      "tags": [
+        "graphs",
+        "greedy",
+        "shortest paths"
+      ],
+      "contestId": 449,
+      "index": "B",
+      "submissionId": 374016708,
+      "date": "2026-05-09",
+      "gym": false
+    },
+    {
+      "id": "938D",
+      "name": "Buy a Ticket",
+      "rating": 2000,
+      "tags": [
+        "data structures",
+        "graphs",
+        "shortest paths"
+      ],
+      "contestId": 938,
+      "index": "D",
+      "submissionId": 374014566,
+      "date": "2026-05-09",
+      "gym": false
+    },
+    {
+      "id": "1385E",
+      "name": "Directing Edges",
+      "rating": 2000,
+      "tags": [
+        "constructive algorithms",
+        "dfs and similar",
+        "graphs"
+      ],
+      "contestId": 1385,
+      "index": "E",
+      "submissionId": 374007175,
+      "date": "2026-05-09",
+      "gym": false
+    },
+    {
+      "id": "478D",
+      "name": "Red-Green Towers",
+      "rating": 2000,
+      "tags": [
+        "dp"
+      ],
+      "contestId": 478,
+      "index": "D",
+      "submissionId": 373409707,
+      "date": "2026-05-03",
+      "gym": false
+    },
+    {
+      "id": "545E",
+      "name": "Paths and Trees",
+      "rating": 2000,
+      "tags": [
+        "graphs",
+        "greedy",
+        "shortest paths"
+      ],
+      "contestId": 545,
+      "index": "E",
+      "submissionId": 372798671,
+      "date": "2026-04-28",
+      "gym": false
+    },
+    {
+      "id": "6E",
+      "name": "Exposition",
+      "rating": 1900,
+      "tags": [
+        "binary search",
+        "data structures",
+        "dsu",
+        "trees",
+        "two pointers"
+      ],
+      "contestId": 6,
+      "index": "E",
+      "submissionId": 377255769,
+      "date": "2026-06-04",
+      "gym": false
+    },
+    {
+      "id": "144D",
+      "name": "Missile Silos",
+      "rating": 1900,
+      "tags": [
+        "data structures",
+        "dfs and similar",
+        "graphs",
+        "shortest paths"
+      ],
+      "contestId": 144,
+      "index": "D",
+      "submissionId": 374295590,
+      "date": "2026-05-12",
+      "gym": false
+    },
+    {
+      "id": "25C",
+      "name": "Roads in Berland",
+      "rating": 1900,
+      "tags": [
+        "graphs",
+        "shortest paths"
+      ],
+      "contestId": 25,
+      "index": "C",
+      "submissionId": 374077505,
+      "date": "2026-05-10",
+      "gym": false
+    },
+    {
+      "id": "19B",
+      "name": "Checkout Assistant",
+      "rating": 1900,
+      "tags": [
+        "dp"
+      ],
+      "contestId": 19,
+      "index": "B",
+      "submissionId": 373411193,
+      "date": "2026-05-03",
+      "gym": false
+    },
+    {
+      "id": "577B",
+      "name": "Modulo Sum",
+      "rating": 1900,
+      "tags": [
+        "combinatorics",
+        "data structures",
+        "dp",
+        "two pointers"
+      ],
+      "contestId": 577,
+      "index": "B",
+      "submissionId": 373408495,
+      "date": "2026-05-03",
+      "gym": false
+    },
+    {
+      "id": "20C",
+      "name": "Dijkstra?",
+      "rating": 1900,
+      "tags": [
+        "graphs",
+        "shortest paths"
+      ],
+      "contestId": 20,
+      "index": "C",
+      "submissionId": 372773697,
+      "date": "2026-04-28",
+      "gym": false
+    },
+    {
+      "id": "25D",
+      "name": "Roads not only in Berland",
+      "rating": 1900,
+      "tags": [
+        "dsu",
+        "graphs",
+        "trees"
+      ],
+      "contestId": 25,
+      "index": "D",
+      "submissionId": 372715920,
+      "date": "2026-04-27",
+      "gym": false
+    },
+    {
+      "id": "1095F",
+      "name": "Make It Connected",
+      "rating": 1900,
+      "tags": [
+        "dsu",
+        "graphs",
+        "greedy"
+      ],
+      "contestId": 1095,
+      "index": "F",
+      "submissionId": 372700641,
+      "date": "2026-04-27",
+      "gym": false
+    },
+    {
+      "id": "1245D",
+      "name": "Shichikuji and Power Grid",
+      "rating": 1900,
+      "tags": [
+        "dsu",
+        "graphs",
+        "greedy",
+        "shortest paths",
+        "trees"
+      ],
+      "contestId": 1245,
+      "index": "D",
+      "submissionId": 372691330,
+      "date": "2026-04-27",
+      "gym": false
+    },
+    {
+      "id": "1572A",
+      "name": "Book",
+      "rating": 1800,
+      "tags": [
+        "binary search",
+        "brute force",
+        "data structures",
+        "dp",
+        "graphs",
+        "implementation",
+        "sortings"
+      ],
+      "contestId": 1572,
+      "index": "A",
+      "submissionId": 372808125,
+      "date": "2026-04-28",
+      "gym": false
+    },
+    {
+      "id": "467C",
+      "name": "George and Job",
+      "rating": 1700,
+      "tags": [
+        "dp",
+        "implementation"
+      ],
+      "contestId": 467,
+      "index": "C",
+      "submissionId": 374300581,
+      "date": "2026-05-12",
+      "gym": false
+    },
+    {
+      "id": "295B",
+      "name": "Greg and Graph",
+      "rating": 1700,
+      "tags": [
+        "dp",
+        "graphs",
+        "shortest paths"
+      ],
+      "contestId": 295,
+      "index": "B",
+      "submissionId": 374104547,
+      "date": "2026-05-10",
+      "gym": false
+    },
+    {
+      "id": "474D",
+      "name": "Flowers",
+      "rating": 1700,
+      "tags": [
+        "dp"
+      ],
+      "contestId": 474,
+      "index": "D",
+      "submissionId": 373393879,
+      "date": "2026-05-03",
+      "gym": false
+    },
+    {
+      "id": "601A",
+      "name": "The Two Routes",
+      "rating": 1600,
+      "tags": [
+        "graphs",
+        "shortest paths"
+      ],
+      "contestId": 601,
+      "index": "A",
+      "submissionId": 374293770,
+      "date": "2026-05-12",
+      "gym": false
+    },
+    {
+      "id": "706C",
+      "name": "Hard problem",
+      "rating": 1600,
+      "tags": [
+        "dp",
+        "strings"
+      ],
+      "contestId": 706,
+      "index": "C",
+      "submissionId": 374018293,
+      "date": "2026-05-09",
+      "gym": false
+    },
+    {
+      "id": "377A",
+      "name": "Maze",
+      "rating": 1600,
+      "tags": [
+        "dfs and similar"
+      ],
+      "contestId": 377,
+      "index": "A",
+      "submissionId": 373906742,
+      "date": "2026-05-08",
+      "gym": false
+    },
+    {
+      "id": "431C",
+      "name": "k-Tree",
+      "rating": 1600,
+      "tags": [
+        "dp",
+        "implementation",
+        "trees"
+      ],
+      "contestId": 431,
+      "index": "C",
+      "submissionId": 373400338,
+      "date": "2026-05-03",
+      "gym": false
+    },
+    {
+      "id": "510C",
+      "name": "Fox And Names",
+      "rating": 1600,
+      "tags": [
+        "dfs and similar",
+        "graphs",
+        "sortings"
+      ],
+      "contestId": 510,
+      "index": "C",
+      "submissionId": 372806051,
+      "date": "2026-04-28",
+      "gym": false
+    },
+    {
+      "id": "659E",
+      "name": "New Reform",
+      "rating": 1600,
+      "tags": [
+        "data structures",
+        "dfs and similar",
+        "dsu",
+        "graphs",
+        "greedy"
+      ],
+      "contestId": 659,
+      "index": "E",
+      "submissionId": 372242250,
+      "date": "2026-04-23",
+      "gym": false
+    },
+    {
+      "id": "550C",
+      "name": "Divisibility by Eight",
+      "rating": 1500,
+      "tags": [
+        "brute force",
+        "dp",
+        "math"
+      ],
+      "contestId": 550,
+      "index": "C",
+      "submissionId": 374386918,
+      "date": "2026-05-13",
+      "gym": false
+    },
+    {
+      "id": "580C",
+      "name": "Kefa and Park",
+      "rating": 1500,
+      "tags": [
+        "dfs and similar",
+        "graphs",
+        "trees"
+      ],
+      "contestId": 580,
+      "index": "C",
+      "submissionId": 373812995,
+      "date": "2026-05-07",
+      "gym": false
+    },
+    {
+      "id": "2226C",
+      "name": "Mental Monumental (Easy Version)",
+      "rating": 1500,
+      "tags": [
+        "binary search",
+        "data structures",
+        "greedy",
+        "math",
+        "two pointers"
+      ],
+      "contestId": 2226,
+      "index": "C",
+      "submissionId": 372843289,
+      "date": "2026-04-28",
+      "gym": false
+    },
+    {
+      "id": "455A",
+      "name": "Boredom",
+      "rating": 1500,
+      "tags": [
+        "dp"
+      ],
+      "contestId": 455,
+      "index": "A",
+      "submissionId": 372810085,
+      "date": "2026-04-28",
+      "gym": false
+    },
+    {
+      "id": "977E",
+      "name": "Cyclic Components",
+      "rating": 1500,
+      "tags": [
+        "dfs and similar",
+        "dsu",
+        "graphs"
+      ],
+      "contestId": 977,
+      "index": "E",
+      "submissionId": 372251509,
+      "date": "2026-04-23",
+      "gym": false
+    },
+    {
+      "id": "510B",
+      "name": "Fox And Two Dots",
+      "rating": 1500,
+      "tags": [
+        "dfs and similar"
+      ],
+      "contestId": 510,
+      "index": "B",
+      "submissionId": 372141331,
+      "date": "2026-04-22",
+      "gym": false
+    },
+    {
+      "id": "545C",
+      "name": "Woodcutters",
+      "rating": 1500,
+      "tags": [
+        "dp",
+        "greedy"
+      ],
+      "contestId": 545,
+      "index": "C",
+      "submissionId": 372136802,
+      "date": "2026-04-22",
+      "gym": false
+    },
+    {
+      "id": "702B",
+      "name": "Powers of Two",
+      "rating": 1500,
+      "tags": [
+        "brute force",
+        "data structures",
+        "implementation",
+        "math"
+      ],
+      "contestId": 702,
+      "index": "B",
+      "submissionId": 372127915,
+      "date": "2026-04-22",
+      "gym": false
+    },
+    {
+      "id": "276C",
+      "name": "Little Girl and Maximum Sum",
+      "rating": 1500,
+      "tags": [
+        "data structures",
+        "greedy",
+        "implementation",
+        "sortings"
+      ],
+      "contestId": 276,
+      "index": "C",
+      "submissionId": 371937966,
+      "date": "2026-04-21",
+      "gym": false
+    },
+    {
+      "id": "580B",
+      "name": "Kefa and Company",
+      "rating": 1500,
+      "tags": [
+        "binary search",
+        "sortings",
+        "two pointers"
+      ],
+      "contestId": 580,
+      "index": "B",
+      "submissionId": 371884316,
+      "date": "2026-04-20",
+      "gym": false
+    },
+    {
+      "id": "1772D",
+      "name": "Absolute Sorting",
+      "rating": 1400,
+      "tags": [
+        "constructive algorithms",
+        "math"
+      ],
+      "contestId": 1772,
+      "index": "D",
+      "submissionId": 393077092,
+      "date": "2026-10-03",
+      "gym": false
+    },
+    {
+      "id": "2233C",
+      "name": "Cost of a Bracket Sequence",
+      "rating": 1400,
+      "tags": [
+        "brute force",
+        "dp",
+        "greedy"
+      ],
+      "contestId": 2233,
+      "index": "C",
+      "submissionId": 378193846,
+      "date": "2026-06-11",
+      "gym": false
+    },
+    {
+      "id": "602B",
+      "name": "Approximating a Constant Range",
+      "rating": 1400,
+      "tags": [
+        "dp",
+        "implementation",
+        "two pointers"
+      ],
+      "contestId": 602,
+      "index": "B",
+      "submissionId": 377258942,
+      "date": "2026-06-04",
+      "gym": false
+    },
+    {
+      "id": "2231C",
+      "name": "Chipmunk Theo and Equality",
+      "rating": 1400,
+      "tags": [
+        "implementation",
+        "sortings"
+      ],
+      "contestId": 2231,
+      "index": "C",
+      "submissionId": 376382062,
+      "date": "2026-05-28",
+      "gym": false
+    },
+    {
+      "id": "489C",
+      "name": "Given Length and Sum of Digits...",
+      "rating": 1400,
+      "tags": [
+        "dp",
+        "greedy",
+        "implementation"
+      ],
+      "contestId": 489,
+      "index": "C",
+      "submissionId": 374385056,
+      "date": "2026-05-13",
+      "gym": false
+    },
+    {
+      "id": "414B",
+      "name": "Mashmokh and ACM",
+      "rating": 1400,
+      "tags": [
+        "combinatorics",
+        "dp",
+        "number theory"
+      ],
+      "contestId": 414,
+      "index": "B",
+      "submissionId": 374297679,
+      "date": "2026-05-12",
+      "gym": false
+    },
+    {
+      "id": "1195C",
+      "name": "Basketball Exercise",
+      "rating": 1400,
+      "tags": [
+        "dp"
+      ],
+      "contestId": 1195,
+      "index": "C",
+      "submissionId": 374017321,
+      "date": "2026-05-09",
+      "gym": false
+    },
+    {
+      "id": "1167C",
+      "name": "News Distribution",
+      "rating": 1400,
+      "tags": [
+        "dfs and similar",
+        "dsu",
+        "graphs"
+      ],
+      "contestId": 1167,
+      "index": "C",
+      "submissionId": 373913414,
+      "date": "2026-05-08",
+      "gym": false
+    },
+    {
+      "id": "520B",
+      "name": "Two Buttons",
+      "rating": 1400,
+      "tags": [
+        "dfs and similar",
+        "graphs",
+        "greedy",
+        "implementation",
+        "math",
+        "shortest paths"
+      ],
+      "contestId": 520,
+      "index": "B",
+      "submissionId": 373817658,
+      "date": "2026-05-07",
+      "gym": false
+    },
+    {
+      "id": "698A",
+      "name": "Vacations",
+      "rating": 1400,
+      "tags": [
+        "dp"
+      ],
+      "contestId": 698,
+      "index": "A",
+      "submissionId": 373307109,
+      "date": "2026-05-02",
+      "gym": false
+    },
+    {
+      "id": "445B",
+      "name": "DZY Loves Chemistry",
+      "rating": 1400,
+      "tags": [
+        "dfs and similar",
+        "dsu",
+        "greedy"
+      ],
+      "contestId": 445,
+      "index": "B",
+      "submissionId": 372236130,
+      "date": "2026-04-23",
+      "gym": false
+    },
+    {
+      "id": "816B",
+      "name": "Karen and Coffee",
+      "rating": 1400,
+      "tags": [
+        "binary search",
+        "data structures",
+        "implementation"
+      ],
+      "contestId": 816,
+      "index": "B",
+      "submissionId": 371886621,
+      "date": "2026-04-20",
+      "gym": false
+    },
+    {
+      "id": "279B",
+      "name": "Books",
+      "rating": 1400,
+      "tags": [
+        "binary search",
+        "brute force",
+        "implementation",
+        "two pointers"
+      ],
+      "contestId": 279,
+      "index": "B",
+      "submissionId": 371881827,
+      "date": "2026-04-20",
+      "gym": false
+    },
+    {
+      "id": "1201C",
+      "name": "Maximum Median",
+      "rating": 1400,
+      "tags": [
+        "binary search",
+        "greedy",
+        "math",
+        "sortings"
+      ],
+      "contestId": 1201,
+      "index": "C",
+      "submissionId": 344022637,
+      "date": "2025-10-16",
+      "gym": false
+    },
+    {
+      "id": "2132C2",
+      "name": "The Cunning Seller (hard version)",
+      "rating": 1400,
+      "tags": [
+        "binary search",
+        "greedy",
+        "math"
+      ],
+      "contestId": 2132,
+      "index": "C2",
+      "submissionId": 334871075,
+      "date": "2025-08-21",
+      "gym": false
+    },
+    {
+      "id": "2232C1",
+      "name": "Seating Arrangement (Easy Version)",
+      "rating": 1300,
+      "tags": [
+        "binary search",
+        "dp",
+        "greedy",
+        "two pointers"
+      ],
+      "contestId": 2232,
+      "index": "C1",
+      "submissionId": 377014868,
+      "date": "2026-06-02",
+      "gym": false
+    },
+    {
+      "id": "189A",
+      "name": "Cut Ribbon",
+      "rating": 1300,
+      "tags": [
+        "brute force",
+        "dp"
+      ],
+      "contestId": 189,
+      "index": "A",
+      "submissionId": 373306450,
+      "date": "2026-05-02",
+      "gym": false
+    },
+    {
+      "id": "1538C",
+      "name": "Number of Pairs",
+      "rating": 1300,
+      "tags": [
+        "binary search",
+        "data structures",
+        "math",
+        "two pointers"
+      ],
+      "contestId": 1538,
+      "index": "C",
+      "submissionId": 372125976,
+      "date": "2026-04-22",
+      "gym": false
+    },
+    {
+      "id": "251A",
+      "name": "Points on Line",
+      "rating": 1300,
+      "tags": [
+        "binary search",
+        "combinatorics",
+        "two pointers"
+      ],
+      "contestId": 251,
+      "index": "A",
+      "submissionId": 372096553,
+      "date": "2026-04-22",
+      "gym": false
+    },
+    {
+      "id": "893C",
+      "name": "Rumor",
+      "rating": 1300,
+      "tags": [
+        "dfs and similar",
+        "graphs",
+        "greedy"
+      ],
+      "contestId": 893,
+      "index": "C",
+      "submissionId": 371975688,
+      "date": "2026-04-21",
+      "gym": false
+    },
+    {
+      "id": "1119B",
+      "name": "Alyona and a Narrow Fridge",
+      "rating": 1300,
+      "tags": [
+        "binary search",
+        "flows",
+        "greedy",
+        "sortings"
+      ],
+      "contestId": 1119,
+      "index": "B",
+      "submissionId": 344028307,
+      "date": "2025-10-16",
+      "gym": false
+    },
+    {
+      "id": "1294C",
+      "name": "Product of Three Numbers",
+      "rating": 1300,
+      "tags": [
+        "greedy",
+        "math",
+        "number theory"
+      ],
+      "contestId": 1294,
+      "index": "C",
+      "submissionId": 340021287,
+      "date": "2025-09-23",
+      "gym": false
+    },
+    {
+      "id": "459B",
+      "name": "Pashmak and Flowers",
+      "rating": 1300,
+      "tags": [
+        "combinatorics",
+        "implementation",
+        "sortings"
+      ],
+      "contestId": 459,
+      "index": "B",
+      "submissionId": 340016735,
+      "date": "2025-09-23",
+      "gym": false
+    },
+    {
+      "id": "451B",
+      "name": "Sort the Array",
+      "rating": 1300,
+      "tags": [
+        "implementation",
+        "sortings"
+      ],
+      "contestId": 451,
+      "index": "B",
+      "submissionId": 340014603,
+      "date": "2025-09-23",
+      "gym": false
+    },
+    {
+      "id": "230B",
+      "name": "T-primes",
+      "rating": 1300,
+      "tags": [
+        "binary search",
+        "implementation",
+        "math",
+        "number theory"
+      ],
+      "contestId": 230,
+      "index": "B",
+      "submissionId": 325678647,
+      "date": "2025-06-23",
+      "gym": false
+    },
+    {
+      "id": "4C",
+      "name": "Registration System",
+      "rating": 1300,
+      "tags": [
+        "data structures",
+        "hashing",
+        "implementation"
+      ],
+      "contestId": 4,
+      "index": "C",
+      "submissionId": 325676803,
+      "date": "2025-06-23",
+      "gym": false
+    },
+    {
+      "id": "25A",
+      "name": "IQ test",
+      "rating": 1300,
+      "tags": [
+        "brute force"
+      ],
+      "contestId": 25,
+      "index": "A",
+      "submissionId": 325675479,
+      "date": "2025-06-23",
+      "gym": false
+    },
+    {
+      "id": "2091E",
+      "name": "Interesting Ratio",
+      "rating": 1300,
+      "tags": [
+        "brute force",
+        "math",
+        "number theory",
+        "two pointers"
+      ],
+      "contestId": 2091,
+      "index": "E",
+      "submissionId": 322996266,
+      "date": "2025-06-05",
+      "gym": false
+    },
+    {
+      "id": "1305B",
+      "name": "Kuroni and Simple Strings",
+      "rating": 1200,
+      "tags": [
+        "constructive algorithms",
+        "greedy",
+        "strings",
+        "two pointers"
+      ],
+      "contestId": 1305,
+      "index": "B",
+      "submissionId": 376777577,
+      "date": "2026-05-31",
+      "gym": false
+    },
+    {
+      "id": "1369B",
+      "name": "AccurateLee",
+      "rating": 1200,
+      "tags": [
+        "greedy",
+        "implementation",
+        "strings"
+      ],
+      "contestId": 1369,
+      "index": "B",
+      "submissionId": 376764955,
+      "date": "2026-05-31",
+      "gym": false
+    },
+    {
+      "id": "1076A",
+      "name": "Minimizing the String",
+      "rating": 1200,
+      "tags": [
+        "greedy",
+        "strings"
+      ],
+      "contestId": 1076,
+      "index": "A",
+      "submissionId": 376761785,
+      "date": "2026-05-31",
+      "gym": false
+    },
+    {
+      "id": "1185B",
+      "name": "Email from Polycarp",
+      "rating": 1200,
+      "tags": [
+        "implementation",
+        "strings"
+      ],
+      "contestId": 1185,
+      "index": "B",
+      "submissionId": 376404212,
+      "date": "2026-05-28",
+      "gym": false
+    },
+    {
+      "id": "1989B",
+      "name": "Substring and Subsequence",
+      "rating": 1200,
+      "tags": [
+        "brute force",
+        "greedy",
+        "strings"
+      ],
+      "contestId": 1989,
+      "index": "B",
+      "submissionId": 376193203,
+      "date": "2026-05-26",
+      "gym": false
+    },
+    {
+      "id": "1023A",
+      "name": "Single Wildcard Pattern Matching",
+      "rating": 1200,
+      "tags": [
+        "brute force",
+        "implementation",
+        "strings"
+      ],
+      "contestId": 1023,
+      "index": "A",
+      "submissionId": 375463663,
+      "date": "2026-05-21",
+      "gym": false
+    },
+    {
+      "id": "625B",
+      "name": "War of the Corporations",
+      "rating": 1200,
+      "tags": [
+        "constructive algorithms",
+        "greedy",
+        "strings"
+      ],
+      "contestId": 625,
+      "index": "B",
+      "submissionId": 375460982,
+      "date": "2026-05-21",
+      "gym": false
+    },
+    {
+      "id": "8A",
+      "name": "Train and Peter",
+      "rating": 1200,
+      "tags": [
+        "strings"
+      ],
+      "contestId": 8,
+      "index": "A",
+      "submissionId": 375242147,
+      "date": "2026-05-19",
+      "gym": false
+    },
+    {
+      "id": "217A",
+      "name": "Ice Skating",
+      "rating": 1200,
+      "tags": [
+        "brute force",
+        "dfs and similar",
+        "dsu",
+        "graphs"
+      ],
+      "contestId": 217,
+      "index": "A",
+      "submissionId": 373908591,
+      "date": "2026-05-08",
+      "gym": false
+    },
+    {
+      "id": "327A",
+      "name": "Flipping Game",
+      "rating": 1200,
+      "tags": [
+        "brute force",
+        "dp",
+        "implementation"
+      ],
+      "contestId": 327,
+      "index": "A",
+      "submissionId": 373712661,
+      "date": "2026-05-06",
+      "gym": false
+    },
+    {
+      "id": "474B",
+      "name": "Worms",
+      "rating": 1200,
+      "tags": [
+        "binary search",
+        "implementation"
+      ],
+      "contestId": 474,
+      "index": "B",
+      "submissionId": 372090000,
+      "date": "2026-04-22",
+      "gym": false
+    },
+    {
+      "id": "433B",
+      "name": "Kuriyama Mirai's Stones",
+      "rating": 1200,
+      "tags": [
+        "dp",
+        "implementation",
+        "sortings"
+      ],
+      "contestId": 433,
+      "index": "B",
+      "submissionId": 371880181,
+      "date": "2026-04-20",
+      "gym": false
+    },
+    {
+      "id": "2134C",
+      "name": "Even Larger",
+      "rating": 1200,
+      "tags": [
+        "brute force",
+        "greedy",
+        "implementation"
+      ],
+      "contestId": 2134,
+      "index": "C",
+      "submissionId": 335683842,
+      "date": "2025-08-26",
+      "gym": false
+    },
+    {
+      "id": "2134B",
+      "name": "Add 0 or K",
+      "rating": 1200,
+      "tags": [
+        "constructive algorithms",
+        "math",
+        "number theory"
+      ],
+      "contestId": 2134,
+      "index": "B",
+      "submissionId": 335642475,
+      "date": "2025-08-26",
+      "gym": false
+    },
+    {
+      "id": "2128C",
+      "name": "Leftmost Below",
+      "rating": 1200,
+      "tags": [
+        "greedy",
+        "math"
+      ],
+      "contestId": 2128,
+      "index": "C",
+      "submissionId": 331168330,
+      "date": "2025-07-27",
+      "gym": false
+    },
+    {
+      "id": "1363A",
+      "name": "Odd Selection",
+      "rating": 1200,
+      "tags": [
+        "brute force",
+        "implementation",
+        "math"
+      ],
+      "contestId": 1363,
+      "index": "A",
+      "submissionId": 325564449,
+      "date": "2025-06-22",
+      "gym": false
+    },
+    {
+      "id": "977C",
+      "name": "Less or Equal",
+      "rating": 1200,
+      "tags": [
+        "sortings"
+      ],
+      "contestId": 977,
+      "index": "C",
+      "submissionId": 325562751,
+      "date": "2025-06-22",
+      "gym": false
+    },
+    {
+      "id": "1352B",
+      "name": "Same Parity Summands",
+      "rating": 1200,
+      "tags": [
+        "constructive algorithms",
+        "math"
+      ],
+      "contestId": 1352,
+      "index": "B",
+      "submissionId": 325561464,
+      "date": "2025-06-22",
+      "gym": false
+    },
+    {
+      "id": "489B",
+      "name": "BerSU Ball",
+      "rating": 1200,
+      "tags": [
+        "dfs and similar",
+        "dp",
+        "graph matchings",
+        "greedy",
+        "sortings",
+        "two pointers"
+      ],
+      "contestId": 489,
+      "index": "B",
+      "submissionId": 325387161,
+      "date": "2025-06-21",
+      "gym": false
+    },
+    {
+      "id": "1520D",
+      "name": "Same Differences",
+      "rating": 1200,
+      "tags": [
+        "data structures",
+        "hashing",
+        "math"
+      ],
+      "contestId": 1520,
+      "index": "D",
+      "submissionId": 325385147,
+      "date": "2025-06-21",
+      "gym": false
+    },
+    {
+      "id": "514A",
+      "name": "Chewbaсca and Number",
+      "rating": 1200,
+      "tags": [
+        "greedy",
+        "implementation"
+      ],
+      "contestId": 514,
+      "index": "A",
+      "submissionId": 325380814,
+      "date": "2025-06-21",
+      "gym": false
+    },
+    {
+      "id": "1352C",
+      "name": "K-th Not Divisible by n",
+      "rating": 1200,
+      "tags": [
+        "binary search",
+        "math"
+      ],
+      "contestId": 1352,
+      "index": "C",
+      "submissionId": 325380103,
+      "date": "2025-06-21",
+      "gym": false
+    },
+    {
+      "id": "466A",
+      "name": "Cheap Travel",
+      "rating": 1200,
+      "tags": [
+        "implementation"
+      ],
+      "contestId": 466,
+      "index": "A",
+      "submissionId": 325375532,
+      "date": "2025-06-21",
+      "gym": false
+    },
+    {
+      "id": "492B",
+      "name": "Vanya and Lanterns",
+      "rating": 1200,
+      "tags": [
+        "binary search",
+        "implementation",
+        "math",
+        "sortings"
+      ],
+      "contestId": 492,
+      "index": "B",
+      "submissionId": 325373709,
+      "date": "2025-06-21",
+      "gym": false
+    },
+    {
+      "id": "1304B",
+      "name": "Longest Palindrome",
+      "rating": 1100,
+      "tags": [
+        "brute force",
+        "constructive algorithms",
+        "greedy",
+        "implementation",
+        "strings"
+      ],
+      "contestId": 1304,
+      "index": "B",
+      "submissionId": 376782370,
+      "date": "2026-05-31",
+      "gym": false
+    },
+    {
+      "id": "1324B",
+      "name": "Yet Another Palindrome Problem",
+      "rating": 1100,
+      "tags": [
+        "brute force",
+        "strings"
+      ],
+      "contestId": 1324,
+      "index": "B",
+      "submissionId": 376779031,
+      "date": "2026-05-31",
+      "gym": false
+    },
+    {
+      "id": "1428C",
+      "name": "ABBB",
+      "rating": 1100,
+      "tags": [
+        "brute force",
+        "data structures",
+        "greedy",
+        "strings"
+      ],
+      "contestId": 1428,
+      "index": "C",
+      "submissionId": 376776224,
+      "date": "2026-05-31",
+      "gym": false
+    },
+    {
+      "id": "1342B",
+      "name": "Binary Period",
+      "rating": 1100,
+      "tags": [
+        "constructive algorithms",
+        "strings"
+      ],
+      "contestId": 1342,
+      "index": "B",
+      "submissionId": 376772639,
+      "date": "2026-05-31",
+      "gym": false
+    },
+    {
+      "id": "2094D",
+      "name": "Tung Tung Sahur",
+      "rating": 1100,
+      "tags": [
+        "greedy",
+        "strings",
+        "two pointers"
+      ],
+      "contestId": 2094,
+      "index": "D",
+      "submissionId": 376609356,
+      "date": "2026-05-30",
+      "gym": false
+    },
+    {
+      "id": "2231B",
+      "name": "Another Sorting Problem",
+      "rating": 1100,
+      "tags": [
+        "constructive algorithms"
+      ],
+      "contestId": 2231,
+      "index": "B",
+      "submissionId": 376356328,
+      "date": "2026-05-28",
+      "gym": false
+    },
+    {
+      "id": "1703D",
+      "name": "Double Strings",
+      "rating": 1100,
+      "tags": [
+        "brute force",
+        "data structures",
+        "strings"
+      ],
+      "contestId": 1703,
+      "index": "D",
+      "submissionId": 375226813,
+      "date": "2026-05-19",
+      "gym": false
+    },
+    {
+      "id": "1490C",
+      "name": "Sum of Cubes",
+      "rating": 1100,
+      "tags": [
+        "binary search",
+        "brute force",
+        "math"
+      ],
+      "contestId": 1490,
+      "index": "C",
+      "submissionId": 372199447,
+      "date": "2026-04-23",
+      "gym": false
+    },
+    {
+      "id": "706B",
+      "name": "Interesting drink",
+      "rating": 1100,
+      "tags": [
+        "binary search",
+        "dp",
+        "implementation"
+      ],
+      "contestId": 706,
+      "index": "B",
+      "submissionId": 372089677,
+      "date": "2026-04-22",
+      "gym": false
+    },
+    {
+      "id": "313B",
+      "name": "Ilya and Queries",
+      "rating": 1100,
+      "tags": [
+        "dp",
+        "implementation"
+      ],
+      "contestId": 313,
+      "index": "B",
+      "submissionId": 371853578,
+      "date": "2026-04-20",
+      "gym": false
+    },
+    {
+      "id": "363B",
+      "name": "Fence",
+      "rating": 1100,
+      "tags": [
+        "brute force",
+        "dp"
+      ],
+      "contestId": 363,
+      "index": "B",
+      "submissionId": 371762722,
+      "date": "2026-04-19",
+      "gym": false
+    },
+    {
+      "id": "158B",
+      "name": "Taxi",
+      "rating": 1100,
+      "tags": [
+        "*special",
+        "greedy",
+        "implementation"
+      ],
+      "contestId": 158,
+      "index": "B",
+      "submissionId": 371760346,
+      "date": "2026-04-19",
+      "gym": false
+    },
+    {
+      "id": "2130B",
+      "name": "Pathless",
+      "rating": 1100,
+      "tags": [
+        "constructive algorithms"
+      ],
+      "contestId": 2130,
+      "index": "B",
+      "submissionId": 331791771,
+      "date": "2025-07-31",
+      "gym": false
+    },
+    {
+      "id": "2128B",
+      "name": "Deque Process",
+      "rating": 1100,
+      "tags": [
+        "constructive algorithms",
+        "greedy",
+        "sortings",
+        "two pointers"
+      ],
+      "contestId": 2128,
+      "index": "B",
+      "submissionId": 331150377,
+      "date": "2025-07-27",
+      "gym": false
+    },
+    {
+      "id": "2125C",
+      "name": "Count Good Numbers",
+      "rating": 1100,
+      "tags": [
+        "bitmasks",
+        "combinatorics",
+        "math",
+        "number theory"
+      ],
+      "contestId": 2125,
+      "index": "C",
+      "submissionId": 330382066,
+      "date": "2025-07-22",
+      "gym": false
+    },
+    {
+      "id": "519B",
+      "name": "A and B and Compilation Errors",
+      "rating": 1100,
+      "tags": [
+        "data structures",
+        "implementation",
+        "sortings"
+      ],
+      "contestId": 519,
+      "index": "B",
+      "submissionId": 325149968,
+      "date": "2025-06-19",
+      "gym": false
+    },
+    {
+      "id": "1327A",
+      "name": "Sum of Odd Integers",
+      "rating": 1100,
+      "tags": [
+        "math"
+      ],
+      "contestId": 1327,
+      "index": "A",
+      "submissionId": 325147881,
+      "date": "2025-06-19",
+      "gym": false
+    },
+    {
+      "id": "368B",
+      "name": "Sereja and Suffixes",
+      "rating": 1100,
+      "tags": [
+        "data structures",
+        "dp"
+      ],
+      "contestId": 368,
+      "index": "B",
+      "submissionId": 325147089,
+      "date": "2025-06-19",
+      "gym": false
+    },
+    {
+      "id": "270A",
+      "name": "Fancy Fence",
+      "rating": 1100,
+      "tags": [
+        "geometry",
+        "implementation",
+        "math"
+      ],
+      "contestId": 270,
+      "index": "A",
+      "submissionId": 325143203,
+      "date": "2025-06-19",
+      "gym": false
+    },
+    {
+      "id": "456A",
+      "name": "Laptops",
+      "rating": 1100,
+      "tags": [
+        "sortings"
+      ],
+      "contestId": 456,
+      "index": "A",
+      "submissionId": 325141356,
+      "date": "2025-06-19",
+      "gym": false
+    },
+    {
+      "id": "2111C",
+      "name": "Equal Values",
+      "rating": 1100,
+      "tags": [
+        "brute force",
+        "greedy",
+        "two pointers"
+      ],
+      "contestId": 2111,
+      "index": "C",
+      "submissionId": 324378109,
+      "date": "2025-06-14",
+      "gym": false
+    },
+    {
+      "id": "2074C",
+      "name": "XOR and Triangle",
+      "rating": 1100,
+      "tags": [
+        "bitmasks",
+        "brute force",
+        "geometry",
+        "greedy",
+        "probabilities"
+      ],
+      "contestId": 2074,
+      "index": "C",
+      "submissionId": 323118686,
+      "date": "2025-06-06",
+      "gym": false
+    },
+    {
+      "id": "2107B",
+      "name": "Apples in Boxes",
+      "rating": 1100,
+      "tags": [
+        "games",
+        "greedy",
+        "math"
+      ],
+      "contestId": 2107,
+      "index": "B",
+      "submissionId": 321796886,
+      "date": "2025-05-28",
+      "gym": false
+    },
+    {
+      "id": "1027A",
+      "name": "Palindromic Twist",
+      "rating": 1000,
+      "tags": [
+        "implementation",
+        "strings"
+      ],
+      "contestId": 1027,
+      "index": "A",
+      "submissionId": 376783577,
+      "date": "2026-05-31",
+      "gym": false
+    },
+    {
+      "id": "1374C",
+      "name": "Move Brackets",
+      "rating": 1000,
+      "tags": [
+        "greedy",
+        "strings"
+      ],
+      "contestId": 1374,
+      "index": "C",
+      "submissionId": 376773865,
+      "date": "2026-05-31",
+      "gym": false
+    },
+    {
+      "id": "1473B",
+      "name": "String LCM",
+      "rating": 1000,
+      "tags": [
+        "brute force",
+        "math",
+        "number theory",
+        "strings"
+      ],
+      "contestId": 1473,
+      "index": "B",
+      "submissionId": 376754480,
+      "date": "2026-05-31",
+      "gym": false
+    },
+    {
+      "id": "1796B",
+      "name": "Asterisk-Minor Template",
+      "rating": 1000,
+      "tags": [
+        "implementation",
+        "strings"
+      ],
+      "contestId": 1796,
+      "index": "B",
+      "submissionId": 376751158,
+      "date": "2026-05-31",
+      "gym": false
+    },
+    {
+      "id": "1506C",
+      "name": "Double-ended Strings",
+      "rating": 1000,
+      "tags": [
+        "brute force",
+        "implementation",
+        "strings"
+      ],
+      "contestId": 1506,
+      "index": "C",
+      "submissionId": 376611890,
+      "date": "2026-05-30",
+      "gym": false
+    },
+    {
+      "id": "1251A",
+      "name": "Broken Keyboard",
+      "rating": 1000,
+      "tags": [
+        "brute force",
+        "strings",
+        "two pointers"
+      ],
+      "contestId": 1251,
+      "index": "A",
+      "submissionId": 376387140,
+      "date": "2026-05-28",
+      "gym": false
+    },
+    {
+      "id": "2000C",
+      "name": "Numeric String Template",
+      "rating": 1000,
+      "tags": [
+        "data structures",
+        "strings"
+      ],
+      "contestId": 2000,
+      "index": "C",
+      "submissionId": 376303310,
+      "date": "2026-05-27",
+      "gym": false
+    },
+    {
+      "id": "1791D",
+      "name": "Distinct Split",
+      "rating": 1000,
+      "tags": [
+        "brute force",
+        "greedy",
+        "strings"
+      ],
+      "contestId": 1791,
+      "index": "D",
+      "submissionId": 376298733,
+      "date": "2026-05-27",
+      "gym": false
+    },
+    {
+      "id": "1278A",
+      "name": "Shuffle Hashing",
+      "rating": 1000,
+      "tags": [
+        "brute force",
+        "implementation",
+        "strings"
+      ],
+      "contestId": 1278,
+      "index": "A",
+      "submissionId": 376285647,
+      "date": "2026-05-27",
+      "gym": false
+    },
+    {
+      "id": "1223B",
+      "name": "Strings Equalization",
+      "rating": 1000,
+      "tags": [
+        "strings"
+      ],
+      "contestId": 1223,
+      "index": "B",
+      "submissionId": 376282499,
+      "date": "2026-05-27",
+      "gym": false
+    },
+    {
+      "id": "58A",
+      "name": "Chat room",
+      "rating": 1000,
+      "tags": [
+        "greedy",
+        "strings"
+      ],
+      "contestId": 58,
+      "index": "A",
+      "submissionId": 375936807,
+      "date": "2026-05-24",
+      "gym": false
+    },
+    {
+      "id": "118A",
+      "name": "String Task",
+      "rating": 1000,
+      "tags": [
+        "implementation",
+        "strings"
+      ],
+      "contestId": 118,
+      "index": "A",
+      "submissionId": 374943164,
+      "date": "2026-05-17",
+      "gym": false
+    },
+    {
+      "id": "579A",
+      "name": "Raising Bacteria",
+      "rating": 1000,
+      "tags": [
+        "bitmasks"
+      ],
+      "contestId": 579,
+      "index": "A",
+      "submissionId": 344858683,
+      "date": "2025-10-20",
+      "gym": false
+    },
+    {
+      "id": "2132C1",
+      "name": "The Cunning Seller (easy version)",
+      "rating": 1000,
+      "tags": [
+        "greedy",
+        "math"
+      ],
+      "contestId": 2132,
+      "index": "C1",
+      "submissionId": 334855138,
+      "date": "2025-08-21",
+      "gym": false
+    },
+    {
+      "id": "500A",
+      "name": "New Year Transportation",
+      "rating": 1000,
+      "tags": [
+        "dfs and similar",
+        "graphs",
+        "implementation"
+      ],
+      "contestId": 500,
+      "index": "A",
+      "submissionId": 324767309,
+      "date": "2025-06-17",
+      "gym": false
+    },
+    {
+      "id": "43A",
+      "name": "Football",
+      "rating": 1000,
+      "tags": [
+        "strings"
+      ],
+      "contestId": 43,
+      "index": "A",
+      "submissionId": 324765582,
+      "date": "2025-06-17",
+      "gym": false
+    },
+    {
+      "id": "339B",
+      "name": "Xenia and Ringroad",
+      "rating": 1000,
+      "tags": [
+        "implementation"
+      ],
+      "contestId": 339,
+      "index": "B",
+      "submissionId": 324763822,
+      "date": "2025-06-17",
+      "gym": false
+    },
+    {
+      "id": "230A",
+      "name": "Dragons",
+      "rating": 1000,
+      "tags": [
+        "greedy",
+        "sortings"
+      ],
+      "contestId": 230,
+      "index": "A",
+      "submissionId": 324634990,
+      "date": "2025-06-16",
+      "gym": false
+    },
+    {
+      "id": "131A",
+      "name": "cAPS lOCK",
+      "rating": 1000,
+      "tags": [
+        "implementation",
+        "strings"
+      ],
+      "contestId": 131,
+      "index": "A",
+      "submissionId": 324629203,
+      "date": "2025-06-16",
+      "gym": false
+    },
+    {
+      "id": "479A",
+      "name": "Expression",
+      "rating": 1000,
+      "tags": [
+        "brute force",
+        "math"
+      ],
+      "contestId": 479,
+      "index": "A",
+      "submissionId": 324619451,
+      "date": "2025-06-16",
+      "gym": false
+    },
+    {
+      "id": "122A",
+      "name": "Lucky Division",
+      "rating": 1000,
+      "tags": [
+        "brute force",
+        "number theory"
+      ],
+      "contestId": 122,
+      "index": "A",
+      "submissionId": 324618564,
+      "date": "2025-06-16",
+      "gym": false
+    },
+    {
+      "id": "69A",
+      "name": "Young Physicist",
+      "rating": 1000,
+      "tags": [
+        "implementation",
+        "math"
+      ],
+      "contestId": 69,
+      "index": "A",
+      "submissionId": 324614430,
+      "date": "2025-06-16",
+      "gym": false
+    },
+    {
+      "id": "1A",
+      "name": "Theatre Square",
+      "rating": 1000,
+      "tags": [
+        "math"
+      ],
+      "contestId": 1,
+      "index": "A",
+      "submissionId": 324612344,
+      "date": "2025-06-16",
+      "gym": false
+    },
+    {
+      "id": "2091C",
+      "name": "Combination Lock",
+      "rating": 1000,
+      "tags": [
+        "constructive algorithms",
+        "greedy"
+      ],
+      "contestId": 2091,
+      "index": "C",
+      "submissionId": 322991214,
+      "date": "2025-06-05",
+      "gym": false
+    },
+    {
+      "id": "2233B",
+      "name": "Different Distances",
+      "rating": 900,
+      "tags": [
+        "constructive algorithms"
+      ],
+      "contestId": 2233,
+      "index": "B",
+      "submissionId": 378091807,
+      "date": "2026-06-10",
+      "gym": false
+    },
+    {
+      "id": "2232B",
+      "name": "Cake Leveling",
+      "rating": 900,
+      "tags": [
+        "binary search",
+        "greedy",
+        "math"
+      ],
+      "contestId": 2232,
+      "index": "B",
+      "submissionId": 377011588,
+      "date": "2026-06-02",
+      "gym": false
+    },
+    {
+      "id": "208A",
+      "name": "Dubstep",
+      "rating": 900,
+      "tags": [
+        "strings"
+      ],
+      "contestId": 208,
+      "index": "A",
+      "submissionId": 376035046,
+      "date": "2026-05-25",
+      "gym": false
+    },
+    {
+      "id": "977B",
+      "name": "Two-gram",
+      "rating": 900,
+      "tags": [
+        "implementation",
+        "strings"
+      ],
+      "contestId": 977,
+      "index": "B",
+      "submissionId": 374945933,
+      "date": "2026-05-17",
+      "gym": false
+    },
+    {
+      "id": "115A",
+      "name": "Party",
+      "rating": 900,
+      "tags": [
+        "dfs and similar",
+        "graphs",
+        "trees"
+      ],
+      "contestId": 115,
+      "index": "A",
+      "submissionId": 372939212,
+      "date": "2026-04-29",
+      "gym": false
+    },
+    {
+      "id": "2226B",
+      "name": "Everything Everywhere",
+      "rating": 900,
+      "tags": [
+        "greedy",
+        "math",
+        "number theory"
+      ],
+      "contestId": 2226,
+      "index": "B",
+      "submissionId": 372828210,
+      "date": "2026-04-28",
+      "gym": false
+    },
+    {
+      "id": "580A",
+      "name": "Kefa and First Steps",
+      "rating": 900,
+      "tags": [
+        "brute force",
+        "dp",
+        "implementation"
+      ],
+      "contestId": 580,
+      "index": "A",
+      "submissionId": 371759330,
+      "date": "2026-04-19",
+      "gym": false
+    },
+    {
+      "id": "2132B",
+      "name": "The Secret Number",
+      "rating": 900,
+      "tags": [
+        "math"
+      ],
+      "contestId": 2132,
+      "index": "B",
+      "submissionId": 334838741,
+      "date": "2025-08-21",
+      "gym": false
+    },
+    {
+      "id": "2125B",
+      "name": "Left and Down",
+      "rating": 900,
+      "tags": [
+        "math",
+        "number theory"
+      ],
+      "contestId": 2125,
+      "index": "B",
+      "submissionId": 330361039,
+      "date": "2025-07-22",
+      "gym": false
+    },
+    {
+      "id": "2233A",
+      "name": "AI Project Development",
+      "rating": 800,
+      "tags": [
+        "brute force",
+        "math"
+      ],
+      "contestId": 2233,
+      "index": "A",
+      "submissionId": 378073350,
+      "date": "2026-06-10",
+      "gym": false
+    },
+    {
+      "id": "2230A",
+      "name": "Optimal Purchase",
+      "rating": 800,
+      "tags": [
+        "implementation",
+        "math"
+      ],
+      "contestId": 2230,
+      "index": "A",
+      "submissionId": 377159496,
+      "date": "2026-06-03",
+      "gym": false
+    },
+    {
+      "id": "2232A",
+      "name": "Convergence",
+      "rating": 800,
+      "tags": [
+        "greedy",
+        "sortings"
+      ],
+      "contestId": 2232,
+      "index": "A",
+      "submissionId": 376886632,
+      "date": "2026-06-01",
+      "gym": false
+    },
+    {
+      "id": "2231A",
+      "name": "Construct an Array",
+      "rating": 800,
+      "tags": [
+        "constructive algorithms"
+      ],
+      "contestId": 2231,
+      "index": "A",
+      "submissionId": 376353593,
+      "date": "2026-05-28",
+      "gym": false
+    },
+    {
+      "id": "1796A",
+      "name": "Typical Interview Problem",
+      "rating": 800,
+      "tags": [
+        "brute force",
+        "implementation",
+        "strings"
+      ],
+      "contestId": 1796,
+      "index": "A",
+      "submissionId": 376040275,
+      "date": "2026-05-25",
+      "gym": false
+    },
+    {
+      "id": "266A",
+      "name": "Stones on the Table",
+      "rating": 800,
+      "tags": [
+        "implementation"
+      ],
+      "contestId": 266,
+      "index": "A",
+      "submissionId": 376035866,
+      "date": "2026-05-25",
+      "gym": false
+    },
+    {
+      "id": "41A",
+      "name": "Translation",
+      "rating": 800,
+      "tags": [
+        "implementation",
+        "strings"
+      ],
+      "contestId": 41,
+      "index": "A",
+      "submissionId": 375935611,
+      "date": "2026-05-24",
+      "gym": false
+    },
+    {
+      "id": "112A",
+      "name": "Petya and Strings",
+      "rating": 800,
+      "tags": [
+        "implementation",
+        "strings"
+      ],
+      "contestId": 112,
+      "index": "A",
+      "submissionId": 375935123,
+      "date": "2026-05-24",
+      "gym": false
+    },
+    {
+      "id": "1794A",
+      "name": "Prefix and Suffix Array",
+      "rating": 800,
+      "tags": [
+        "strings"
+      ],
+      "contestId": 1794,
+      "index": "A",
+      "submissionId": 374954259,
+      "date": "2026-05-17",
+      "gym": false
+    },
+    {
+      "id": "1462B",
+      "name": "Last Year's Substring",
+      "rating": 800,
+      "tags": [
+        "dp",
+        "implementation",
+        "strings"
+      ],
+      "contestId": 1462,
+      "index": "B",
+      "submissionId": 374949403,
+      "date": "2026-05-17",
+      "gym": false
+    },
+    {
+      "id": "71A",
+      "name": "Way Too Long Words",
+      "rating": 800,
+      "tags": [
+        "strings"
+      ],
+      "contestId": 71,
+      "index": "A",
+      "submissionId": 374941970,
+      "date": "2026-05-17",
+      "gym": false
+    },
+    {
+      "id": "1398B",
+      "name": "Substring Removal Game",
+      "rating": 800,
+      "tags": [
+        "games",
+        "greedy",
+        "sortings"
+      ],
+      "contestId": 1398,
+      "index": "B",
+      "submissionId": 373814860,
+      "date": "2026-05-07",
+      "gym": false
+    },
+    {
+      "id": "2226A",
+      "name": "Disturbing Distribution",
+      "rating": 800,
+      "tags": [
+        "greedy",
+        "math"
+      ],
+      "contestId": 2226,
+      "index": "A",
+      "submissionId": 372821893,
+      "date": "2026-04-28",
+      "gym": false
+    },
+    {
+      "id": "996A",
+      "name": "Hit the Lottery",
+      "rating": 800,
+      "tags": [
+        "dp",
+        "greedy"
+      ],
+      "contestId": 996,
+      "index": "A",
+      "submissionId": 371758595,
+      "date": "2026-04-19",
+      "gym": false
+    },
+    {
+      "id": "977A",
+      "name": "Wrong Subtraction",
+      "rating": 800,
+      "tags": [
+        "implementation"
+      ],
+      "contestId": 977,
+      "index": "A",
+      "submissionId": 371758274,
+      "date": "2026-04-19",
+      "gym": false
+    },
+    {
+      "id": "1527A",
+      "name": "And Then There Were K",
+      "rating": 800,
+      "tags": [
+        "bitmasks"
+      ],
+      "contestId": 1527,
+      "index": "A",
+      "submissionId": 347664236,
+      "date": "2025-11-06",
+      "gym": false
+    },
+    {
+      "id": "1421A",
+      "name": "XORwice",
+      "rating": 800,
+      "tags": [
+        "bitmasks",
+        "greedy",
+        "math"
+      ],
+      "contestId": 1421,
+      "index": "A",
+      "submissionId": 344857639,
+      "date": "2025-10-20",
+      "gym": false
+    },
+    {
+      "id": "2151A",
+      "name": "Incremental Subarray",
+      "rating": 800,
+      "tags": [
+        "math",
+        "strings"
+      ],
+      "contestId": 2151,
+      "index": "A",
+      "submissionId": 340166608,
+      "date": "2025-09-24",
+      "gym": false
+    },
+    {
+      "id": "2134A",
+      "name": "Painting With Two Colors",
+      "rating": 800,
+      "tags": [
+        "constructive algorithms",
+        "implementation",
+        "math"
+      ],
+      "contestId": 2134,
+      "index": "A",
+      "submissionId": 335631494,
+      "date": "2025-08-26",
+      "gym": false
+    },
+    {
+      "id": "2132A",
+      "name": "Homework",
+      "rating": 800,
+      "tags": [
+        "brute force",
+        "implementation",
+        "strings"
+      ],
+      "contestId": 2132,
+      "index": "A",
+      "submissionId": 334811667,
+      "date": "2025-08-21",
+      "gym": false
+    },
+    {
+      "id": "2130A",
+      "name": "Submission is All You Need",
+      "rating": 800,
+      "tags": [
+        "greedy",
+        "math"
+      ],
+      "contestId": 2130,
+      "index": "A",
+      "submissionId": 331756966,
+      "date": "2025-07-31",
+      "gym": false
+    },
+    {
+      "id": "2128A",
+      "name": "Recycling Center",
+      "rating": 800,
+      "tags": [
+        "greedy",
+        "sortings"
+      ],
+      "contestId": 2128,
+      "index": "A",
+      "submissionId": 331114678,
+      "date": "2025-07-27",
+      "gym": false
+    },
+    {
+      "id": "2125A",
+      "name": "Difficult Contest",
+      "rating": 800,
+      "tags": [
+        "constructive algorithms",
+        "implementation",
+        "sortings",
+        "strings"
+      ],
+      "contestId": 2125,
+      "index": "A",
+      "submissionId": 330343316,
+      "date": "2025-07-22",
+      "gym": false
+    },
+    {
+      "id": "339A",
+      "name": "Helpful Maths",
+      "rating": 800,
+      "tags": [
+        "greedy",
+        "implementation",
+        "sortings",
+        "strings"
+      ],
+      "contestId": 339,
+      "index": "A",
+      "submissionId": 324041029,
+      "date": "2025-06-12",
+      "gym": false
+    },
+    {
+      "id": "263A",
+      "name": "Beautiful Matrix",
+      "rating": 800,
+      "tags": [
+        "implementation"
+      ],
+      "contestId": 263,
+      "index": "A",
+      "submissionId": 324038229,
+      "date": "2025-06-12",
+      "gym": false
+    },
+    {
+      "id": "50A",
+      "name": "Domino piling",
+      "rating": 800,
+      "tags": [
+        "greedy",
+        "math"
+      ],
+      "contestId": 50,
+      "index": "A",
+      "submissionId": 324037616,
+      "date": "2025-06-12",
+      "gym": false
+    },
+    {
+      "id": "158A",
+      "name": "Next Round",
+      "rating": 800,
+      "tags": [
+        "*special",
+        "implementation"
+      ],
+      "contestId": 158,
+      "index": "A",
+      "submissionId": 324036803,
+      "date": "2025-06-12",
+      "gym": false
+    },
+    {
+      "id": "2074B",
+      "name": "The Third Side",
+      "rating": 800,
+      "tags": [
+        "geometry",
+        "greedy",
+        "math"
+      ],
+      "contestId": 2074,
+      "index": "B",
+      "submissionId": 323109228,
+      "date": "2025-06-06",
+      "gym": false
+    },
+    {
+      "id": "2074A",
+      "name": "Draw a Square",
+      "rating": 800,
+      "tags": [
+        "geometry",
+        "implementation"
+      ],
+      "contestId": 2074,
+      "index": "A",
+      "submissionId": 323106670,
+      "date": "2025-06-06",
+      "gym": false
+    },
+    {
+      "id": "2091B",
+      "name": "Team Training",
+      "rating": 800,
+      "tags": [
+        "dp",
+        "greedy",
+        "sortings"
+      ],
+      "contestId": 2091,
+      "index": "B",
+      "submissionId": 322986414,
+      "date": "2025-06-05",
+      "gym": false
+    },
+    {
+      "id": "2091A",
+      "name": "Olympiad Date",
+      "rating": 800,
+      "tags": [
+        "greedy",
+        "strings"
+      ],
+      "contestId": 2091,
+      "index": "A",
+      "submissionId": 322983567,
+      "date": "2025-06-05",
+      "gym": false
+    },
+    {
+      "id": "282A",
+      "name": "Bit++",
+      "rating": 800,
+      "tags": [
+        "implementation"
+      ],
+      "contestId": 282,
+      "index": "A",
+      "submissionId": 322976043,
+      "date": "2025-06-05",
+      "gym": false
+    },
+    {
+      "id": "231A",
+      "name": "Team",
+      "rating": 800,
+      "tags": [
+        "brute force",
+        "greedy"
+      ],
+      "contestId": 231,
+      "index": "A",
+      "submissionId": 322975671,
+      "date": "2025-06-05",
+      "gym": false
+    },
+    {
+      "id": "4A",
+      "name": "Watermelon",
+      "rating": 800,
+      "tags": [
+        "brute force",
+        "math"
+      ],
+      "contestId": 4,
+      "index": "A",
+      "submissionId": 322965933,
+      "date": "2025-06-05",
+      "gym": false
+    },
+    {
+      "id": "2107A",
+      "name": "LRC and VIP",
+      "rating": 800,
+      "tags": [
+        "greedy",
+        "number theory"
+      ],
+      "contestId": 2107,
+      "index": "A",
+      "submissionId": 321799796,
+      "date": "2025-05-28",
+      "gym": false
+    },
+    {
+      "id": "106565B",
+      "name": "排考场",
+      "rating": null,
+      "tags": [],
+      "contestId": 106565,
+      "index": "B",
+      "submissionId": 377792668,
+      "date": "2026-06-08",
+      "gym": true
+    },
+    {
+      "id": "104821C",
+      "name": "Primitive Root",
+      "rating": null,
+      "tags": [],
+      "contestId": 104821,
+      "index": "C",
+      "submissionId": 374197147,
+      "date": "2026-05-11",
+      "gym": true
+    },
+    {
+      "id": "104821G",
+      "name": "Knapsack",
+      "rating": null,
+      "tags": [],
+      "contestId": 104821,
+      "index": "G",
+      "submissionId": 374185069,
+      "date": "2026-05-11",
+      "gym": true
+    },
+    {
+      "id": "104821I",
+      "name": "Counter",
+      "rating": null,
+      "tags": [],
+      "contestId": 104821,
+      "index": "I",
+      "submissionId": 374181022,
+      "date": "2026-05-11",
+      "gym": true
+    },
+    {
+      "id": "105257G",
+      "name": "Disappearing Number",
+      "rating": null,
+      "tags": [],
+      "contestId": 105257,
+      "index": "G",
+      "submissionId": 373815705,
+      "date": "2026-05-07",
+      "gym": true
+    },
+    {
+      "id": "105257C",
+      "name": "Seats",
+      "rating": null,
+      "tags": [],
+      "contestId": 105257,
+      "index": "C",
+      "submissionId": 373595198,
+      "date": "2026-05-05",
+      "gym": true
+    },
+    {
+      "id": "105257M",
+      "name": "Window Decoration",
+      "rating": null,
+      "tags": [],
+      "contestId": 105257,
+      "index": "M",
+      "submissionId": 373589543,
+      "date": "2026-05-05",
+      "gym": true
+    },
+    {
+      "id": "105257F",
+      "name": "Try a try, AC is OK",
+      "rating": null,
+      "tags": [],
+      "contestId": 105257,
+      "index": "F",
+      "submissionId": 373587920,
+      "date": "2026-05-05",
+      "gym": true
+    },
+    {
+      "id": "105257A",
+      "name": "chmod",
+      "rating": null,
+      "tags": [],
+      "contestId": 105257,
+      "index": "A",
+      "submissionId": 373587464,
+      "date": "2026-05-05",
+      "gym": true
+    },
+    {
+      "id": "105891J",
+      "name": "Win",
+      "rating": null,
+      "tags": [],
+      "contestId": 105891,
+      "index": "J",
+      "submissionId": 373502779,
+      "date": "2026-05-04",
+      "gym": true
+    },
+    {
+      "id": "105891G",
+      "name": "student",
+      "rating": null,
+      "tags": [],
+      "contestId": 105891,
+      "index": "G",
+      "submissionId": 373500762,
+      "date": "2026-05-04",
+      "gym": true
+    },
+    {
+      "id": "105891C",
+      "name": "gcd",
+      "rating": null,
+      "tags": [],
+      "contestId": 105891,
+      "index": "C",
+      "submissionId": 373500434,
+      "date": "2026-05-04",
+      "gym": true
+    },
+    {
+      "id": "105891A",
+      "name": "Color",
+      "rating": null,
+      "tags": [],
+      "contestId": 105891,
+      "index": "A",
+      "submissionId": 373499537,
+      "date": "2026-05-04",
+      "gym": true
+    },
+    {
+      "id": "105891K",
+      "name": "Welfare",
+      "rating": null,
+      "tags": [],
+      "contestId": 105891,
+      "index": "K",
+      "submissionId": 373493824,
+      "date": "2026-05-04",
+      "gym": true
+    },
+    {
+      "id": "105891L",
+      "name": "easy",
+      "rating": null,
+      "tags": [],
+      "contestId": 105891,
+      "index": "L",
+      "submissionId": 373489918,
+      "date": "2026-05-04",
+      "gym": true
+    },
+    {
+      "id": "105977G",
+      "name": "炒股高手",
+      "rating": null,
+      "tags": [],
+      "contestId": 105977,
+      "index": "G",
+      "submissionId": 338026167,
+      "date": "2025-09-11",
+      "gym": true
+    },
+    {
+      "id": "105949F",
+      "name": "Inversion Pairs",
+      "rating": null,
+      "tags": [],
+      "contestId": 105949,
+      "index": "F",
+      "submissionId": 325017944,
+      "date": "2025-06-18",
+      "gym": true
+    },
+    {
+      "id": "105941H",
+      "name": "树论函数",
+      "rating": null,
+      "tags": [],
+      "contestId": 105941,
+      "index": "H",
+      "submissionId": 322643141,
+      "date": "2025-06-03",
+      "gym": true
+    },
+    {
+      "id": "105941J",
+      "name": "Ring Trick",
+      "rating": null,
+      "tags": [],
+      "contestId": 105941,
+      "index": "J",
+      "submissionId": 322635467,
+      "date": "2025-06-03",
+      "gym": true
+    },
+    {
+      "id": "105941D",
+      "name": "2025",
+      "rating": null,
+      "tags": [],
+      "contestId": 105941,
+      "index": "D",
+      "submissionId": 322496165,
+      "date": "2025-06-02",
+      "gym": true
+    },
+    {
+      "id": "105158M",
+      "name": "有效算法",
+      "rating": null,
+      "tags": [],
+      "contestId": 105158,
+      "index": "M",
+      "submissionId": 321360430,
+      "date": "2025-05-26",
+      "gym": true
+    },
+    {
+      "id": "105158J",
+      "name": "排列与合数",
+      "rating": null,
+      "tags": [],
+      "contestId": 105158,
+      "index": "J",
+      "submissionId": 321240187,
+      "date": "2025-05-25",
+      "gym": true
+    },
+    {
+      "id": "105158B",
+      "name": "扫雷 1",
+      "rating": null,
+      "tags": [],
+      "contestId": 105158,
+      "index": "B",
+      "submissionId": 321234291,
+      "date": "2025-05-25",
+      "gym": true
+    },
+    {
+      "id": "105158F",
+      "name": "优秀字符串",
+      "rating": null,
+      "tags": [],
+      "contestId": 105158,
+      "index": "F",
+      "submissionId": 321231372,
+      "date": "2025-05-25",
+      "gym": true
+    }
+  ]
+}
