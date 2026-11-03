@@ -41,6 +41,7 @@ const teek = defineTeekConfig({
   articleShare: { enabled: false },
   articleUpdate: { enabled: false },
   themeEnhance: { enabled: false },
+  backTop: { enabled: true, content: 'icon' },
   comment: false,
   vitePlugins: { sidebar: false, permalink: false, docAnalysis: false, autoFrontmatter: false },
   footerInfo: {

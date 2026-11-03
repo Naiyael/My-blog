@@ -18,10 +18,11 @@ onUnmounted(()=>{mounted=false;sequence++;if(router.onAfterRouteChange===routeHo
 </script>
 <template>
 <section class="journal-feed" v-if="!home||posts.length">
+  <header v-if="home" class="journal-home-heading"><div><span>笔记 · 题解 · 日常</span><h2>最近的记录</h2></div><a href="/journal.html">全部文章 <span aria-hidden="true">↗</span></a></header>
   <div v-if="!home&&!props.category" class="journal-filter"><button v-for="(label,key) in {all:'全部',article:'文章',solution:'题解',daily:'日常'}" :key="key" :class="{active:category===(key==='all'?'':key)}" @click="chooseCategory(key==='all'?'':key)">{{label}}</button></div>
   <p v-if="tag&&!home" class="journal-selected-tag">标签：<strong>{{tag}}</strong><button @click="clearTag" aria-label="清除标签筛选">清除 ×</button></p>
   <p class="cms-muted" v-if="loading">正在加载…</p><p class="cms-error" v-else-if="error">{{error}} <button @click="load">重试</button></p><p class="cms-muted journal-empty" v-else-if="!posts.length">暂无{{tag?'相关内容':categoryNames[category]||'内容'}}。</p>
-  <div v-else class="journal-items"><a class="journal-card" v-for="post in posts" :key="post.id" :href="postLink(post)"><img v-if="post.cover" :src="post.cover" :alt="post.title" loading="lazy"><div><span class="journal-meta">{{categoryNames[post.category]}} · {{dateLabel(post.publishedAt)}}</span><h2>{{post.title}}</h2><p>{{post.excerpt}}</p><span v-if="post.tags.length" class="journal-tags">{{post.tags.map(t=>'#'+t).join('  ')}}</span></div><span class="journal-arrow">↗</span></a></div>
+  <div v-else class="journal-items"><a class="journal-card" v-for="post in posts" :key="post.id" :href="postLink(post)"><img v-if="post.cover" :src="post.cover" :alt="post.title" loading="lazy"><div><span class="journal-meta"><span class="journal-category">{{categoryNames[post.category]}}</span><time :datetime="post.publishedAt">{{dateLabel(post.publishedAt)}}</time></span><h2>{{post.title}}</h2><p>{{post.excerpt}}</p><span v-if="post.tags.length" class="journal-tags"><span v-for="label in post.tags" :key="label">{{label}}</span></span></div><span class="journal-arrow" aria-hidden="true">↗</span></a></div>
   <div class="journal-pagination" v-if="total>12"><button :disabled="page===1" @click="page--">上一页</button><span>{{page}} / {{Math.ceil(total/12)}}</span><button :disabled="page*12>=total" @click="page++">下一页</button></div>
 </section>
 </template>
