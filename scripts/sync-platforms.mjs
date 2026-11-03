@@ -1,0 +1,3 @@
+import fs from 'node:fs';import {fetchCodeforces,fetchLuogu,wait} from '../worker/platforms.mjs';
+async function sync(){for(const [key,loader,file]of [['Codeforces',fetchCodeforces,'codeforces.json'],['洛谷',fetchLuogu,'luogu-live.json']]){try{const data=await loader();fs.mkdirSync('src/data',{recursive:true});fs.writeFileSync('src/data/'+file,JSON.stringify(data,null,2));console.log(`${new Date().toLocaleString('zh-CN',{timeZone:'Asia/Shanghai'})} ${key}: ${data.solved} AC${data.rating!=null?', Rating '+data.rating:''}`);}catch{console.error(key+' 同步暂缓，保留上次数据');}}}
+await sync();if(process.argv.includes('--watch'))while(true){await wait(60000);await sync();}

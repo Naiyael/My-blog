@@ -1,17 +1,19 @@
 <script setup>
 import {ref,computed,watch} from 'vue';
-import cf from '../../../../src/data/codeforces.json';
-import { groups } from '../../../../src/data/luogu';
+import { usePlatform } from './platform-state';
 const props=defineProps({platform:{type:String,default:'cf'}});
+const { data } = usePlatform(props.platform);
+const cf = computed(() => props.platform==='cf'?data.value:{tags:{},problems:[]});
+const groups = computed(() => props.platform==='luogu'?data.value.groups:[]);
 const query=ref(''),selected=ref(''),page=ref(1);
 const labels={'graphs':'图论','dp':'动态规划','greedy':'贪心','data structures':'数据结构','strings':'字符串','math':'数学','shortest paths':'最短路','binary search':'二分','two pointers':'双指针','dsu':'并查集','dfs and similar':'搜索','number theory':'数论','constructive algorithms':'构造','implementation':'模拟','brute force':'枚举','sortings':'排序'};
 const tagOptions=['graphs','dp','data structures','greedy','math','strings','binary search','shortest paths','dsu'];
-const luogu=groups.flatMap(g=>g.ids.map(id=>({id,group:g.name,color:g.color})));
-const filtered=computed(()=>props.platform==='cf'?cf.problems.filter(p=>(!selected.value||p.tags.includes(selected.value))&&`${p.id} ${p.name} ${p.tags.join(' ')} ${p.tags.map(t=>labels[t]||t).join(' ')}`.toLowerCase().includes(query.value.trim().toLowerCase())):luogu.filter(p=>(!selected.value||p.group===selected.value)&&p.id.toLowerCase().includes(query.value.trim().toLowerCase())));
+const filtered=computed(()=>props.platform==='cf'?cf.value.problems.filter(p=>(!selected.value||p.tags.includes(selected.value))&&`${p.id} ${p.name} ${p.tags.join(' ')} ${p.tags.map(t=>labels[t]||t).join(' ')}`.toLowerCase().includes(query.value.trim().toLowerCase())):data.value.problems.filter(p=>(!selected.value||p.group===selected.value)&&`${p.id} ${p.name}`.toLowerCase().includes(query.value.trim().toLowerCase())));
 const size=computed(()=>props.platform==='cf'?10:30);
 const totalPages=computed(()=>Math.max(1,Math.ceil(filtered.value.length/size.value)));
 const visible=computed(()=>filtered.value.slice((page.value-1)*size.value,page.value*size.value));
 watch([query,selected],()=>page.value=1);
+watch(totalPages,n=>{if(page.value>n)page.value=n;});
 const reset=()=>{query.value='';selected.value='';};
 const url=p=>props.platform==='cf'?`https://codeforces.com/${p.gym?'gym':'contest'}/${p.contestId}/problem/${p.index}`:`https://www.luogu.com.cn/problem/${p.id}`;
 </script>

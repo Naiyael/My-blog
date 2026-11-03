@@ -45,7 +45,7 @@ const teek = defineTeekConfig({
   footerInfo: {
     copyright: { createYear: 2026, name: 'Naiyael', link: '/about.html' },
     theme: { show: true, name: 'Teek', link: 'https://github.com/Kele-Bingtang/vitepress-theme-teek' },
-    bottomMessage: '<a href="/sources.html">数据与图片来源</a>',
+    bottomMessage: '<a href="/sources.html">致谢</a>',
   },
 });
 
@@ -69,6 +69,7 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
+      { text: '文章', link: '/journal.html' },
       { text: '算法', items: [{ text: 'Codeforces', link: '/codeforces.html' }, { text: '洛谷', link: '/luogu.html' }] },
       { text: '日常', link: '/daily.html' },
       { text: '关于', link: '/about.html' },

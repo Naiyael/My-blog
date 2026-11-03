@@ -1,11 +1,34 @@
 # Naiyael · 算法与日常
 
-基于 MIT 开源主题 [Teek](https://github.com/Kele-Bingtang/vitepress-theme-teek) 的 Vue 3 + VitePress 个人博客。直接使用主题的首页、头像资料栏、分类、标签、站内搜索和移动导航。定制内容为本人提供的头像、Unsplash 山湖封面、Codeforces 与洛谷题目记录。
+Vue 3 / VitePress / Teek 前台 + Cloudflare Worker 后端。文章保存在 D1，图片保存在 R2；编辑和发布不需要重新构建网站。
 
-启动：`npm run dev`；构建：`npm run build`；生产预览：`npm run preview`。
+- 管理后台：/admin.html（使用站点所有者的 ChatGPT 账号）
+- 所有文章：/journal.html；日常：/daily.html
+- 支持文章、题解、日常、Markdown 预览、封面与正文图片、草稿、发布和可恢复归档。
+- 写入校验站点管理员身份与 Origin；草稿和未发布图片不可匿名读取；版本检查避免并发覆盖。
+- SITE_ADMIN_EMAIL 为 Sites 运行时私密配置，不写入源码。
 
-数据来自 2026-11-03 的 Codeforces 公开 API，原始响应在 research/。运行 `node scripts/prepare-data.mjs` 生成 src/data/codeforces.json。204 道不同题目包含 Gym，不代表正式比赛成绩。洛谷 233 道来自用户截图可见部分，保留截图难度分组，位于 src/data/luogu.js。各平台分别统计；标签有重叠，不代表熟练度。
+## 开发与验证
 
-编辑页面：docs/*.md；主题配置：docs/.vitepress/config.mts；数据交互组件：docs/.vitepress/theme/components/。构建输出为 dist/，用于现有 Sites 网站部署。
+1. npm install
+2. npm run db:generate（仅在 schema 修改后新增迁移，已应用迁移不可修改）
+3. npm run build
+4. npm run dev
 
-头像位于 docs/public/images/avatar.jpg，使用本人提供的原图。封面 mountain-lake.jpg 来自 Francesco Ungaro / Unsplash，来源链接在 docs/sources.md。Teek 许可证保存在 research/TEEK-LICENSE.txt，页脚保留主题链接。日常页尚未添加个人文章。
+本地预览 http://127.0.0.1:4173。预览登录仅在 loopback 开发适配器中模拟，生产登录由 Sites 托管。本地数据库和图片在忽略的 .local-state/ 中，与线上数据分离。
+
+npm test 验证草稿隔离、发布/归档、身份和跨站请求校验、图片上传、Markdown 安全、数据库持久化以及平台数据解析。
+
+## OJ 自动同步
+
+前台打开时每 60 秒读取同源 API；后端缓存 60 秒并合并并发请求。上游失败时保留上次成功数据并显示更新暂缓。
+
+- Codeforces qiushan233：公开 API 同步 Rating、Rating 历史、提交动态、通过题目和标签。请求间隔至少 2.1 秒。Rating 以官方结算为准。
+- 洛谷 1589332：读取公开 practice 页的通过题目、尝试题目和名称。逐次提交列表匿名访问返回 401，因此不能展示同一道题的每次 WA；新尝试/新 AC 会反映在练习记录中。
+- node scripts/sync-platforms.mjs 手动更新本地回退数据；加 --watch 每分钟同步一次。网站运行时无需启动此本地脚本，也无需重新发布。
+
+## 构建和数据
+
+构建把 VitePress 静态资源压缩嵌入单个 ESM Worker，输出 dist/server/index.js；.openai/hosting.json 声明 DB / BUCKET。D1 schema 在 db/schema.ts，迁移在 drizzle/。发布会由 Sites 应用线上迁移。
+
+Teek 许可证位于 research/TEEK-LICENSE.txt。本人头像位于 docs/public/images/avatar.jpg，封面摄影署名见 docs/sources.md。不要提交本地数据库、账号 Cookie 或运行时密钥。

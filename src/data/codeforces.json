@@ -6,7 +6,6 @@
   "totalSubmissions": 381,
   "solved": 204,
   "maxDifficulty": 2100,
-  "updatedAt": "2026-11-03",
   "history": [
     {
       "contestId": 2125,
@@ -73,32 +72,32 @@
     }
   ],
   "tags": {
-    "constructive algorithms": 16,
-    "math": 42,
-    "brute force": 35,
-    "dp": 31,
-    "greedy": 57,
     "data structures": 20,
     "two pointers": 18,
     "binary search": 20,
-    "implementation": 58,
+    "dfs and similar": 17,
+    "graphs": 23,
+    "greedy": 57,
+    "shortest paths": 10,
+    "constructive algorithms": 16,
+    "dp": 31,
     "dsu": 9,
     "trees": 6,
+    "combinatorics": 5,
+    "brute force": 35,
+    "implementation": 58,
     "sortings": 23,
     "strings": 42,
+    "math": 42,
     "number theory": 11,
-    "dfs and similar": 17,
-    "combinatorics": 5,
-    "graphs": 23,
-    "shortest paths": 10,
-    "games": 2,
-    "*special": 2,
-    "bitmasks": 5,
     "flows": 1,
     "hashing": 2,
     "graph matchings": 1,
+    "*special": 2,
+    "bitmasks": 5,
     "geometry": 4,
-    "probabilities": 1
+    "probabilities": 1,
+    "games": 2
   },
   "problems": [
     {
@@ -2985,6 +2984,117 @@
       "submissionId": 321231372,
       "date": "2025-05-25",
       "gym": true
+    }
+  ],
+  "syncedAt": "2026-11-03T13:18:07.735Z",
+  "recentSubmissions": [
+    {
+      "id": 393077092,
+      "problemId": "1772D",
+      "name": "Absolute Sorting",
+      "verdict": "OK",
+      "language": "C++17 (GCC 7-32)",
+      "date": "2026-10-03T13:35:56.000Z",
+      "url": "https://codeforces.com/contest/1772/submission/393077092"
+    },
+    {
+      "id": 378193846,
+      "problemId": "2233C",
+      "name": "Cost of a Bracket Sequence",
+      "verdict": "OK",
+      "language": "C++17 (GCC 7-32)",
+      "date": "2026-06-11T12:03:05.000Z",
+      "url": "https://codeforces.com/contest/2233/submission/378193846"
+    },
+    {
+      "id": 378191230,
+      "problemId": "2233C",
+      "name": "Cost of a Bracket Sequence",
+      "verdict": "WRONG_ANSWER",
+      "language": "C++17 (GCC 7-32)",
+      "date": "2026-06-11T11:38:09.000Z",
+      "url": "https://codeforces.com/contest/2233/submission/378191230"
+    },
+    {
+      "id": 378190491,
+      "problemId": "2233C",
+      "name": "Cost of a Bracket Sequence",
+      "verdict": "WRONG_ANSWER",
+      "language": "C++17 (GCC 7-32)",
+      "date": "2026-06-11T11:30:37.000Z",
+      "url": "https://codeforces.com/contest/2233/submission/378190491"
+    },
+    {
+      "id": 378091807,
+      "problemId": "2233B",
+      "name": "Different Distances",
+      "verdict": "OK",
+      "language": "C++17 (GCC 7-32)",
+      "date": "2026-06-10T13:46:24.000Z",
+      "url": "https://codeforces.com/contest/2233/submission/378091807"
+    },
+    {
+      "id": 378073350,
+      "problemId": "2233A",
+      "name": "AI Project Development",
+      "verdict": "OK",
+      "language": "C++17 (GCC 7-32)",
+      "date": "2026-06-10T11:26:56.000Z",
+      "url": "https://codeforces.com/contest/2233/submission/378073350"
+    },
+    {
+      "id": 377906022,
+      "problemId": "1195E",
+      "name": "OpenStreetMap",
+      "verdict": "OK",
+      "language": "C++17 (GCC 7-32)",
+      "date": "2026-06-09T12:42:24.000Z",
+      "url": "https://codeforces.com/contest/1195/submission/377906022"
+    },
+    {
+      "id": 377792668,
+      "problemId": "106565B",
+      "name": "排考场",
+      "verdict": "OK",
+      "language": "C++17 (GCC 7-32)",
+      "date": "2026-06-08T13:49:42.000Z",
+      "url": "https://codeforces.com/gym/106565/submission/377792668"
+    },
+    {
+      "id": 377792624,
+      "problemId": "106565B",
+      "name": "排考场",
+      "verdict": "WRONG_ANSWER",
+      "language": "C++17 (GCC 7-32)",
+      "date": "2026-06-08T13:49:19.000Z",
+      "url": "https://codeforces.com/gym/106565/submission/377792624"
+    },
+    {
+      "id": 377792577,
+      "problemId": "106565D",
+      "name": "哦~搞错了",
+      "verdict": "WRONG_ANSWER",
+      "language": "C++17 (GCC 7-32)",
+      "date": "2026-06-08T13:48:59.000Z",
+      "url": "https://codeforces.com/gym/106565/submission/377792577"
+    },
+    {
+      "id": 377296405,
+      "problemId": "514D",
+      "name": "R2D2 and Droid Army",
+      "verdict": "OK",
+      "language": "C++17 (GCC 7-32)",
+      "date": "2026-06-04T14:42:09.000Z",
+      "url": "https://codeforces.com/contest/514/submission/377296405"
+    },
+    {
+      "id": 377258942,
+      "problemId": "602B",
+      "name": "Approximating a Constant Range",
+      "verdict": "OK",
+      "language": "C++17 (GCC 7-32)",
+      "date": "2026-06-04T08:45:44.000Z",
+      "url": "https://codeforces.com/contest/602/submission/377258942"
     }
   ]
 }

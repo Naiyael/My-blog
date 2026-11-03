@@ -1,0 +1,6 @@
+import {ref,onMounted,onUnmounted} from 'vue';
+import cf from '../../../../src/data/codeforces.json';
+import luogu from '../../../../src/data/luogu-live.json';
+const states={cf:{data:ref(cf),busy:ref(false),users:0,pending:null,timer:null},luogu:{data:ref(luogu),busy:ref(false),users:0,pending:null,timer:null}};
+async function update(name){const s=states[name];if(s.pending)return s.pending;s.busy.value=true;s.pending=(async()=>{try{const r=await fetch('/api/platforms/'+name,{cache:'no-store',signal:AbortSignal.timeout(45000)});if(!r.ok)throw new Error();const d=await r.json();if(!Array.isArray(d.problems)||typeof d.solved!=='number')throw new Error();s.data.value=d;}catch{s.data.value={...s.data.value,syncState:'delayed'};}finally{s.busy.value=false;s.pending=null;}})();return s.pending;}
+export function usePlatform(name){const s=states[name];let joined=false;const visible=()=>{if(document.visibilityState==='visible')update(name);};onMounted(()=>{joined=true;if(++s.users===1){update(name);s.visible=visible;s.timer=setInterval(()=>{if(document.visibilityState==='visible')update(name);},60000);document.addEventListener('visibilitychange',visible);}});onUnmounted(()=>{if(joined&&--s.users===0){clearInterval(s.timer);document.removeEventListener('visibilitychange',s.visible);}});return {data:s.data,busy:s.busy,refresh:()=>update(name)};}
