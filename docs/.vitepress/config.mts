@@ -11,6 +11,7 @@ const teek = defineTeekConfig({
   windowTransition: false,
   author: { name: 'Naiyael', link: '/about.html' },
   banner: {
+    enabled: false,
     name: 'Naiyael',
     description: 'ACMer，写代码，也记日常。',
     bgStyle: 'partImg',

@@ -1,0 +1,632 @@
+[
+  {
+    "id": "cplusplus",
+    "name": "C++",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/cplusplus",
+    "official": false
+  },
+  {
+    "id": "python",
+    "name": "Python",
+    "source": "https://www.python.org/static/apple-touch-icon-144x144-precomposed.png",
+    "official": true
+  },
+  {
+    "id": "c",
+    "name": "C",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/c",
+    "official": false
+  },
+  {
+    "id": "javascript",
+    "name": "JavaScript",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/javascript",
+    "official": false
+  },
+  {
+    "id": "typescript",
+    "name": "TypeScript",
+    "source": "https://www.typescriptlang.org/icons/icon-512x512.png?v=8944a05a8b601855de116c8a56d3b3ae",
+    "official": true
+  },
+  {
+    "id": "java",
+    "name": "Java",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/java",
+    "official": false
+  },
+  {
+    "id": "rust",
+    "name": "Rust",
+    "source": "https://rust-lang.org/static/images/favicon.svg",
+    "official": true
+  },
+  {
+    "id": "go",
+    "name": "Go",
+    "source": "https://go.dev/images/favicon-gopher.svg",
+    "official": true
+  },
+  {
+    "id": "csharp",
+    "name": "C#",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/csharp",
+    "official": false
+  },
+  {
+    "id": "kotlin",
+    "name": "Kotlin",
+    "source": "https://kotlinlang.org/images/favicon/favicon.svg",
+    "official": true
+  },
+  {
+    "id": "swift",
+    "name": "Swift",
+    "source": "https://www.swift.org/assets/images/icon-swift.svg",
+    "official": true
+  },
+  {
+    "id": "php",
+    "name": "Php",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/php",
+    "official": false
+  },
+  {
+    "id": "ruby",
+    "name": "Ruby",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/ruby",
+    "official": false
+  },
+  {
+    "id": "dart",
+    "name": "Dart",
+    "source": "https://dart.dev/assets/img/touch-icon-iphone-retina.png",
+    "official": true
+  },
+  {
+    "id": "lua",
+    "name": "Lua",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/lua",
+    "official": false
+  },
+  {
+    "id": "scala",
+    "name": "Scala",
+    "source": "https://www.scala-lang.org/resources/safari-pinned-tab.svg",
+    "official": true
+  },
+  {
+    "id": "r",
+    "name": "R",
+    "source": "https://www.r-project.org/favicon-32x32.png",
+    "official": true
+  },
+  {
+    "id": "elixir",
+    "name": "Elixir",
+    "source": "https://elixir-lang.org/images/seo/favicon-512-elixir.png",
+    "official": true
+  },
+  {
+    "id": "haskell",
+    "name": "Haskell",
+    "source": "https://www.haskell.org/img/favicon.ico",
+    "official": true
+  },
+  {
+    "id": "clojure",
+    "name": "Clojure",
+    "source": "https://clojure.org/images/clojure-logo-icon-256.png",
+    "official": true
+  },
+  {
+    "id": "html5",
+    "name": "HTML5",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/html5",
+    "official": false
+  },
+  {
+    "id": "css3",
+    "name": "CSS3",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/css3",
+    "official": false
+  },
+  {
+    "id": "sass",
+    "name": "Sass",
+    "source": "https://sass-lang.com/icon.png",
+    "official": true
+  },
+  {
+    "id": "tailwindcss",
+    "name": "Tailwind CSS",
+    "source": "https://tailwindcss.com/favicons/safari-pinned-tab.svg?v=4",
+    "official": true
+  },
+  {
+    "id": "bootstrap",
+    "name": "Bootstrap",
+    "source": "https://getbootstrap.com/docs/6.0/assets/img/favicons/safari-pinned-tab.svg",
+    "official": true
+  },
+  {
+    "id": "vuejs",
+    "name": "Vue",
+    "source": "https://vuejs.org/logo.svg",
+    "official": true
+  },
+  {
+    "id": "react",
+    "name": "React",
+    "source": "https://react.dev/safari-pinned-tab.svg",
+    "official": true
+  },
+  {
+    "id": "angular",
+    "name": "Angular",
+    "source": "https://angular.dev/assets/icons/safari-pinned-tab.svg",
+    "official": true
+  },
+  {
+    "id": "svelte",
+    "name": "Svelte",
+    "source": "https://svelte.dev/favicon.png",
+    "official": true
+  },
+  {
+    "id": "solidjs",
+    "name": "Solidjs",
+    "source": "https://www.solidjs.com/img/favicons/apple-touch-icon.png",
+    "official": true
+  },
+  {
+    "id": "nextjs",
+    "name": "Next.js",
+    "source": "https://nextjs.org/favicon.ico?favicon.38folom4sz_yx.ico",
+    "official": true
+  },
+  {
+    "id": "nuxtjs",
+    "name": "Nuxt",
+    "source": "https://nuxt.com/icon.png",
+    "official": true
+  },
+  {
+    "id": "astro",
+    "name": "Astro",
+    "source": "https://astro.build/favicon.svg",
+    "official": true
+  },
+  {
+    "id": "nodejs",
+    "name": "Node.js",
+    "source": "https://nodejs.org/static/images/favicons/favicon.png",
+    "official": true
+  },
+  {
+    "id": "denojs",
+    "name": "Deno",
+    "source": "https://deno.com/logo.svg?__frsh_c=ba3bc66b1456a2a2caff15a7f9da8773ea6ae3fc",
+    "official": true
+  },
+  {
+    "id": "bun",
+    "name": "Bun",
+    "source": "https://bun.sh/logo.svg",
+    "official": true
+  },
+  {
+    "id": "express",
+    "name": "Express",
+    "source": "https://expressjs.com/favicon.svg",
+    "official": true
+  },
+  {
+    "id": "nestjs",
+    "name": "Nestjs",
+    "source": "https://nestjs.com/favicon.svg",
+    "official": true
+  },
+  {
+    "id": "spring",
+    "name": "Spring",
+    "source": "https://spring.io/favicon.svg?v=96334d577af708644f6f0495dd1c7bc8",
+    "official": true
+  },
+  {
+    "id": "django",
+    "name": "Django",
+    "source": "https://static.djangoproject.com/img/icon-touch.e4872c4da341.png",
+    "official": true
+  },
+  {
+    "id": "flask",
+    "name": "Flask",
+    "source": "https://flask.palletsprojects.com/en/stable/_static/flask-icon.svg",
+    "official": true
+  },
+  {
+    "id": "fastapi",
+    "name": "Fastapi",
+    "source": "https://fastapi.tiangolo.com/img/favicon.png",
+    "official": true
+  },
+  {
+    "id": "laravel",
+    "name": "Laravel",
+    "source": "https://laravel.com/img/favicon/safari-pinned-tab.svg",
+    "official": true
+  },
+  {
+    "id": "rails",
+    "name": "Rails",
+    "source": "https://rubyonrails.org/assets/images/favicon.png",
+    "official": true
+  },
+  {
+    "id": "electron",
+    "name": "Electron",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/electron",
+    "official": false
+  },
+  {
+    "id": "flutter",
+    "name": "Flutter",
+    "source": "https://flutter.dev/assets/favicon.26abda3864324ef4ac32dd0d3ce28907.png",
+    "official": true
+  },
+  {
+    "id": "android",
+    "name": "Android",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/android",
+    "official": false
+  },
+  {
+    "id": "apple",
+    "name": "Apple",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/apple",
+    "official": false
+  },
+  {
+    "id": "docker",
+    "name": "Docker",
+    "source": "https://www.docker.com/app/uploads/2024/02/cropped-docker-logo-favicon-192x192.png",
+    "official": true
+  },
+  {
+    "id": "kubernetes",
+    "name": "Kubernetes",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/kubernetes",
+    "official": false
+  },
+  {
+    "id": "terraform",
+    "name": "Terraform",
+    "source": "https://developer.hashicorp.com/favicon.svg",
+    "official": true
+  },
+  {
+    "id": "ansible",
+    "name": "Ansible",
+    "source": "https://www.redhat.com/favicon.ico",
+    "official": true
+  },
+  {
+    "id": "linux",
+    "name": "Linux",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/linux",
+    "official": false
+  },
+  {
+    "id": "ubuntu",
+    "name": "Ubuntu",
+    "source": "https://assets.ubuntu.com/v1/f38b9c7e-COF%20apple-touch-icon.png",
+    "official": true
+  },
+  {
+    "id": "debian",
+    "name": "Debian",
+    "source": "https://www.debian.org/favicon.ico",
+    "official": true
+  },
+  {
+    "id": "nginx",
+    "name": "Nginx",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/nginx",
+    "official": false
+  },
+  {
+    "id": "apache",
+    "name": "Apache",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/apache",
+    "official": false
+  },
+  {
+    "id": "postgresql",
+    "name": "PostgreSQL",
+    "source": "https://www.postgresql.org/favicon.ico",
+    "official": true
+  },
+  {
+    "id": "mysql",
+    "name": "MySQL",
+    "source": "https://www.mysql.com/favicon-48x48.png",
+    "official": true
+  },
+  {
+    "id": "sqlite",
+    "name": "SQLite",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/sqlite",
+    "official": false
+  },
+  {
+    "id": "mongodb",
+    "name": "MongoDB",
+    "source": "https://www.mongodb.com/assets/images/global/favicon.ico",
+    "official": true
+  },
+  {
+    "id": "redis",
+    "name": "Redis",
+    "source": "https://redis.io/icon.png?icon.3r8p6nysrg-mh.png",
+    "official": true
+  },
+  {
+    "id": "graphql",
+    "name": "GraphQL",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/graphql",
+    "official": false
+  },
+  {
+    "id": "prisma",
+    "name": "Prisma",
+    "source": "https://www.prisma.io/icon.svg?icon.33jj2rcm8g1fz.svg",
+    "official": true
+  },
+  {
+    "id": "git",
+    "name": "Git",
+    "source": "https://git-scm.com/favicon.ico",
+    "official": true
+  },
+  {
+    "id": "github",
+    "name": "Github",
+    "source": "https://github.githubassets.com/assets/pinned-octocat-093da3e6fa40.svg",
+    "official": true
+  },
+  {
+    "id": "gitlab",
+    "name": "Gitlab",
+    "source": "https://about.gitlab.com/images/ico/favicon-192x192.png",
+    "official": true
+  },
+  {
+    "id": "vscode",
+    "name": "VS Code",
+    "source": "https://code.visualstudio.com/assets/favicon.ico",
+    "official": true
+  },
+  {
+    "id": "vim",
+    "name": "Vim",
+    "source": "https://www.vim.org/images/vim_shortcut.ico",
+    "official": true
+  },
+  {
+    "id": "neovim",
+    "name": "Neovim",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/neovim",
+    "official": false
+  },
+  {
+    "id": "intellij",
+    "name": "Intellij",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/intellij",
+    "official": false
+  },
+  {
+    "id": "webstorm",
+    "name": "Webstorm",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/webstorm",
+    "official": false
+  },
+  {
+    "id": "figma",
+    "name": "Figma",
+    "source": "https://static.figma.com/app/icon/2/favicon.svg",
+    "official": true
+  },
+  {
+    "id": "blender",
+    "name": "Blender",
+    "source": "https://www.blender.org/wp-content/themes/bthree/assets/icons/favicon.svg",
+    "official": true
+  },
+  {
+    "id": "unity",
+    "name": "Unity",
+    "source": "https://unity.com/icon-dark.svg",
+    "official": true
+  },
+  {
+    "id": "unrealengine",
+    "name": "Unrealengine",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/unrealengine",
+    "official": false
+  },
+  {
+    "id": "godot",
+    "name": "Godot",
+    "source": "https://godotengine.org/assets/favicon.svg",
+    "official": true
+  },
+  {
+    "id": "threejs",
+    "name": "Threejs",
+    "source": "https://threejs.org/files/favicon_white.ico",
+    "official": true
+  },
+  {
+    "id": "opengl",
+    "name": "OpenGL",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/opengl",
+    "official": false
+  },
+  {
+    "id": "pytorch",
+    "name": "PyTorch",
+    "source": "https://pytorch.org/wp-content/uploads/2024/10/cropped-favicon-192x192.webp",
+    "official": true
+  },
+  {
+    "id": "tensorflow",
+    "name": "TensorFlow",
+    "source": "https://www.gstatic.com/devrel-devsite/prod/veed85ba0e3651062c793a40796e84fb34afbf8489308d45f92d5448e587e3f03/tensorflow/images/apple-touch-icon-180x180.png",
+    "official": true
+  },
+  {
+    "id": "numpy",
+    "name": "Numpy",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/numpy",
+    "official": false
+  },
+  {
+    "id": "pandas",
+    "name": "Pandas",
+    "source": "https://pandas.pydata.org/static/img/favicon.ico",
+    "official": true
+  },
+  {
+    "id": "jupyter",
+    "name": "Jupyter",
+    "source": "https://jupyter.org/favicon.svg",
+    "official": true
+  },
+  {
+    "id": "scikitlearn",
+    "name": "scikit-learn",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/scikitlearn",
+    "official": false
+  },
+  {
+    "id": "webpack",
+    "name": "Webpack",
+    "source": "https://webpack.js.org/logo-on-white-bg.4a16a9aed80e42ee.svg",
+    "official": true
+  },
+  {
+    "id": "vitejs",
+    "name": "Vite",
+    "source": "https://vite.dev/logo-without-border.svg",
+    "official": true
+  },
+  {
+    "id": "babel",
+    "name": "Babel",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/babel",
+    "official": false
+  },
+  {
+    "id": "npm",
+    "name": "Npm",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/npm",
+    "official": false
+  },
+  {
+    "id": "pnpm",
+    "name": "Pnpm",
+    "source": "https://pnpm.io/img/favicon.png",
+    "official": true
+  },
+  {
+    "id": "yarn",
+    "name": "Yarn",
+    "source": "https://yarnpkg.com/img/yarn-favicon.svg",
+    "official": true
+  },
+  {
+    "id": "cloudflare",
+    "name": "Cloudflare",
+    "source": "https://www.cloudflare.com/favicon.ico",
+    "official": true
+  },
+  {
+    "id": "amazonwebservices",
+    "name": "AWS",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/amazonwebservices",
+    "official": false
+  },
+  {
+    "id": "azure",
+    "name": "Azure",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/azure",
+    "official": false
+  },
+  {
+    "id": "googlecloud",
+    "name": "Google Cloud",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/googlecloud",
+    "official": false
+  },
+  {
+    "id": "vercel",
+    "name": "Vercel",
+    "source": "https://assets.vercel.com/image/upload/q_auto/front/favicon/vercel/apple-touch-icon-256x256.png",
+    "official": true
+  },
+  {
+    "id": "netlify",
+    "name": "Netlify",
+    "source": "https://www.netlify.com/favicon/icon.svg",
+    "official": true
+  },
+  {
+    "id": "githubactions",
+    "name": "GitHub Actions",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/githubactions",
+    "official": false
+  },
+  {
+    "id": "jenkins",
+    "name": "Jenkins",
+    "source": "https://www.jenkins.io/safari-pinned-tab.svg",
+    "official": true
+  },
+  {
+    "id": "vitest",
+    "name": "Vitest",
+    "source": "https://vitest.dev/logo-without-border.svg",
+    "official": true
+  },
+  {
+    "id": "jest",
+    "name": "Jest",
+    "source": "https://jestjs.io/img/jest.svg",
+    "official": true
+  },
+  {
+    "id": "playwright",
+    "name": "Playwright",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/playwright",
+    "official": false
+  },
+  {
+    "id": "selenium",
+    "name": "Selenium",
+    "source": "https://github.com/devicons/devicon/tree/master/icons/selenium",
+    "official": false
+  },
+  {
+    "id": "cypressio",
+    "name": "Cypress",
+    "source": "https://www.cypress.io/favicon.svg?v=2",
+    "official": true
+  },
+  {
+    "id": "pytest",
+    "name": "Pytest",
+    "source": "https://docs.pytest.org/en/stable/_static/favicon.png",
+    "official": true
+  }
+]

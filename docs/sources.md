@@ -7,9 +7,9 @@ article: false
 
 [Teek](https://github.com/Kele-Bingtang/vitepress-theme-teek) · Vue / VitePress · MIT License
 
-## 封面摄影
+## 技术图标
 
-[Francesco Ungaro / Unsplash](https://unsplash.com/photos/a-body-of-water-surrounded-by-mountains-under-a-cloudy-sky-T-Z_YB4jTA4)
+各技术官网与官方品牌资源，以及 [Devicon](https://github.com/devicons/devicon)。图标用于展示技术生态。
 
 ## 算法平台
 
