@@ -1,6 +1,12 @@
 ---
 title: 标签
 article: false
-layout: home
-tagsPage: true
+layout: page
 ---
+<div class="reading-page content-taxonomy-page">
+
+# 标签
+
+<ContentStats mode="tags" />
+
+</div>

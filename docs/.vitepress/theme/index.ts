@@ -11,6 +11,7 @@ import PostView from './components/PostView.vue';
 import PlatformSummary from './components/PlatformSummary.vue';
 import RecentSubmissions from './components/RecentSubmissions.vue';
 import ManagedPage from './components/ManagedPage.vue';
+import ContentStats from './components/ContentStats.vue';
 export default {
   extends: Teek,
   Layout,
@@ -23,5 +24,6 @@ export default {
     app.component('PlatformSummary', PlatformSummary);
     app.component('RecentSubmissions', RecentSubmissions);
     app.component('ManagedPage', ManagedPage);
+    app.component('ContentStats', ContentStats);
   },
 };

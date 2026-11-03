@@ -43,6 +43,13 @@ export async function routeAPI(request,env){
   if(path==='/api/health')return json({ok:true,database:!!env.DB,uploads:!!env.BUCKET});
   if(!env.DB)return json({error:'服务暂不可用，请稍后再试'},503);
   const db=env.DB;
+  if(path==='/api/content-stats'&&method==='GET'){
+    const [categories,tags]=await Promise.all([
+      db.prepare(contentCTE+"SELECT category AS key,COUNT(*) AS count FROM content_posts WHERE status='published' GROUP BY category ORDER BY count DESC,category").all(),
+      db.prepare(contentCTE+"SELECT trim(t.value) AS name,COUNT(DISTINCT p.id) AS count FROM content_posts p,json_each(p.tags) t WHERE p.status='published' AND t.type='text' AND trim(t.value) != '' GROUP BY trim(t.value) ORDER BY count DESC,name").all(),
+    ]);
+    return json({total:categories.results.reduce((sum,c)=>sum+c.count,0),categories:categories.results,tags:tags.results});
+  }
   if(path==='/api/admin/export'&&method==='GET'){
     const data=await db.prepare(contentCTE+`SELECT ${postFields},content FROM content_posts WHERE status != 'deleted' ORDER BY created_at,id`).all();
     return json({format:'naiyael-content-backup',version:1,exportedAt:new Date().toISOString(),posts:data.results.map(decode)});
@@ -60,6 +67,8 @@ export async function routeAPI(request,env){
     else if(['draft','published','archived','trash'].includes(requestedStatus)){conditions.push('status = ?');args.push(requestedStatus);}
     else{conditions.push("status NOT IN ('trash','deleted')");}
     if(['article','solution','daily'].includes(category)){conditions.push('category = ?');args.push(category);}
+    const tag=url.searchParams.get('tag');
+    if(tag){conditions.push('EXISTS (SELECT 1 FROM json_each(content_posts.tags) t WHERE trim(t.value) = ?)');args.push(tag.trim().slice(0,100));}
     const search=(url.searchParams.get('q')||'').trim().slice(0,100);
     if(search){conditions.push("(title LIKE ? ESCAPE '\\' OR excerpt LIKE ? ESCAPE '\\' OR tags LIKE ? ESCAPE '\\')");const q='%'+search.replace(/[\\%_]/g,'\\$&')+'%';args.push(q,q,q);}
     const where=conditions.length?' WHERE '+conditions.join(' AND '):'';

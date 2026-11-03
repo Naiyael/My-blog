@@ -77,3 +77,20 @@ test('ordinary post deletion, search, filters, counts and private content backup
   assert.equal((await routeAPI(req('/api/admin/posts/'+p.id,'DELETE',{version:t2.version,confirmTitle:p.title}),env)).status,200);
   assert.equal(await env.DB.prepare('SELECT id FROM posts WHERE id=?').bind(p.id).first(),null);
 }finally{env.DB.close();}});
+
+test('public taxonomy counts only published content and follows edits, trash and restore',async()=>{const env=fixture();try{
+  const stats=async()=>await(await routeAPI(req('/api/content-stats','GET',undefined,false),env)).json();
+  const initial=await stats();assert.equal(initial.total,3);assert.deepEqual(initial.categories,[{key:'article',count:3}]);assert.equal(initial.tags.find(t=>t.name==='图论').count,1);
+  const p=(await(await routeAPI(req('/api/admin/posts','POST',{...draft,tags:['私密草稿标签']}),env)).json()).post;
+  assert.equal((await stats()).total,3);assert.ok(!(await stats()).tags.some(t=>t.name==='私密草稿标签'));
+  const published=(await(await routeAPI(req('/api/admin/posts/'+p.id,'PUT',{...p,status:'published',tags:['图论','图论','最短路']}),env)).json()).post;
+  const after=await stats();assert.equal(after.total,4);assert.equal(after.categories.find(c=>c.key==='solution').count,1);assert.equal(after.tags.find(t=>t.name==='图论').count,2);assert.equal(after.tags.find(t=>t.name==='最短路').count,1);
+  const tagged=await(await routeAPI(req('/api/posts?tag='+encodeURIComponent('图论'),'GET',undefined,false),env)).json();assert.equal(tagged.total,2);
+  const filtered=await(await routeAPI(req('/api/posts?category=solution&tag='+encodeURIComponent('图论'),'GET',undefined,false),env)).json();assert.equal(filtered.total,1);assert.equal(filtered.posts[0].id,p.id);
+  assert.equal((await(await routeAPI(req('/api/posts?tag='+encodeURIComponent('图'),'GET',undefined,false),env)).json()).total,0);
+  assert.equal((await(await routeAPI(req('/api/posts?tag='+encodeURIComponent("' OR 1=1 --"),'GET',undefined,false),env)).json()).total,0);
+  const trashed=(await(await routeAPI(req('/api/admin/posts/'+p.id,'PATCH',{action:'trash',version:published.version}),env)).json()).post;
+  assert.equal((await stats()).total,3);assert.ok(!(await stats()).tags.some(t=>t.name==='最短路'));
+  const restored=(await(await routeAPI(req('/api/admin/posts/'+p.id,'PATCH',{action:'restore',version:trashed.version}),env)).json()).post;assert.equal((await stats()).total,4);
+  await routeAPI(req('/api/admin/posts/'+p.id,'PUT',{...restored,status:'archived'}),env);assert.equal((await stats()).total,3);
+}finally{env.DB.close();}});
