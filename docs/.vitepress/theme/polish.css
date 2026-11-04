@@ -60,17 +60,20 @@ body .tech-hero .tech-logo:hover{border-color:#8bbbd7}
 .journal-home-heading>a{font-size:12px;color:#607c91;white-space:nowrap;padding-bottom:6px}
 .journal-home-heading>a>span{margin-left:12px}
 .journal-items{gap:15px}
-.journal-card{padding:25px 29px!important;border-radius:13px;box-shadow:0 3px 15px #20364d03;transition:transform .18s,border-color .18s,box-shadow .18s}
-.journal-card:hover{border-color:#b7d2e3;transform:translateY(-2px);box-shadow:0 9px 24px #20364d08}
+.journal-card{padding:25px 29px!important;border-radius:13px;box-shadow:0 3px 15px #20364d03;transition:background-color .2s ease}
+.journal-card:hover{border-color:var(--vp-c-divider);transform:none;box-shadow:0 3px 15px #20364d03}
+.journal-card:focus-visible{outline:2px solid #7eb6d8;outline-offset:3px;background:#f8fbfd}
 .journal-meta{display:flex;align-items:center;gap:13px;font-size:11px;letter-spacing:.2px;color:#728193}
 .journal-category{color:#456b86;background:#eef5fa;border-radius:5px;padding:2px 8px;font-size:10px;line-height:1.8}
 .journal-meta time{font-variant-numeric:tabular-nums;font-size:10px}
-.journal-card h2{font-size:23px!important;font-weight:600!important;margin:12px 0 9px!important;letter-spacing:.1px}
+.journal-card h2{font-size:23px!important;font-weight:600!important;margin:12px 0 9px!important;letter-spacing:.1px;transition:color .2s ease}
 .journal-card p{font-size:13px!important;line-height:1.9;color:#68798c}
 .journal-tags{display:flex;flex-wrap:wrap;gap:7px 13px;font-size:10px;color:#7b8e9e;margin-top:16px}
 .journal-tags>span:before{content:'#';margin-right:2px;color:#9ab1c2}
-.journal-arrow{right:25px;top:28px;width:27px;height:27px;display:flex;align-items:center;justify-content:center;border:1px solid #e6edf3;border-radius:50%;color:#6c8ca4;font-size:15px;transition:background .18s,color .18s}
-.journal-card:hover .journal-arrow{background:#246e9a;color:#fff;border-color:#246e9a}
+.journal-arrow{right:25px;top:28px;width:27px;height:27px;display:flex;align-items:center;justify-content:center;border:0;border-radius:0;background:transparent;color:#8a9caa;font-size:17px;transition:color .2s ease,transform .2s ease}
+.journal-card:hover .journal-arrow{background:transparent;color:#8a9caa;border-color:transparent}
+.journal-card:focus-visible h2,.journal-card:focus-visible .journal-arrow{color:var(--vp-c-brand-1)}
+@media(hover:hover) and (pointer:fine){.journal-card:hover{background:#f8fbfd}.journal-card:hover h2,.journal-card:hover .journal-arrow{color:var(--vp-c-brand-1)}.journal-card:hover .journal-arrow{transform:translate(2px,-2px)}}
 .journal-card>img{width:150px;height:118px;border-radius:8px}
 .journal-filter{background:#f4f7fa;border:1px solid #e7edf3;border-radius:10px;padding:5px;display:flex;width:fit-content;max-width:100%;flex-wrap:wrap;gap:4px}
 .journal-filter button{font-size:12px;padding:7px 17px;border-radius:7px;color:#62778a}
@@ -106,5 +109,5 @@ body .tech-hero .tech-logo:hover{border-color:#8bbbd7}
 @media(max-width:1000px){body .tech-hero .tech-intro h1{font-size:65px}body .tech-hero .tech-intro>p{font-size:16px}.journal-card{padding:23px!important}.journal-card h2{font-size:21px!important}.journal-arrow{right:20px}.tk-home-main__content{gap:22px}}
 @media(max-width:768px){.tk-home-main__content{margin-top:30px;padding-inline:20px;gap:25px}.tk-home-main__content__info{position:static}.tk-home-card .content-stats-card,.tk-home-card .tk-page-card{width:100%}.tk-home-card{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.tk-home-card>.tk-my{grid-column:1/-1}.tk-home-card>.content-stats-summary{grid-column:1/-1}.content-stats-card{padding:18px}.journal-home-heading h2{font-size:23px}.journal-home-heading{padding-bottom:20px}.reading-page{padding:36px 23px 60px}.cms-editor{padding:22px}.reading-page h1{font-size:29px}}
 @media(max-width:680px){body .tech-hero .tech-hero-inner{min-height:auto;padding:33px 23px 19px}body .tech-hero .tech-intro{padding:0 0 7px}body .tech-hero .tech-intro h1{font-size:63px;letter-spacing:-2.5px;margin-bottom:15px}body .tech-hero .tech-intro>p{font-size:15px}body .tech-hero .tech-person{margin-bottom:21px}body .tech-hero .tech-person>span{font-size:10px}body .tech-hero .tech-main-link{font-size:12px;padding:11px 17px}body .tech-hero .tech-about-link{font-size:12px}body .tech-hero .tech-ecosystem-label{font-size:7px;gap:7px;letter-spacing:.15px}body .tech-hero .tech-hover-name{font-size:7px}body .tech-hero .tech-globe-controls button{font-size:10px}.journal-card{padding:22px 20px!important}.journal-card h2{font-size:21px!important}.journal-card p{font-size:12px!important}.journal-card>img{width:78px;height:92px}.journal-arrow{top:23px;right:18px;width:23px;height:23px;font-size:13px}.journal-meta{gap:10px}.journal-category{font-size:9px}.journal-meta time{font-size:9px}.journal-tags{font-size:10px;gap:5px 10px}.journal-home-heading>a{font-size:11px}.journal-filter button{padding:6px 14px}.cms-admin{padding-top:30px}.cms-editor{padding:21px 18px}.platform-totals{gap:12px}.platform-totals strong{font-size:25px}.platform-sync,.platform-sync small{font-size:10px}.content-tag-cloud>a{font-size:10px;padding:4px 7px}.content-stats-card header h2{font-size:13px}}
-@media(prefers-reduced-motion:reduce){.journal-card,.journal-arrow,.content-tag-cloud>a{transition:none}.journal-card:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){.journal-card,.journal-card h2,.journal-arrow,.content-tag-cloud>a{transition:none}.journal-card:hover,.journal-card:hover .journal-arrow{transform:none}}
 
