@@ -1,4 +1,7 @@
 import { sqliteTable, text, integer, index } from 'drizzle-orm/sqlite-core';
+export const siteSettings = sqliteTable('site_settings', {
+  id:text('id').primaryKey(), value:text('value').notNull(), version:integer('version').notNull().default(1), updatedAt:text('updated_at').notNull(),
+});
 export const posts = sqliteTable('posts', {
   id: text('id').primaryKey(), title: text('title').notNull(), content: text('content').notNull(),
   excerpt: text('excerpt').notNull().default(''), category: text('category').notNull().default('article'),

@@ -94,3 +94,36 @@ test('public taxonomy counts only published content and follows edits, trash and
   const restored=(await(await routeAPI(req('/api/admin/posts/'+p.id,'PATCH',{action:'restore',version:trashed.version}),env)).json()).post;assert.equal((await stats()).total,4);
   await routeAPI(req('/api/admin/posts/'+p.id,'PUT',{...restored,status:'archived'}),env);assert.equal((await stats()).total,3);
 }finally{env.DB.close();}});
+
+test('custom categories accept free text, retain legacy labels and work in filters and counts',async()=>{const env=fixture();try{
+  const p=(await(await routeAPI(req('/api/admin/posts','POST',{...draft,category:'  C++ / STL  ',status:'published'}),env)).json()).post;assert.equal(p.category,'C++ / STL');
+  const listed=await(await routeAPI(req('/api/posts?category='+encodeURIComponent('C++ / STL'),'GET',undefined,false),env)).json();assert.equal(listed.total,1);assert.equal(listed.posts[0].id,p.id);
+  const stats=await(await routeAPI(req('/api/content-stats','GET',undefined,false),env)).json();assert.equal(stats.categories.find(c=>c.key==='C++ / STL').count,1);
+  const d=(await(await routeAPI(req('/api/admin/posts','POST',{...draft,category:'私密学习记录'}),env)).json()).post;
+  const suggestions=await(await routeAPI(req('/api/admin/categories'),env)).json();assert.ok(suggestions.categories.some(c=>c.label==='私密学习记录'));
+  const publicStats=await(await routeAPI(req('/api/content-stats','GET',undefined,false),env)).json();assert.ok(!publicStats.categories.some(c=>c.key===d.category));
+  assert.equal((await routeAPI(req('/api/admin/categories','GET',undefined,false),env)).status,403);
+  const legacy=(await(await routeAPI(req('/api/admin/posts','POST',{...draft,category:'题解'}),env)).json()).post;assert.equal(legacy.category,'solution');
+  for(const category of ['', '   ', 'a'.repeat(41), 'test\nname'])assert.equal((await routeAPI(req('/api/admin/posts','POST',{...draft,category}),env)).status,400);
+  assert.equal((await(await routeAPI(req('/api/posts?category='+encodeURIComponent("' OR 1=1 --"),'GET',undefined,false),env)).json()).total,0);
+  const updated=(await(await routeAPI(req('/api/admin/posts/'+p.id,'PUT',{...p,category:'比赛复盘'}),env)).json()).post;assert.equal(updated.category,'比赛复盘');
+  assert.equal((await(await routeAPI(req('/api/posts?category='+encodeURIComponent('C++ / STL'),'GET',undefined,false),env)).json()).total,0);
+  const labels=await(await routeAPI(req('/api/posts?category='+encodeURIComponent('文章'),'GET',undefined,false),env)).json();assert.equal(labels.total,3);
+}finally{env.DB.close();}});
+
+test('managed navigation validates links, enforces owner access, filters hidden items and detects conflicts',async()=>{const env=fixture();try{
+  const initial=await(await routeAPI(req('/api/admin/navigation'),env)).json();assert.equal(initial.version,0);assert.equal(initial.navigation.length,6);
+  const nav=[{id:'home',text:'我的首页',link:'/',hidden:false,newTab:false},{id:'group',text:'学习记录',hidden:false,children:[{id:'shown',text:'算法笔记',link:'/journal.html?category='+encodeURIComponent('算法笔记'),hidden:false,newTab:false},{id:'secret',text:'未开放页面',link:'/private.html',hidden:true,newTab:false}]},{id:'hidden',text:'隐藏入口',link:'/hidden.html',hidden:true,newTab:false},{id:'external',text:'Codeforces',link:'https://codeforces.com/profile/qiushan233',hidden:false,newTab:true}];
+  const put=(navigation,version=0,auth=true,origin='https://site.test')=>routeAPI(req('/api/admin/navigation','PUT',{navigation,version},auth,origin),env);
+  assert.equal((await routeAPI(req('/api/admin/navigation','GET',undefined,false),env)).status,403);
+  assert.equal((await put(nav,0,false)).status,403);assert.equal((await put(nav,0,true,'https://other.test')).status,403);
+  for(const link of ['javascript:alert(1)','data:text/html,x','//evil.test','/\\evil.test','https://user:password@site.test',' https://site.test'])assert.equal((await put([{id:'bad',text:'坏链接',link}])).status,400);
+  assert.equal((await put([{id:'dup',text:'A',link:'/'},{id:'dup',text:'B',link:'/'}])).status,400);
+  assert.equal((await put([{id:'empty',text:'空菜单',children:[]}])).status,400);
+  const saved=await put(nav);assert.equal(saved.status,200);const settings=await saved.json();assert.equal(settings.version,1);assert.deepEqual(settings.navigation,nav);
+  const publicNav=await(await routeAPI(req('/api/site-settings','GET',undefined,false),env)).json();assert.equal(publicNav.navigation.length,3);assert.equal(publicNav.navigation[1].children.length,1);assert.ok(!JSON.stringify(publicNav).includes('隐藏入口'));assert.ok(!JSON.stringify(publicNav).includes('未开放页面'));
+  assert.equal((await put(nav)).status,409);
+  const changed=structuredClone(nav);changed[0].text='主页';assert.equal((await put(changed,1)).status,200);assert.equal((await put(nav,1)).status,409);
+  assert.equal((await(await routeAPI(req('/api/site-settings','GET',undefined,false),env)).json()).navigation[0].text,'主页');
+  const backup=await(await routeAPI(req('/api/admin/export'),env)).json();assert.equal(backup.siteSettings.navigation[0].text,'主页');assert.equal(backup.version,2);
+}finally{env.DB.close();}});

@@ -69,14 +69,7 @@ export default defineConfig({
   ],
   markdown: { lineNumbers: true, image: { lazyLoading: true } },
   themeConfig: {
-    nav: [
-      { text: '首页', link: '/' },
-      { text: '文章', link: '/journal.html' },
-      { text: '算法', items: [{ text: 'Codeforces', link: '/codeforces.html' }, { text: '洛谷', link: '/luogu.html' }] },
-      { text: '日常', link: '/daily.html' },
-      { text: '关于', link: '/about.html' },
-      { text: 'Codeforces ↗', link: 'https://codeforces.com/profile/qiushan233' },
-    ],
+    nav: [],
     sidebar: false,
     outline: { level: [2, 3], label: '本页目录' },
     docFooter: { prev: '上一篇', next: '下一篇' },
@@ -88,3 +81,4 @@ export default defineConfig({
     sidebarMenuLabel: '目录',
   },
 });
+

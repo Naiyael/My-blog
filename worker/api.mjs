@@ -1,4 +1,6 @@
+import {canonicalCategory,categoryLabel,DEFAULT_NAVIGATION,normalizeNavigation,visibleNavigation} from '../src/site-model.js';
 export const json=(body,status=200)=>Response.json(body,{status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
+async function readNavigation(db){const row=await db.prepare("SELECT value,version,updated_at FROM site_settings WHERE id='navigation'").first();return row?{navigation:JSON.parse(row.value),version:row.version,updatedAt:row.updated_at}:{navigation:structuredClone(DEFAULT_NAVIGATION),version:0,updatedAt:null};}
 const postFields='id,title,excerpt,category,status,tags,cover,created_at AS createdAt,updated_at AS updatedAt,published_at AS publishedAt,version,page_key AS pageKey,trashed_at AS trashedAt,previous_status AS previousStatus';
 // Existing static entries remain available without a write on public requests.
 // The first owner edit materializes the entry; tombstones prevent resurrection.
@@ -19,7 +21,7 @@ export function validatePost(input){
   if(!input||typeof input!=='object')return '内容格式不正确';
   if(typeof input.title!=='string'||!input.title.trim()||input.title.length>160)return '请填写不超过 160 字的标题';
   if(typeof input.content!=='string'||input.content.length>200000)return '正文过长或格式不正确';
-  if(!['article','solution','daily'].includes(input.category))return '请选择内容分类';
+  if(typeof input.category!=='string'||!canonicalCategory(input.category)||canonicalCategory(input.category).length>40||/[\u0000-\u001f\u007f]/u.test(input.category))return '请填写不超过 40 字的分类名称';
   if(!['draft','published','archived'].includes(input.status))return '发布状态不正确';
   if(input.status==='published'&&!input.content.trim())return '发布前请填写正文';
   if(input.excerpt!=null&&(typeof input.excerpt!=='string'||input.excerpt.length>400))return '摘要不能超过 400 字';
@@ -43,6 +45,23 @@ export async function routeAPI(request,env){
   if(path==='/api/health')return json({ok:true,database:!!env.DB,uploads:!!env.BUCKET});
   if(!env.DB)return json({error:'服务暂不可用，请稍后再试'},503);
   const db=env.DB;
+  if((path==='/api/site-settings'||path==='/api/admin/navigation')&&method==='GET'){
+    const data=await readNavigation(db);return json(admin?data:{...data,navigation:visibleNavigation(data.navigation)});
+  }
+  if(path==='/api/admin/navigation'&&method==='PUT'){
+    if(Number(request.headers.get('content-length')||0)>64000)return json({error:'导航配置过大'},413);
+    let input;try{input=await request.json();}catch{return json({error:'请求格式不正确'},400);}
+    if(!Number.isInteger(input?.version)||input.version<0)return json({error:'请重新加载导航配置'},400);
+    let navigation;try{navigation=normalizeNavigation(input.navigation);}catch(e){return json({error:e.message},400);}
+    const value=JSON.stringify(navigation),now=new Date().toISOString();
+    const result=input.version===0?await db.prepare("INSERT OR IGNORE INTO site_settings(id,value,version,updated_at) VALUES('navigation',?,1,?)").bind(value,now).run():await db.prepare("UPDATE site_settings SET value=?,version=version+1,updated_at=? WHERE id='navigation' AND version=?").bind(value,now,input.version).run();
+    if(!result.meta?.changes)return json({error:'导航已在其他窗口修改，请重新加载后再保存'},409);
+    return json(await readNavigation(db));
+  }
+  if(path==='/api/admin/categories'&&method==='GET'){
+    const rows=await db.prepare(contentCTE+"SELECT category AS key,COUNT(*) AS count FROM content_posts WHERE status NOT IN ('trash','deleted') GROUP BY category ORDER BY count DESC,category").all();
+    return json({categories:rows.results.map(item=>({...item,label:categoryLabel(item.key)}))});
+  }
   if(path==='/api/content-stats'&&method==='GET'){
     const [categories,tags]=await Promise.all([
       db.prepare(contentCTE+"SELECT category AS key,COUNT(*) AS count FROM content_posts WHERE status='published' GROUP BY category ORDER BY count DESC,category").all(),
@@ -52,7 +71,7 @@ export async function routeAPI(request,env){
   }
   if(path==='/api/admin/export'&&method==='GET'){
     const data=await db.prepare(contentCTE+`SELECT ${postFields},content FROM content_posts WHERE status != 'deleted' ORDER BY created_at,id`).all();
-    return json({format:'naiyael-content-backup',version:1,exportedAt:new Date().toISOString(),posts:data.results.map(decode)});
+    return json({format:'naiyael-content-backup',version:2,exportedAt:new Date().toISOString(),posts:data.results.map(decode),siteSettings:await readNavigation(db)});
   }
   const pageMatch=path.match(/^\/api\/pages\/(codeforces|luogu|about)$/);
   if(pageMatch&&method==='GET'){
@@ -66,7 +85,7 @@ export async function routeAPI(request,env){
     if(!admin){conditions.push('status = ?');args.push('published');}
     else if(['draft','published','archived','trash'].includes(requestedStatus)){conditions.push('status = ?');args.push(requestedStatus);}
     else{conditions.push("status NOT IN ('trash','deleted')");}
-    if(['article','solution','daily'].includes(category)){conditions.push('category = ?');args.push(category);}
+    if(category){conditions.push('category = ?');args.push(canonicalCategory(category).slice(0,100));}
     const tag=url.searchParams.get('tag');
     if(tag){conditions.push('EXISTS (SELECT 1 FROM json_each(content_posts.tags) t WHERE trim(t.value) = ?)');args.push(tag.trim().slice(0,100));}
     const search=(url.searchParams.get('q')||'').trim().slice(0,100);
@@ -85,6 +104,7 @@ export async function routeAPI(request,env){
     if(Number(request.headers.get('content-length')||0)>220000)return json({error:'正文过长'},413);
     let input;try{input=await request.json();}catch{return json({error:'内容格式不正确'},400);}
     const invalid=validatePost(input);if(invalid)return json({error:invalid},400);
+    input.category=canonicalCategory(input.category);
     const now=new Date().toISOString(),id=match?.[2]??crypto.randomUUID();
     const tags=JSON.stringify([...new Set(input.tags??[])]),excerpt=(input.excerpt||input.content.replace(/[#*`>\[\]()!]/g,'').replace(/\s+/g,' ').trim().slice(0,130));
     if(method==='POST'){
