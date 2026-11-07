@@ -10,7 +10,7 @@ const teek = defineTeekConfig({
   homeCardListPosition: 'left',
   windowTransition: false,
   bodyBgImg: {
-    imgSrc: '/images/miku-wallpaper.jpg',
+    imgSrc: '/images/miku-wallpaper-hd-v2.jpg',
     imgOpacity: 1,
     mask: true,
     maskBg: 'rgba(16, 30, 51, 0.14)',
@@ -37,7 +37,7 @@ const teek = defineTeekConfig({
     avatar: '/images/avatar.jpg',
     shape: 'circle',
     circleSize: 105,
-    circleBgImg: '/images/miku-wallpaper.jpg',
+    circleBgImg: '/images/miku-wallpaper-hd-v2.jpg',
     circleBgMask: true,
     color: '#fff',
   },
@@ -74,6 +74,7 @@ export default defineConfig({
   ignoreDeadLinks: false,
   lastUpdated: false,
   head: [
+    ['link', { rel: 'preload', as: 'image', href: '/images/miku-wallpaper-hd-v2.jpg', fetchpriority: 'high' }],
     ['link', { rel: 'icon', type: 'image/jpeg', href: '/images/avatar.jpg' }],
     ['meta', { name: 'theme-color', content: '#f6f7f8' }],
     ['meta', { property: 'og:image', content: 'https://folio-studio-20261103-n7x.cuteagate.chatgpt.site/images/avatar.jpg' }],
