@@ -66,7 +66,7 @@ onUnmounted(()=>{loadSequence++;window.removeEventListener('beforeunload',preven
           <label class="cms-field"><span>标题</span><input v-model="editor.title" placeholder="写一个标题" maxlength="160" aria-label="文章标题"></label>
           <div class="cms-field-row"><label class="cms-field"><span>分类</span><input v-model="editor.category" list="cms-category-options" maxlength="40" placeholder="如：学习笔记、旅行、比赛复盘" aria-label="文章分类"><small class="cms-field-help">直接输入新分类，也可选用已有分类。</small><datalist id="cms-category-options"><option v-for="label in categoryOptions" :key="label" :value="label" /></datalist></label><label class="cms-field"><span>标签</span><input v-model="editor.tagsText" placeholder="用逗号分隔，如 图论, 最短路" aria-label="文章标签"></label></div>
           <label class="cms-field"><span>摘要 <small>可留空，保存时自动生成</small></span><textarea v-model="editor.excerpt" rows="2" maxlength="400" aria-label="文章摘要"></textarea></label>
-          <div class="cms-cover-field"><span>封面 <small>可选</small></span><p class="cms-field-help">列表显示缩略图，文章页显示横向大图。建议使用 16:9 横图；支持 JPG、PNG、WebP、GIF，最大 5 MB。</p><div class="cms-cover-actions"><button @click="coverInput.click()">{{uploading?'上传中…':editor.cover?'更换封面':'＋ 上传封面'}}</button><button v-if="editor.cover" @click="editor.cover=''">移除封面</button></div><CoverPreview :post="editor" /></div>
+          <div class="cms-cover-field"><span>封面 <small>可选</small></span><p class="cms-field-help">列表卡片顶部显示封面，文章页显示横向大图。建议使用 16:9 横图；支持 JPG、PNG、WebP、GIF，最大 5 MB。</p><div class="cms-cover-actions"><button @click="coverInput.click()">{{uploading?'上传中…':editor.cover?'更换封面':'＋ 上传封面'}}</button><button v-if="editor.cover" @click="editor.cover=''">移除封面</button></div><CoverPreview :post="editor" /></div>
           <input ref="coverInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif" hidden @change="upload($event,true)"><input ref="imageInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif" hidden @change="upload($event,false)">
           <div class="cms-body-heading"><span>正文 <small>支持 Markdown</small></span><div><button :class="{active:!preview}" @click="preview=false">编辑</button><button :class="{active:preview}" @click="preview=true">预览</button></div></div>
           <div class="cms-toolbar" v-if="!preview"><button @click="insert('小标题','\n## ','\n')">H₂ 标题</button><button @click="insert('加粗文字','**','**')"><b>B</b></button><button @click="insert('\n```cpp\n// 代码\n```\n')">&lt;/&gt; 代码</button><button @click="imageInput.click()">＋ 图片</button></div>
@@ -79,4 +79,5 @@ onUnmounted(()=>{loadSequence++;window.removeEventListener('beforeunload',preven
   </template>
 </div>
 </template>
+
 

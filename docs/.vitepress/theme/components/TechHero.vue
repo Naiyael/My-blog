@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import icons from '../../../../src/data/tech-icons.json';
+defineProps({compact:{type:Boolean,default:false}});
 const stage=ref(null), paused=ref(false), activeName=ref('');
 const nodes=[];
 const golden=Math.PI*(3-Math.sqrt(5));
@@ -21,7 +22,7 @@ onBeforeUnmount(()=>{cancelAnimationFrame(frame);resizeObserver?.disconnect();in
 </script>
 
 <template>
-<section class="tech-hero" aria-labelledby="tech-hero-title">
+<section class="tech-hero" :class="{'is-compact':compact}" :aria-labelledby="compact?undefined:'tech-hero-title'" :aria-label="compact?'技术生态图标球':undefined">
   <div class="tech-hero-inner">
     <div class="tech-intro">
       <div class="tech-person"><img src="/images/avatar.jpg" alt="Naiyael 的头像" width="45" height="45"><span>ACMer <i></i> qiushan233</span></div>
