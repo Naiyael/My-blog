@@ -1,7 +1,8 @@
 /* The wallpaper's cyan, lavender and rose form one palette across the site. */
 :root {
-  --folio-surface: rgba(239, 249, 251, .97);
-  --folio-lilac-surface: rgba(245, 240, 251, .97);
+  --folio-surface: rgba(239, 249, 251, .84);
+  --folio-lilac-surface: rgba(245, 240, 251, .84);
+  --folio-reading-surface: rgba(244, 250, 252, .92);
   --folio-paper: #f8fbfd;
   --folio-line: #cce3e9;
   --folio-ink: #253d53;
@@ -26,12 +27,12 @@
   --vp-code-bg: #edf1f8;
   --vp-code-color: #70518f;
   --tk-theme-color: #087f93;
-  --tk-body-bg-img-nav-color: rgba(236, 247, 251, .97);
+  --tk-body-bg-img-nav-color: rgba(236, 247, 251, .88);
 }
 
 /* Quiet tinted surfaces keep the illustration visible without losing contrast. */
 .VPNavBar {
-  background: rgba(236, 247, 251, .97) !important;
+  background: rgba(236, 247, 251, .88) !important;
   border-bottom: 1px solid #c7e2eb;
   box-shadow: 0 2px 18px #173a5a12;
 }
@@ -50,6 +51,7 @@
   background: var(--folio-surface);
   border-color: #c5e4eb;
   box-shadow: var(--folio-shadow);
+  backdrop-filter: blur(2px);
 }
 .journal-card:nth-child(3n + 2), .cms-admin-post:nth-child(3n + 2),
 .cms-nav-card:nth-child(3n + 2), .content-stats-tags, .article-toc-card {
@@ -104,7 +106,7 @@
 }
 .journal-card:hover, .cms-admin-post:hover, .cms-nav-card:hover {
   border-color: #78becd;
-  background: #f0fafc;
+  background: rgba(240, 250, 252, .90);
   box-shadow: 0 8px 28px #183b6126;
 }
 .journal-card:hover .journal-arrow { border-color: #83b9cc; color: #08778f !important; }
@@ -160,7 +162,7 @@
 
 /* Reading surfaces and their outline share the same palette. */
 .reading-page:not(.reading-outline-page), .VPDoc .content-container,
-.article-loading { background: var(--folio-surface); border-color: var(--folio-line); }
+.article-main, .article-loading { background: var(--folio-reading-surface); border-color: var(--folio-line); }
 .article-header > h1, .reading-page h1 { color: #2a4760; }
 .article-header .reading-excerpt { color: #61778d; border-color: #a5c8dc; }
 .reading-back, .reading-meta, .reading-tags { color: #657e94; }
@@ -204,15 +206,15 @@
 .cms-card-status.archived { color: #7c668f; }
 .cms-card-status.trash { color: #a75070; }
 .cms-create-card {
-  background: rgba(230, 247, 250, .97);
+  background: rgba(230, 247, 250, .82);
   border-color: #7dbcc9;
   box-shadow: var(--folio-shadow);
 }
-.cms-create-card:hover { background: #e6f6f8; border-color: #4e9fb2; }
+.cms-create-card:hover { background: rgba(230, 246, 248, .90); border-color: #4e9fb2; }
 .cms-create-plus { background: #cdebf0; color: #237d94; }
 .cms-create-card strong { color: #34748b; }
 .cms-create-card > span:last-child { color: #617f94; }
-.cms-nav-card.is-hidden { background: #ece7f3; border-color: #cfc3e2; }
+.cms-nav-card.is-hidden { background: rgba(236, 231, 243, .84); border-color: #cfc3e2; }
 .cms-nav-card-children > span { background: #e8dff4; color: #71598e; }
 .cms-nav-live-preview button, .cms-nav-live-preview summary { color: #4c7188; }
 .cms-nav-live-preview > span { color: #78698f; }
