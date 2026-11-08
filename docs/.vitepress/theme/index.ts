@@ -10,6 +10,7 @@ import './refined.css';
 import './direct-drag.css';
 import './navigation-cards.css';
 import './article-outline.css';
+import './wallpaper-palette.css';
 import Layout from './Layout.vue';
 import RatingHistory from './components/RatingHistory.vue';
 import ProblemArchive from './components/ProblemArchive.vue';
