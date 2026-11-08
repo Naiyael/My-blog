@@ -1,6 +1,7 @@
 <script setup>
 import {ref,computed,watch,onMounted,onUnmounted,nextTick} from 'vue';
-import {api,renderMarkdown,categoryLabel,dateLabel} from './cms-client';
+import {api,categoryLabel,dateLabel} from './cms-client';
+import ArticleContent from './ArticleContent.vue';
 import CoverPreview from './CoverPreview.vue';
 import NavigationEditor from './NavigationEditor.vue';
 import {movePostOrder} from '../../../../src/post-order.js';
@@ -13,7 +14,6 @@ const bodyInput=ref(null),coverInput=ref(null),imageInput=ref(null),pending=ref(
 const editorDialog=ref(null),titleInput=ref(null);
 const statusNames={draft:'草稿',published:'已发布',archived:'已归档',trash:'回收站'};
 const dirty=computed(()=>editor.value&&JSON.stringify(editor.value)!==base.value);
-const rendered=computed(()=>renderMarkdown(editor.value?.content));
 const locked=computed(()=>busy.value||uploading.value);
 const draggingId=ref(''),dropId=ref(''),dropSide=ref('before'),dragPoint=ref({x:0,y:0});
 const dragPost=computed(()=>posts.value.find(post=>post.id===draggingId.value));
@@ -139,7 +139,7 @@ onUnmounted(()=>{loadSequence++;cancelCardDrag();window.removeEventListener('bef
           <input ref="coverInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif" hidden @change="upload($event,true)"><input ref="imageInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif" hidden @change="upload($event,false)">
           <div class="cms-body-heading"><span>正文 <small>支持 Markdown</small></span><div><button :class="{active:!preview}" @click="preview=false">编辑</button><button :class="{active:preview}" @click="preview=true">预览</button></div></div>
           <div class="cms-toolbar" v-if="!preview"><button @click="insert('小标题','\n## ','\n')">H₂ 标题</button><button @click="insert('加粗文字','**','**')"><b>B</b></button><button @click="insert('\n```cpp\n// 代码\n```\n')">&lt;/&gt; 代码</button><button @click="imageInput.click()">＋ 图片</button></div>
-          <textarea v-if="!preview" ref="bodyInput" class="cms-body-input" v-model="editor.content" placeholder="从这里开始写…" aria-label="文章正文" spellcheck="false"></textarea><div v-else class="vp-doc cms-body-preview" v-html="rendered||'<p>正文预览会显示在这里。</p>'"></div>
+          <textarea v-if="!preview" ref="bodyInput" class="cms-body-input" v-model="editor.content" placeholder="从这里开始写…" aria-label="文章正文" spellcheck="false"></textarea><div v-else class="cms-body-preview"><ArticleContent v-if="editor.content" :content="editor.content" compact /><p v-else class="cms-muted">正文预览会显示在这里。</p></div>
         </fieldset>
         <div class="cms-editor-bottom"><span>{{editor.content.length}} 字符 · {{editor.id?'最后保存 '+dateLabel(editor.updatedAt):'尚未保存'}}</span><div><a v-if="editor.id&&editor.status==='published'" :href="editor.pageKey?`/${editor.pageKey}.html`:`/post.html?id=${editor.id}`" target="_blank" rel="noopener noreferrer">查看内容 ↗</a><button v-if="!inTrash" @click="duplicate" :disabled="locked">复制草稿</button><button v-if="editor.id&&!inTrash&&editor.status!=='archived'" @click="save('archived')" :disabled="locked">归档</button><button v-if="editor.id" class="cms-danger-text" @click="askAction(inTrash?'delete':'trash')" :disabled="locked">{{inTrash?'彻底删除':'移到回收站'}}</button></div></div>
         <button class="cms-return-library" @click="closeEditor" :disabled="locked">完成，返回卡片</button>
