@@ -5,6 +5,32 @@ const migration=fs.readdirSync('drizzle').filter(f=>f.endsWith('.sql')).sort().m
 function fixture(){const DB=createLocalDB();DB.exec(migration);const objects=new Map();return {DB,SITE_ADMIN_EMAIL:'owner@site.test',BUCKET:{async put(k,b,o){objects.set(k,{body:new Blob([b]).stream(),bytes:b,options:o});},async get(k){const v=objects.get(k);return v?{body:new Blob([v.bytes]).stream()}:null;},async delete(k){objects.delete(k);}}};}
 function req(path,method='GET',body,auth=true,origin='https://site.test'){const headers=new Headers();if(auth){headers.set('oai-authenticated-user-email','owner@site.test');headers.set('oai-authenticated-user-id','owner-id');}if(method!=='GET'){headers.set('origin',origin);headers.set('content-type','application/json');}return new Request('https://site.test'+path,{method,headers,body:body===undefined?undefined:JSON.stringify(body)});}
 const draft={title:'测试题解',content:'## 解题思路\n\n测试正文。',category:'solution',status:'draft',tags:['图论'],excerpt:'',cover:''};
+test('post order persists independently, pins precede custom rank across pages and filters, private pins stay private',async()=>{const env=fixture();try{
+  const created=[];for(let i=0;i<14;i++)created.push((await(await routeAPI(req('/api/admin/posts','POST',{...draft,title:'排序测试 '+i,status:'published'}),env)).json()).post);
+  const secret=(await(await routeAPI(req('/api/admin/posts','POST',{...draft,title:'私密置顶草稿'}),env)).json()).post;
+  const all=await(await routeAPI(req('/api/admin/post-order'),env)).json();assert.equal(all.version,0);
+  const orderedIds=[...created].reverse().map(p=>p.id),pinnedIds=[created[0].id,secret.id];
+  const response=await routeAPI(req('/api/admin/post-order','PUT',{version:0,orderedIds,pinnedIds}),env);assert.equal(response.status,200);assert.equal((await response.json()).version,1);
+  const first=await(await routeAPI(req('/api/posts','GET',undefined,false),env)).json();assert.equal(first.posts[0].id,created[0].id);assert.equal(first.posts[0].pinned,true);assert.equal(first.posts[1].id,created[13].id);assert.equal(first.posts.length,12);assert.ok(!JSON.stringify(first).includes(secret.id));
+  const second=await(await routeAPI(req('/api/posts?page=2','GET',undefined,false),env)).json();assert.equal(new Set([...first.posts,...second.posts].map(p=>p.id)).size,17);
+  const filtered=await(await routeAPI(req('/api/posts?category=solution&tag='+encodeURIComponent('图论'),'GET',undefined,false),env)).json();assert.equal(filtered.posts[0].id,created[0].id);assert.equal(filtered.posts[1].id,created[13].id);
+  const after=(await(await routeAPI(req('/api/admin/posts/'+created[0].id),env)).json()).post;assert.equal(after.publishedAt,created[0].publishedAt);assert.equal(after.updatedAt,created[0].updatedAt);assert.equal(after.version,created[0].version);
+  const backup=await(await routeAPI(req('/api/admin/export'),env)).json();assert.deepEqual(backup.postOrder.pinnedIds,pinnedIds);
+  assert.equal((await routeAPI(req('/api/admin/post-order','PUT',{version:1,orderedIds:[],pinnedIds:[]}),env)).status,200);
+  const reset=await(await routeAPI(req('/api/posts','GET',undefined,false),env)).json();assert.ok(reset.posts.every(p=>!p.pinned));
+}finally{env.DB.close();}});
+test('post ordering requires owner and same origin, validates IDs and protects concurrent changes',async()=>{const env=fixture();try{
+  const data=await(await routeAPI(req('/api/admin/post-order'),env)).json();const body={version:0,orderedIds:data.posts.map(p=>p.id),pinnedIds:[data.posts[0].id]};
+  assert.equal((await routeAPI(req('/api/admin/post-order','GET',undefined,false),env)).status,403);
+  assert.equal((await routeAPI(req('/api/admin/post-order','PUT',body,false),env)).status,403);
+  assert.equal((await routeAPI(req('/api/admin/post-order','PUT',body,true,'https://evil.test'),env)).status,403);
+  assert.equal((await routeAPI(req('/api/admin/post-order','PUT',{...body,orderedIds:[body.orderedIds[0],body.orderedIds[0]]}),env)).status,400);
+  assert.equal((await routeAPI(req('/api/admin/post-order','PUT',{...body,pinnedIds:['not-an-id']}),env)).status,400);
+  assert.equal((await routeAPI(req('/api/admin/post-order','PUT',{...body,pinnedIds:['00000000-0000-4000-8000-000000000000']}),env)).status,409);
+  assert.equal((await routeAPI(req('/api/admin/post-order','PUT',body),env)).status,200);
+  assert.equal((await routeAPI(req('/api/admin/post-order','PUT',{...body,pinnedIds:[]}),env)).status,409);
+  assert.deepEqual((await(await routeAPI(req('/api/admin/post-order'),env)).json()).pinnedIds,body.pinnedIds);
+}finally{env.DB.close();}});
 test('draft privacy, publication, conflict detection and reversible archive',async()=>{const env=fixture();try{
   const created=await routeAPI(req('/api/admin/posts','POST',draft),env);assert.equal(created.status,201);const p=(await created.json()).post;
   assert.equal((await(await routeAPI(req('/api/posts', 'GET',undefined,false),env)).json()).total,3);

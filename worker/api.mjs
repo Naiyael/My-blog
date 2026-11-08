@@ -1,6 +1,13 @@
 import {canonicalCategory,categoryLabel,DEFAULT_NAVIGATION,normalizeNavigation,visibleNavigation} from '../src/site-model.js';
 export const json=(body,status=200)=>Response.json(body,{status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
 async function readNavigation(db){const row=await db.prepare("SELECT value,version,updated_at FROM site_settings WHERE id='navigation'").first();return row?{navigation:JSON.parse(row.value),version:row.version,updatedAt:row.updated_at}:{navigation:structuredClone(DEFAULT_NAVIGATION),version:0,updatedAt:null};}
+async function readPostOrder(db){const row=await db.prepare("SELECT value,version FROM site_settings WHERE id='post-order'").first();return row?{...JSON.parse(row.value),version:row.version}:{orderedIds:[],pinnedIds:[],version:0};}
+async function orderLibrary(db){
+  const [settings,rows]=await Promise.all([readPostOrder(db),db.prepare(contentCTE+`SELECT ${postFields} FROM content_posts WHERE status NOT IN ('trash','deleted') ORDER BY COALESCE(published_at,updated_at) DESC,id DESC`).all()]);
+  const known=new Set(rows.results.map(p=>p.id)),rank=new Map(settings.orderedIds.map((id,i)=>[id,i])),pins=new Set(settings.pinnedIds);
+  const posts=rows.results.map(p=>({...decode(p),pinned:pins.has(p.id)})).sort((a,b)=>Number(b.pinned)-Number(a.pinned)||(rank.get(a.id)??1e9)-(rank.get(b.id)??1e9));
+  return {...settings,orderedIds:settings.orderedIds.filter(id=>known.has(id)),pinnedIds:settings.pinnedIds.filter(id=>known.has(id)),posts};
+}
 const postFields='id,title,excerpt,category,status,tags,cover,created_at AS createdAt,updated_at AS updatedAt,published_at AS publishedAt,version,page_key AS pageKey,trashed_at AS trashedAt,previous_status AS previousStatus';
 // Existing static entries remain available without a write on public requests.
 // The first owner edit materializes the entry; tombstones prevent resurrection.
@@ -45,6 +52,20 @@ export async function routeAPI(request,env){
   if(path==='/api/health')return json({ok:true,database:!!env.DB,uploads:!!env.BUCKET});
   if(!env.DB)return json({error:'服务暂不可用，请稍后再试'},503);
   const db=env.DB;
+  if(path==='/api/admin/post-order'&&method==='GET')return json(await orderLibrary(db));
+  if(path==='/api/admin/post-order'&&method==='PUT'){
+    if(Number(request.headers.get('content-length')||0)>500000)return json({error:'排序配置过大'},413);
+    let input;try{const raw=await request.text();if(raw.length>500000)return json({error:'排序配置过大'},413);input=JSON.parse(raw);}catch{return json({error:'请求格式不正确'},400);}
+    if(!Number.isInteger(input?.version)||input.version<0)return json({error:'请重新加载排序配置'},400);
+    const validIds=ids=>Array.isArray(ids)&&ids.length<=5000&&new Set(ids).size===ids.length&&ids.every(id=>typeof id==='string'&&/^[a-f0-9-]{36}$/.test(id));
+    if(!validIds(input.orderedIds)||!validIds(input.pinnedIds))return json({error:'排序或置顶列表格式不正确'},400);
+    const library=await orderLibrary(db),known=new Set(library.posts.map(p=>p.id));
+    if([...input.orderedIds,...input.pinnedIds].some(id=>!known.has(id)))return json({error:'内容列表已变化，请重新加载排序'},409);
+    const value=JSON.stringify({orderedIds:input.orderedIds,pinnedIds:input.pinnedIds}),now=new Date().toISOString();
+    const result=input.version===0?await db.prepare("INSERT OR IGNORE INTO site_settings(id,value,version,updated_at) VALUES('post-order',?,1,?)").bind(value,now).run():await db.prepare("UPDATE site_settings SET value=?,version=version+1,updated_at=? WHERE id='post-order' AND version=?").bind(value,now,input.version).run();
+    if(!result.meta?.changes)return json({error:'顺序已在其他窗口修改，请重新加载后再保存'},409);
+    return json(await orderLibrary(db));
+  }
   if((path==='/api/site-settings'||path==='/api/admin/navigation')&&method==='GET'){
     const data=await readNavigation(db);return json(admin?data:{...data,navigation:visibleNavigation(data.navigation)});
   }
@@ -71,7 +92,7 @@ export async function routeAPI(request,env){
   }
   if(path==='/api/admin/export'&&method==='GET'){
     const data=await db.prepare(contentCTE+`SELECT ${postFields},content FROM content_posts WHERE status != 'deleted' ORDER BY created_at,id`).all();
-    return json({format:'naiyael-content-backup',version:2,exportedAt:new Date().toISOString(),posts:data.results.map(decode),siteSettings:await readNavigation(db)});
+    return json({format:'naiyael-content-backup',version:2,exportedAt:new Date().toISOString(),posts:data.results.map(decode),siteSettings:await readNavigation(db),postOrder:await readPostOrder(db)});
   }
   const pageMatch=path.match(/^\/api\/pages\/(codeforces|luogu|about)$/);
   if(pageMatch&&method==='GET'){
@@ -91,9 +112,11 @@ export async function routeAPI(request,env){
     const search=(url.searchParams.get('q')||'').trim().slice(0,100);
     if(search){conditions.push("(title LIKE ? ESCAPE '\\' OR excerpt LIKE ? ESCAPE '\\' OR tags LIKE ? ESCAPE '\\')");const q='%'+search.replace(/[\\%_]/g,'\\$&')+'%';args.push(q,q,q);}
     const where=conditions.length?' WHERE '+conditions.join(' AND '):'';
-    const sort=admin?'updated_at DESC,id DESC':'COALESCE(published_at,updated_at) DESC,id DESC';
-    const [rows,total,counts]=await Promise.all([db.prepare(contentCTE+`SELECT ${postFields} FROM content_posts${where} ORDER BY ${sort} LIMIT ? OFFSET ?`).bind(...args,size,(page-1)*size).all(),db.prepare(contentCTE+`SELECT COUNT(*) AS total FROM content_posts${where}`).bind(...args).first(),admin?db.prepare(contentCTE+"SELECT status,COUNT(*) AS count FROM content_posts WHERE status != 'deleted' GROUP BY status").all():null]);
-    return json({posts:rows.results.map(decode),total:total.total,page,pageSize:size,...(admin?{counts:Object.fromEntries(counts.results.map(r=>[r.status,r.count]))}:{})});
+    const placement=await readPostOrder(db);
+    const sort='pinned DESC,sortOrder ASC,COALESCE(published_at,updated_at) DESC,id DESC';
+    const placementFields="CASE WHEN EXISTS(SELECT 1 FROM json_each(?) WHERE value=content_posts.id) THEN 1 ELSE 0 END AS pinned,COALESCE((SELECT CAST(key AS INTEGER) FROM json_each(?) WHERE value=content_posts.id),2147483647) AS sortOrder";
+    const [rows,total,counts]=await Promise.all([db.prepare(contentCTE+`SELECT ${postFields},${placementFields} FROM content_posts${where} ORDER BY ${sort} LIMIT ? OFFSET ?`).bind(JSON.stringify(placement.pinnedIds),JSON.stringify(placement.orderedIds),...args,size,(page-1)*size).all(),db.prepare(contentCTE+`SELECT COUNT(*) AS total FROM content_posts${where}`).bind(...args).first(),admin?db.prepare(contentCTE+"SELECT status,COUNT(*) AS count FROM content_posts WHERE status != 'deleted' GROUP BY status").all():null]);
+    return json({posts:rows.results.map(p=>({...decode(p),pinned:!!p.pinned})),total:total.total,page,pageSize:size,...(admin?{counts:Object.fromEntries(counts.results.map(r=>[r.status,r.count]))}:{})});
   }
   const match=path.match(/^\/api\/(admin\/)?posts\/([a-f0-9-]{36})$/);
   if(match&&method==='GET'){

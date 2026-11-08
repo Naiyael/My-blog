@@ -3,6 +3,10 @@ import {ref,computed,watch,onMounted,onUnmounted} from 'vue';
 import {api,renderMarkdown,categoryLabel,dateLabel} from './cms-client';
 import CoverPreview from './CoverPreview.vue';
 import NavigationEditor from './NavigationEditor.vue';
+import PostOrderEditor from './PostOrderEditor.vue';
+const orderEditor=ref(null);
+async function togglePin(post){if(locked.value)return;busy.value=true;try{const data=await api('/api/admin/post-order');const pinnedIds=data.pinnedIds.includes(post.id)?data.pinnedIds.filter(id=>id!==post.id):[...data.pinnedIds,post.id];await api('/api/admin/post-order',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({version:data.version,orderedIds:data.orderedIds,pinnedIds})});notify(post.pinned?'已取消置顶。':'已置顶，已发布内容会优先展示。');await loadPosts();}catch(e){error.value=e.message;}finally{busy.value=false;}}
+function orderSaved(){notify('排序与置顶已保存，前台展示顺序已更新。');refresh();}
 const authorized=ref(false),ready=ref(false),busy=ref(false),uploading=ref(false),loading=ref(false);
 const message=ref(''),error=ref(''),posts=ref([]),filter=ref(''),category=ref(''),query=ref(''),search=ref('');
 const page=ref(1),total=ref(0),counts=ref({}),editor=ref(null),base=ref(''),preview=ref(false);
@@ -53,17 +57,17 @@ onUnmounted(()=>{loadSequence++;window.removeEventListener('beforeunload',preven
     <div class="cms-card-workspace" v-else>
       <section class="cms-library" aria-label="我的内容">
         <div class="cms-library-toolbar"><h2>我的内容 <small>{{total}}</small></h2>
-        <form class="cms-search" @submit.prevent="runSearch"><label><span class="cms-sr-only">搜索内容</span><input v-model="query" placeholder="搜索标题、摘要、标签" type="search"></label><button type="submit">搜索</button></form>
+        <div class="cms-library-actions"><button class="cms-order-open" @click="orderEditor.open()" :disabled="locked"><span aria-hidden="true">↕</span> 排序与置顶</button><form class="cms-search" @submit.prevent="runSearch"><label><span class="cms-sr-only">搜索内容</span><input v-model="query" placeholder="搜索标题、摘要、标签" type="search"></label><button type="submit">搜索</button></form></div>
         </div>
         <div class="cms-library-filters"><div class="cms-filter"><button v-for="(label,key) in {all:'全部',draft:'草稿',published:'已发布',archived:'归档',trash:'回收站'}" :key="key" :class="{active:filter===(key==='all'?'':key)}" :aria-pressed="filter===(key==='all'?'':key)" @click="changeFilter(key==='all'?'':key)">{{label}}<small v-if="key!=='all'">{{counts[key]||0}}</small></button></div>
         <div class="cms-list-controls"><select v-model="category" @change="page=1;refresh()" aria-label="筛选分类"><option value="">所有分类</option><option v-for="label in categoryOptions" :key="label" :value="label">{{label}}</option></select><button @click="refresh" :disabled="loading">{{loading?'加载中…':'刷新列表'}}</button></div>
         </div>
         <div class="cms-content-grid" :aria-busy="loading">
           <button class="cms-create-card" @click="create" :disabled="locked" aria-label="新建内容"><span class="cms-create-plus" aria-hidden="true">＋</span><strong>写一篇新的</strong><span>文章、题解，或一段日常</span></button>
-          <button v-for="post in posts" :key="post.id" class="cms-content-card" @click="edit(post)" :disabled="locked" :aria-label="'编辑：'+post.title">
+          <article v-for="post in posts" :key="post.id" class="cms-admin-post" :class="{'is-pinned':post.pinned}"><button class="cms-content-card" @click="edit(post)" :disabled="locked" :aria-label="'编辑：'+post.title">
             <img v-if="post.cover" :src="post.cover" alt="" loading="lazy">
-            <span class="cms-card-copy"><span class="cms-card-meta"><span class="cms-card-category">{{categoryLabel(post.category)}}</span><time>{{dateLabel(post.updatedAt)}}</time><span class="cms-card-status" :class="post.status">{{statusNames[post.status]}}</span></span><strong class="cms-card-title">{{post.title}}</strong><span class="cms-card-excerpt">{{post.excerpt||'还没有摘要，点开继续写。'}}</span><span class="cms-card-tags"><span v-for="tag in post.tags.slice(0,3)" :key="tag"># {{tag}}</span></span><span class="cms-card-foot"><span>{{post.pageKey?'网站页面':'内容'}}</span><span>{{post.status==='trash'?'查看与恢复':'点击编辑'}} <span aria-hidden="true">↗</span></span></span></span>
-          </button>
+            <span class="cms-card-copy"><span class="cms-card-meta"><span class="cms-card-category">{{categoryLabel(post.category)}}</span><span v-if="post.pinned" class="post-pin-badge">置顶</span><time>{{dateLabel(post.updatedAt)}}</time><span class="cms-card-status" :class="post.status">{{statusNames[post.status]}}</span></span><strong class="cms-card-title">{{post.title}}</strong><span class="cms-card-excerpt">{{post.excerpt||'还没有摘要，点开继续写。'}}</span><span class="cms-card-tags"><span v-for="tag in post.tags.slice(0,3)" :key="tag"># {{tag}}</span></span><span class="cms-card-foot"><span>{{post.pageKey?'网站页面':'内容'}}</span><span>{{post.status==='trash'?'查看与恢复':'点击编辑'}} <span aria-hidden="true">↗</span></span></span></span>
+          </button><footer class="cms-card-actions" v-if="post.status!=='trash'"><button @click="orderEditor.open(post.id)" :disabled="locked" :aria-label="'调整顺序：'+post.title">调整顺序</button><button @click="togglePin(post)" :disabled="locked" :aria-pressed="post.pinned" :aria-label="(post.pinned?'取消置顶：':'置顶：')+post.title">{{post.pinned?'取消置顶':'置顶'}} <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m5 2 6 0-1 4 2 3H9v3l-1 2-1-2V9H4l2-3z"/></svg></button></footer></article>
         </div>
         <p v-if="loading&&!posts.length" class="cms-library-empty" role="status">正在加载内容…</p><p v-else-if="!posts.length" class="cms-library-empty">{{filter==='trash'?'回收站是空的。':search||category?'没有匹配的内容，试试其他关键词或分类。':'点击加号，写下第一篇记录。'}}</p>
         <div class="cms-pagination" v-if="total>30"><button :disabled="page===1||loading" @click="page--;refresh()" aria-label="上一页">←</button><span>{{page}} / {{Math.ceil(total/30)}}</span><button :disabled="page*30>=total||loading" @click="page++;refresh()" aria-label="下一页">→</button></div>
@@ -94,6 +98,7 @@ onUnmounted(()=>{loadSequence++;window.removeEventListener('beforeunload',preven
       </dialog>
     </div>
   </template>
+  <PostOrderEditor v-if="authorized" ref="orderEditor" @saved="orderSaved" />
 </div>
 </template>
 
