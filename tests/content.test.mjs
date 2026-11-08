@@ -5,6 +5,37 @@ const migration=fs.readdirSync('drizzle').filter(f=>f.endsWith('.sql')).sort().m
 function fixture(){const DB=createLocalDB();DB.exec(migration);const objects=new Map();return {DB,SITE_ADMIN_EMAIL:'owner@site.test',BUCKET:{async put(k,b,o){objects.set(k,{body:new Blob([b]).stream(),bytes:b,options:o});},async get(k){const v=objects.get(k);return v?{body:new Blob([v.bytes]).stream()}:null;},async delete(k){objects.delete(k);}}};}
 function req(path,method='GET',body,auth=true,origin='https://site.test'){const headers=new Headers();if(auth){headers.set('oai-authenticated-user-email','owner@site.test');headers.set('oai-authenticated-user-id','owner-id');}if(method!=='GET'){headers.set('origin',origin);headers.set('content-type','application/json');}return new Request('https://site.test'+path,{method,headers,body:body===undefined?undefined:JSON.stringify(body)});}
 const draft={title:'测试题解',content:'## 解题思路\n\n测试正文。',category:'solution',status:'draft',tags:['图论'],excerpt:'',cover:''};
+test('editor saves pin with content, preserves other pins and custom order, and never exposes pinned drafts',async()=>{const env=fixture();try{
+  const initial=await(await routeAPI(req('/api/admin/post-order'),env)).json(),peer=initial.posts[0].id,orderedIds=initial.posts.map(p=>p.id).reverse();
+  await routeAPI(req('/api/admin/post-order','PUT',{version:0,orderedIds,pinnedIds:[peer]}),env);
+  const created=await routeAPI(req('/api/admin/posts','POST',{...draft,pinned:true}),env);assert.equal(created.status,201);let post=(await created.json()).post;assert.equal(post.pinned,true);
+  assert.equal((await(await routeAPI(req('/api/admin/posts/'+post.id),env)).json()).post.pinned,true);
+  assert.ok(!(await(await routeAPI(req('/api/posts','GET',undefined,false),env)).json()).posts.some(p=>p.id===post.id));
+  post=(await(await routeAPI(req('/api/admin/posts/'+post.id,'PUT',{...post,status:'published'}),env)).json()).post;
+  assert.ok((await(await routeAPI(req('/api/posts','GET',undefined,false),env)).json()).posts.find(p=>p.id===post.id).pinned);
+  let layout=await(await routeAPI(req('/api/admin/post-order'),env)).json();assert.deepEqual(layout.orderedIds,orderedIds);assert.ok(layout.pinnedIds.includes(peer)&&layout.pinnedIds.includes(post.id));
+  const sameVersion=layout.version;post=(await(await routeAPI(req('/api/admin/posts/'+post.id,'PUT',{...post,title:'只改标题'}),env)).json()).post;
+  assert.equal((await(await routeAPI(req('/api/admin/post-order'),env)).json()).version,sameVersion);
+  const {pinned,...legacy}=post;post=(await(await routeAPI(req('/api/admin/posts/'+post.id,'PUT',{...legacy,title:'旧客户端修改'}),env)).json()).post;assert.equal(post.pinned,true);
+  post=(await(await routeAPI(req('/api/admin/posts/'+post.id,'PUT',{...post,pinned:false}),env)).json()).post;assert.equal(post.pinned,false);
+  layout=await(await routeAPI(req('/api/admin/post-order'),env)).json();assert.deepEqual(layout.pinnedIds,[peer]);assert.deepEqual(layout.orderedIds,orderedIds);
+  assert.equal((await routeAPI(req('/api/admin/posts','POST',{...draft,pinned:'yes'}),env)).status,400);
+}finally{env.DB.close();}});
+test('stale editor cannot change pin or overwrite ordering',async()=>{const env=fixture();try{
+  const original=(await(await routeAPI(req('/api/admin/posts','POST',{...draft,pinned:false}),env)).json()).post;
+  const current=(await(await routeAPI(req('/api/admin/posts/'+original.id,'PUT',{...original,title:'较新版本'}),env)).json()).post;
+  const before=await(await routeAPI(req('/api/admin/post-order'),env)).json();
+  assert.equal((await routeAPI(req('/api/admin/posts/'+original.id,'PUT',{...original,pinned:true}),env)).status,409);
+  const after=await(await routeAPI(req('/api/admin/post-order'),env)).json();assert.deepEqual(after,before);
+  assert.equal((await(await routeAPI(req('/api/admin/posts/'+original.id),env)).json()).post.version,current.version);
+}finally{env.DB.close();}});
+test('article and pin changes roll back together when a content write fails',async()=>{const env=fixture();try{
+  const post=(await(await routeAPI(req('/api/admin/posts','POST',{...draft,pinned:false}),env)).json()).post;
+  env.DB.exec("CREATE TRIGGER test_block_update BEFORE UPDATE ON posts BEGIN SELECT RAISE(ABORT,'test write failure'); END;");
+  await assert.rejects(routeAPI(req('/api/admin/posts/'+post.id,'PUT',{...post,pinned:true,title:'不应保存'}),env),/test write failure/);
+  const after=(await(await routeAPI(req('/api/admin/posts/'+post.id),env)).json()).post;assert.equal(after.pinned,false);assert.equal(after.title,post.title);assert.equal(after.version,post.version);
+  assert.equal((await(await routeAPI(req('/api/admin/post-order'),env)).json()).version,0);
+}finally{env.DB.close();}});
 test('post order persists independently, pins precede custom rank across pages and filters, private pins stay private',async()=>{const env=fixture();try{
   const created=[];for(let i=0;i<14;i++)created.push((await(await routeAPI(req('/api/admin/posts','POST',{...draft,title:'排序测试 '+i,status:'published'}),env)).json()).post);
   const secret=(await(await routeAPI(req('/api/admin/posts','POST',{...draft,title:'私密置顶草稿'}),env)).json()).post;

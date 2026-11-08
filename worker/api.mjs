@@ -22,6 +22,22 @@ const seedValues=p=>[p.id,p.title,p.content,p.excerpt,'article','published',JSON
 const contentCTE='WITH content_posts AS (SELECT '+columns+' FROM posts '+initialPages.map(p=>'UNION ALL SELECT '+seedValues(p).map(sqlValue).join(',')+' WHERE NOT EXISTS (SELECT 1 FROM posts WHERE id='+sqlValue(p.id)+')').join(' ')+') ';
 async function materialize(db,id){const p=initialPages.find(p=>p.id===id);if(p)await db.prepare('INSERT OR IGNORE INTO posts ('+columns+') VALUES ('+seedValues(p).map(()=>'?').join(',')+')').bind(...seedValues(p)).run();}
 const decode=p=>p?{...p,tags:JSON.parse(p.tags||'[]')}:null;
+async function decodeWithPin(db,row){if(!row)return null;return {...decode(row),pinned:(await readPostOrder(db)).pinnedIds.includes(row.id)};}
+function pinStatement(db,id,pinned,version,now){
+  // Before an edit, check the same article version as the following content update.
+  // D1 batch runs both statements in one transaction, including on conflict/failure.
+  return db.prepare(`INSERT INTO site_settings(id,value,version,updated_at)
+    SELECT 'post-order',json_object('orderedIds',json('[]'),'pinnedIds',json(?)),1,?
+    WHERE EXISTS(SELECT 1 FROM posts WHERE id=? AND version=? AND status NOT IN ('trash','deleted'))
+      AND (?=1 OR EXISTS(SELECT 1 FROM site_settings WHERE id='post-order'))
+    ON CONFLICT(id) DO UPDATE SET value=json_set(site_settings.value,'$.pinnedIds',json((
+      SELECT json_group_array(value) FROM (
+        SELECT value FROM json_each(site_settings.value,'$.pinnedIds') WHERE value!=?
+        UNION ALL SELECT ? WHERE ?=1
+      )))),version=site_settings.version+1,updated_at=excluded.updated_at
+    WHERE EXISTS(SELECT 1 FROM json_each(site_settings.value,'$.pinnedIds') WHERE value=?) != ?
+  `).bind(JSON.stringify(pinned?[id]:[]),now,id,version,Number(pinned),id,id,Number(pinned),id,Number(pinned));
+}
 export function canAdmin(request,env){const email=request.headers.get('oai-authenticated-user-email');return !!(email&&env.SITE_ADMIN_EMAIL&&email.toLowerCase().trim()===env.SITE_ADMIN_EMAIL.toLowerCase().trim());}
 export function checkWrite(request){return request.headers.get('origin')===new URL(request.url).origin;}
 export function validatePost(input){
@@ -30,6 +46,7 @@ export function validatePost(input){
   if(typeof input.content!=='string'||input.content.length>200000)return '正文过长或格式不正确';
   if(typeof input.category!=='string'||!canonicalCategory(input.category)||canonicalCategory(input.category).length>40||/[\u0000-\u001f\u007f]/u.test(input.category))return '请填写不超过 40 字的分类名称';
   if(!['draft','published','archived'].includes(input.status))return '发布状态不正确';
+  if(input.pinned!==undefined&&typeof input.pinned!=='boolean')return '置顶设置不正确';
   if(input.status==='published'&&!input.content.trim())return '发布前请填写正文';
   if(input.excerpt!=null&&(typeof input.excerpt!=='string'||input.excerpt.length>400))return '摘要不能超过 400 字';
   if(input.tags!=null&&(!Array.isArray(input.tags)||input.tags.length>10||input.tags.some(t=>typeof t!=='string'||t.length>30)))return '标签格式不正确';
@@ -121,7 +138,7 @@ export async function routeAPI(request,env){
   const match=path.match(/^\/api\/(admin\/)?posts\/([a-f0-9-]{36})$/);
   if(match&&method==='GET'){
     const row=await db.prepare(contentCTE+`SELECT ${postFields},content FROM content_posts WHERE id = ?${admin?" AND status != 'deleted'":' AND status = ?'}`).bind(...(admin?[match[2]]:[match[2],'published'])).first();
-    return row?json({post:decode(row)}):json({error:'文章不存在或尚未发布'},404);
+    return row?json({post:await decodeWithPin(db,row)}):json({error:'文章不存在或尚未发布'},404);
   }
   if((path==='/api/admin/posts'&&method==='POST')||(match&&admin&&method==='PUT')){
     if(Number(request.headers.get('content-length')||0)>220000)return json({error:'正文过长'},413);
@@ -131,16 +148,18 @@ export async function routeAPI(request,env){
     const now=new Date().toISOString(),id=match?.[2]??crypto.randomUUID();
     const tags=JSON.stringify([...new Set(input.tags??[])]),excerpt=(input.excerpt||input.content.replace(/[#*`>\[\]()!]/g,'').replace(/\s+/g,' ').trim().slice(0,130));
     if(method==='POST'){
-      await db.prepare('INSERT INTO posts (id,title,content,excerpt,category,status,tags,cover,author_id,created_at,updated_at,published_at,version) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(id,input.title.trim(),input.content,excerpt,input.category,input.status,tags,input.cover||'',request.headers.get('oai-authenticated-user-id')||'owner',now,now,input.status==='published'?now:null,1).run();
+      const insert=db.prepare('INSERT INTO posts (id,title,content,excerpt,category,status,tags,cover,author_id,created_at,updated_at,published_at,version) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(id,input.title.trim(),input.content,excerpt,input.category,input.status,tags,input.cover||'',request.headers.get('oai-authenticated-user-id')||'owner',now,now,input.status==='published'?now:null,1);
+      if(input.pinned!==undefined)await db.batch([insert,pinStatement(db,id,input.pinned,1,now)]);else await insert.run();
     }else{
       if(!Number.isInteger(input.version)||input.version<1)return json({error:'请先重新加载文章'},400);
       await materialize(db,id);
       const existing=await db.prepare('SELECT published_at,status FROM posts WHERE id = ?').bind(id).first();if(!existing||existing.status==='deleted')return json({error:'文章不存在'},404);
       if(existing.status==='trash')return json({error:'请先从回收站恢复这篇内容'},409);
-      const result=await db.prepare('UPDATE posts SET title=?,content=?,excerpt=?,category=?,status=?,tags=?,cover=?,updated_at=?,published_at=?,version=version+1 WHERE id=? AND version=?').bind(input.title.trim(),input.content,excerpt,input.category,input.status,tags,input.cover||'',now,input.status==='published'?(existing.published_at||now):existing.published_at,id,input.version).run();
+      const update=db.prepare("UPDATE posts SET title=?,content=?,excerpt=?,category=?,status=?,tags=?,cover=?,updated_at=?,published_at=?,version=version+1 WHERE id=? AND version=? AND status NOT IN ('trash','deleted')").bind(input.title.trim(),input.content,excerpt,input.category,input.status,tags,input.cover||'',now,input.status==='published'?(existing.published_at||now):existing.published_at,id,input.version);
+      const result=input.pinned!==undefined?(await db.batch([pinStatement(db,id,input.pinned,input.version,now),update]))[1]:await update.run();
       if(!result.meta?.changes)return json({error:'文章已在其他页面更新，请重新加载后再编辑'},409);
     }
-    const post=await db.prepare(`SELECT ${postFields},content FROM posts WHERE id = ?`).bind(id).first();return json({post:decode(post)},method==='POST'?201:200);
+    const post=await db.prepare(`SELECT ${postFields},content FROM posts WHERE id = ?`).bind(id).first();return json({post:await decodeWithPin(db,post)},method==='POST'?201:200);
   }
   if(match&&admin&&['PATCH','DELETE'].includes(method)){
     let input;try{input=await request.json();}catch{return json({error:'请求格式不正确'},400);}
@@ -163,7 +182,7 @@ export async function routeAPI(request,env){
     }else return json({error:'操作不正确'},400);
     if(!result.meta?.changes)return json({error:'内容已更新，请重新加载后操作'},409);
     if(method==='DELETE')return json({deleted:true});
-    const post=await db.prepare(`SELECT ${postFields},content FROM posts WHERE id=?`).bind(id).first();return json({post:decode(post)});
+    const post=await db.prepare(`SELECT ${postFields},content FROM posts WHERE id=?`).bind(id).first();return json({post:await decodeWithPin(db,post)});
   }
   if(path==='/api/admin/uploads'&&method==='POST'){
     if(!env.BUCKET)return json({error:'图片服务暂不可用'},503);

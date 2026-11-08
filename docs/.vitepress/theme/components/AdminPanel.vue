@@ -1,13 +1,9 @@
 <script setup>
-import {ref,computed,watch,onMounted,onUnmounted} from 'vue';
+import {ref,computed,watch,onMounted,onUnmounted,nextTick} from 'vue';
 import {api,renderMarkdown,categoryLabel,dateLabel} from './cms-client';
 import CoverPreview from './CoverPreview.vue';
 import NavigationEditor from './NavigationEditor.vue';
-import PostOrderEditor from './PostOrderEditor.vue';
 import {movePostOrder} from '../../../../src/post-order.js';
-const orderEditor=ref(null);
-async function togglePin(post){if(locked.value)return;busy.value=true;try{const data=await api('/api/admin/post-order');const pinnedIds=data.pinnedIds.includes(post.id)?data.pinnedIds.filter(id=>id!==post.id):[...data.pinnedIds,post.id];await api('/api/admin/post-order',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({version:data.version,orderedIds:data.orderedIds,pinnedIds})});notify(post.pinned?'已取消置顶。':'已置顶，已发布内容会优先展示。');await loadPosts();}catch(e){error.value=e.message;}finally{busy.value=false;}}
-function orderSaved(){notify('排序与置顶已保存，前台展示顺序已更新。');refresh();}
 const authorized=ref(false),ready=ref(false),busy=ref(false),uploading=ref(false),loading=ref(false);
 const message=ref(''),error=ref(''),posts=ref([]),filter=ref(''),category=ref(''),query=ref(''),search=ref('');
 const page=ref(1),total=ref(0),counts=ref({}),editor=ref(null),base=ref(''),preview=ref(false);
@@ -62,12 +58,19 @@ async function endCardPointer(event){
   }catch(e){message.value='';error.value=e.message;await refresh();}finally{busy.value=false;}
 }
 function captureCardClick(event){if(Date.now()<suppressCardClickUntil){event.preventDefault();event.stopPropagation();}}
+async function moveByKeyboard(post,step){
+  if(locked.value||loading.value||post.status==='trash')return;busy.value=true;error.value='';
+  try{const data=await api('/api/admin/post-order'),pins=new Set(data.pinnedIds),group=data.posts.filter(p=>pins.has(p.id)===pins.has(post.id)),target=group[group.findIndex(p=>p.id===post.id)+step];
+    if(!target){notify(step<0?'已经是本组第一篇。':'已经是本组最后一篇。');return;}
+    await api('/api/admin/post-order',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(movePostOrder(data,post.id,target.id,step<0?'before':'after'))});notify('顺序已自动保存。');await loadPosts();
+  }catch(e){error.value=e.message;await refresh();}finally{busy.value=false;await nextTick();document.querySelector(`[data-post-id="${post.id}"] .cms-content-card`)?.focus();}
+}
 const inTrash=computed(()=>editor.value?.status==='trash');
 watch(()=>!!editor.value,open=>{if(open&&editorDialog.value&&!editorDialog.value.open){editorDialog.value.showModal();titleInput.value?.focus();}},{flush:'post'});
 function closeEditor(){if(locked.value||!leaveEditor())return;editorDialog.value?.close();editor.value=null;base.value='';pending.value='';error.value='';}
 let loadSequence=0;
 function notify(text){message.value=text;error.value='';}
-function setEditor(p){editor.value={...p,category:categoryLabel(p.category),tagsText:p.tags.join(', ')};base.value=JSON.stringify(editor.value);pending.value='';}
+function setEditor(p){editor.value={...p,pinned:!!p.pinned,category:categoryLabel(p.category),tagsText:p.tags.join(', ')};base.value=JSON.stringify(editor.value);pending.value='';}
 async function loadCategories(){knownCategories.value=(await api('/api/admin/categories')).categories;}
 function changePanel(value){if(panel.value===value||locked.value)return;if((dirty.value||navigationDirty.value)&&!window.confirm('当前有未保存的修改，确定放弃并切换吗？'))return;if(dirty.value){editor.value=base.value?JSON.parse(base.value):null;}panel.value=value;navigationDirty.value=false;message.value='';error.value='';}
 async function loadPosts(){const seq=++loadSequence;loading.value=true;try{const params=new URLSearchParams({page:String(page.value),status:filter.value,category:category.value,q:search.value});const d=await api('/api/admin/posts?'+params);if(seq!==loadSequence)return;posts.value=d.posts;total.value=d.total;counts.value=d.counts;if(page.value>1&&!d.posts.length){page.value--;return await loadPosts();}}finally{if(seq===loadSequence)loading.value=false;}}
@@ -75,12 +78,12 @@ async function refresh(){try{await loadPosts();}catch(e){error.value=e.message;}
 async function changeFilter(value){filter.value=value;page.value=1;await refresh();}
 function runSearch(){search.value=query.value.trim();page.value=1;refresh();}
 function leaveEditor(){return !dirty.value||window.confirm('当前内容还没有保存，确定放弃修改吗？');}
-function create(){if(locked.value||!leaveEditor())return;editor.value={id:null,title:'',content:'',excerpt:'',category:'文章',status:'draft',tagsText:'',tags:[],cover:'',version:0};base.value=JSON.stringify(editor.value);preview.value=false;pending.value='';message.value='';error.value='';}
+function create(){if(locked.value||!leaveEditor())return;editor.value={id:null,title:'',content:'',excerpt:'',category:'文章',status:'draft',tagsText:'',tags:[],cover:'',version:0,pinned:false};base.value=JSON.stringify(editor.value);preview.value=false;pending.value='';message.value='';error.value='';}
 async function edit(post){if(locked.value||!leaveEditor())return;busy.value=true;try{setEditor((await api('/api/admin/posts/'+post.id)).post);preview.value=false;message.value='';error.value='';}catch(e){error.value=e.message;}finally{busy.value=false;}}
 async function save(status){if(!editor.value||locked.value||inTrash.value)return;busy.value=true;error.value='';message.value='';try{const body={...editor.value,status,tags:editor.value.tagsText.split(/[,，]/).map(s=>s.trim()).filter(Boolean)};const d=await api('/api/admin/posts'+(body.id?'/'+body.id:''),{method:body.id?'PUT':'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});setEditor(d.post);notify(status==='published'?'已发布，网站已更新。':status==='archived'?'已归档，访客将看不到这篇内容。':'草稿已保存。');await Promise.all([loadPosts(),loadCategories()]);}catch(e){error.value=e.message;}finally{busy.value=false;}}
 function askAction(action){if(locked.value||!leaveEditor())return;pending.value=action;confirmTitle.value='';}
 async function executeAction(){if(!editor.value||locked.value)return;const action=pending.value;busy.value=true;error.value='';try{const d=await api('/api/admin/posts/'+editor.value.id,{method:action==='delete'?'DELETE':'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,version:editor.value.version,confirmTitle:confirmTitle.value})});if(action==='delete'){editorDialog.value?.close();editor.value=null;base.value='';notify('已彻底删除。');}else{setEditor(d.post);notify(action==='trash'?'已移到回收站，访客将看不到这篇内容。':'已恢复为'+statusNames[d.post.status]+'。');}pending.value='';await Promise.all([loadPosts(),loadCategories()]);}catch(e){error.value=e.message;}finally{busy.value=false;}}
-function duplicate(){if(!editor.value||locked.value)return;const p=editor.value;editor.value={title:p.title+'（副本）',content:p.content,excerpt:p.excerpt,category:p.category,status:'draft',tags:[...p.tags],tagsText:p.tagsText,cover:p.cover,id:null,version:0};base.value='';pending.value='';preview.value=false;notify('已复制为新草稿，请保存。');}
+function duplicate(){if(!editor.value||locked.value)return;const p=editor.value;editor.value={title:p.title+'（副本）',content:p.content,excerpt:p.excerpt,category:p.category,status:'draft',tags:[...p.tags],tagsText:p.tagsText,cover:p.cover,id:null,version:0,pinned:false};base.value='';pending.value='';preview.value=false;notify('已复制为新草稿，请保存。');}
 async function exportBackup(){if(locked.value)return;busy.value=true;try{const data=await api('/api/admin/export');const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='naiyael-content-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);notify('内容备份已导出，包含草稿和回收站中的内容；图片保留为原链接。');}catch(e){error.value=e.message;}finally{busy.value=false;}}
 async function upload(event,isCover){const file=event.target.files?.[0];event.target.value='';if(!file||locked.value)return;if(file.size>5*1024*1024){error.value='图片不能超过 5 MB';return;}uploading.value=true;error.value='';try{const d=await api('/api/admin/uploads',{method:'POST',headers:{'Content-Type':file.type},body:file});if(isCover)editor.value.cover=d.url;else insert(`\n![图片说明](${d.url})\n`);notify(isCover?'封面已上传，请保存文章。':'图片已插入正文，请保存文章。');}catch(e){error.value=e.message;}finally{uploading.value=false;}}
 function insert(text,before='',after=''){if(!editor.value)return;const el=bodyInput.value;if(!el){editor.value.content+=text;return;}const start=el.selectionStart,end=el.selectionEnd,selected=editor.value.content.slice(start,end);editor.value.content=editor.value.content.slice(0,start)+(before?before+(selected||text)+after:text)+editor.value.content.slice(end);}
@@ -101,17 +104,18 @@ onUnmounted(()=>{loadSequence++;cancelCardDrag();window.removeEventListener('bef
     <div class="cms-card-workspace" v-else>
       <section class="cms-library" aria-label="我的内容">
         <div class="cms-library-toolbar"><h2>我的内容 <small>{{total}}</small></h2>
-        <div class="cms-library-actions"><button class="cms-order-open" @click="orderEditor.open()" :disabled="locked"><span aria-hidden="true">↕</span> 更多排序选项</button><form class="cms-search" @submit.prevent="runSearch"><label><span class="cms-sr-only">搜索内容</span><input v-model="query" :disabled="locked" placeholder="搜索标题、摘要、标签" type="search"></label><button type="submit" :disabled="locked">搜索</button></form></div>
+        <div class="cms-library-actions"><form class="cms-search" @submit.prevent="runSearch"><label><span class="cms-sr-only">搜索内容</span><input v-model="query" :disabled="locked" placeholder="搜索标题、摘要、标签" type="search"></label><button type="submit" :disabled="locked">搜索</button></form></div>
         </div>
         <div class="cms-library-filters"><div class="cms-filter"><button v-for="(label,key) in {all:'全部',draft:'草稿',published:'已发布',archived:'归档',trash:'回收站'}" :key="key" :class="{active:filter===(key==='all'?'':key)}" :aria-pressed="filter===(key==='all'?'':key)" @click="changeFilter(key==='all'?'':key)">{{label}}<small v-if="key!=='all'">{{counts[key]||0}}</small></button></div>
         <div class="cms-list-controls"><select v-model="category" @change="page=1;refresh()" aria-label="筛选分类"><option value="">所有分类</option><option v-for="label in categoryOptions" :key="label" :value="label">{{label}}</option></select><button @click="refresh" :disabled="loading">{{loading?'加载中…':'刷新列表'}}</button></div>
         </div>
+        <p class="cms-sr-only" id="cms-sort-help">点击编辑；按住拖动排序，或使用 Alt 加上下方向键调整同组顺序。顺序自动保存。</p>
         <div class="cms-content-grid" :aria-busy="loading">
           <button class="cms-create-card" @click="create" :disabled="locked" aria-label="新建内容"><span class="cms-create-plus" aria-hidden="true">＋</span><strong>写一篇新的</strong><span>文章、题解，或一段日常</span></button>
-          <article v-for="post in posts" :key="post.id" class="cms-admin-post" :data-post-id="post.id" :class="{'is-pinned':post.pinned,'is-dragging':draggingId===post.id,'is-drop-before':dropId===post.id&&dropSide==='before'&&!invalidDrop,'is-drop-after':dropId===post.id&&dropSide==='after'&&!invalidDrop}" @pointerdown="startCardDrag($event,post)" @click.capture="captureCardClick" @dragstart.prevent><button class="cms-content-card" @click="edit(post)" :disabled="locked" :aria-label="'编辑：'+post.title">
+          <article v-for="post in posts" :key="post.id" class="cms-admin-post" :data-post-id="post.id" :class="{'is-pinned':post.pinned,'is-dragging':draggingId===post.id,'is-drop-before':dropId===post.id&&dropSide==='before'&&!invalidDrop,'is-drop-after':dropId===post.id&&dropSide==='after'&&!invalidDrop}" @pointerdown="startCardDrag($event,post)" @click.capture="captureCardClick" @dragstart.prevent @keydown.alt.up.prevent="moveByKeyboard(post,-1)" @keydown.alt.down.prevent="moveByKeyboard(post,1)"><button class="cms-content-card" @click="edit(post)" :disabled="locked" :aria-label="'编辑：'+post.title" aria-describedby="cms-sort-help">
             <img v-if="post.cover" :src="post.cover" alt="" loading="lazy">
             <span class="cms-card-copy"><span class="cms-card-meta"><span class="cms-card-category">{{categoryLabel(post.category)}}</span><span v-if="post.pinned" class="post-pin-badge">置顶</span><time>{{dateLabel(post.updatedAt)}}</time><span class="cms-card-status" :class="post.status">{{statusNames[post.status]}}</span></span><strong class="cms-card-title">{{post.title}}</strong><span class="cms-card-excerpt">{{post.excerpt||'还没有摘要，点开继续写。'}}</span><span class="cms-card-tags"><span v-for="tag in post.tags.slice(0,3)" :key="tag"># {{tag}}</span></span><span class="cms-card-foot"><span>{{post.pageKey?'网站页面':'内容'}}</span><span>{{post.status==='trash'?'查看与恢复':'点击编辑'}} <span aria-hidden="true">↗</span></span></span></span>
-          </button><footer class="cms-card-actions" v-if="post.status!=='trash'"><button class="cms-inline-drag" @pointerdown.stop.prevent="startCardDrag($event,post,true)" @click="notify('按住卡片拖到目标位置，松手自动保存。')" :disabled="locked" :aria-label="'拖动排序：'+post.title"><span aria-hidden="true">⠿</span> 拖动排序</button><button @click="togglePin(post)" :disabled="locked" :aria-pressed="post.pinned" :aria-label="(post.pinned?'取消置顶：':'置顶：')+post.title">{{post.pinned?'取消置顶':'置顶'}} <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m5 2 6 0-1 4 2 3H9v3l-1 2-1-2V9H4l2-3z"/></svg></button></footer></article>
+          </button><footer class="cms-card-actions" v-if="post.status!=='trash'"><button class="cms-inline-drag" @pointerdown.stop.prevent="startCardDrag($event,post,true)" @click="notify('按住拖动排序，或使用 Alt + 上下方向键；顺序自动保存。')" :disabled="locked" :aria-label="'拖动排序：'+post.title" aria-describedby="cms-sort-help"><span aria-hidden="true">⠿</span> 拖动排序</button><span class="cms-card-autosave-hint">松手自动保存</span></footer></article>
         </div>
         <p v-if="loading&&!posts.length" class="cms-library-empty" role="status">正在加载内容…</p><p v-else-if="!posts.length" class="cms-library-empty">{{filter==='trash'?'回收站是空的。':search||category?'没有匹配的内容，试试其他关键词或分类。':'点击加号，写下第一篇记录。'}}</p>
         <div class="cms-pagination" v-if="total>30"><button :disabled="page===1||loading" @click="page--;refresh()" aria-label="上一页">←</button><span>{{page}} / {{Math.ceil(total/30)}}</span><button :disabled="page*30>=total||loading" @click="page++;refresh()" aria-label="下一页">→</button></div>
@@ -126,6 +130,7 @@ onUnmounted(()=>{loadSequence++;cancelCardDrag();window.removeEventListener('bef
         <p v-if="inTrash" class="cms-page-note">移入时间：{{dateLabel(editor.trashedAt)}}。恢复后可以继续编辑。</p>
         <fieldset :disabled="locked||inTrash||!!pending" class="cms-fields">
           <label class="cms-field"><span>标题</span><input ref="titleInput" v-model="editor.title" placeholder="写一个标题" maxlength="160" aria-label="文章标题"></label>
+          <label class="cms-pin-setting"><span><strong>置顶这篇内容</strong><small>保存后生效，仅已发布内容会在前台展示。</small></span><input type="checkbox" role="switch" v-model="editor.pinned" aria-label="置顶这篇内容"></label>
           <div class="cms-field-row"><label class="cms-field"><span>分类</span><input v-model="editor.category" list="cms-category-options" maxlength="40" placeholder="如：学习笔记、旅行、比赛复盘" aria-label="文章分类"><small class="cms-field-help">直接输入新分类，也可选用已有分类。</small><datalist id="cms-category-options"><option v-for="label in categoryOptions" :key="label" :value="label" /></datalist></label><label class="cms-field"><span>标签</span><input v-model="editor.tagsText" placeholder="用逗号分隔，如 图论, 最短路" aria-label="文章标签"></label></div>
           <details class="cms-extra-fields"><summary>摘要与封面 <span>{{editor.cover?'已设置封面':'可选'}}</span></summary>
           <label class="cms-field"><span>摘要 <small>可留空，保存时自动生成</small></span><textarea v-model="editor.excerpt" rows="2" maxlength="400" aria-label="文章摘要"></textarea></label>
@@ -142,7 +147,6 @@ onUnmounted(()=>{loadSequence++;cancelCardDrag();window.removeEventListener('bef
       </dialog>
     </div>
   </template>
-  <PostOrderEditor v-if="authorized" ref="orderEditor" @saved="orderSaved" />
   <Teleport to="body"><div v-if="dragPost" class="cms-card-drag-ghost" :class="{'is-invalid':invalidDrop}" :style="dragGhostStyle" aria-hidden="true"><span>⠿</span><div><strong>{{dragPost.title}}</strong><small>{{invalidDrop?'请拖到同一置顶分组':dropId?'松手，自动保存':'拖到另一张卡片旁边'}}</small></div></div></Teleport>
 </div>
 </template>
