@@ -5,6 +5,7 @@ import './cms.css';
 import './polish.css';
 import './cms-settings.css';
 import './wallpaper.css';
+import './admin-cards.css';
 import Layout from './Layout.vue';
 import RatingHistory from './components/RatingHistory.vue';
 import ProblemArchive from './components/ProblemArchive.vue';
