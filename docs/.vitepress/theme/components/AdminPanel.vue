@@ -4,6 +4,7 @@ import {api,categoryLabel,dateLabel} from './cms-client';
 import ArticleContent from './ArticleContent.vue';
 import CoverPreview from './CoverPreview.vue';
 import NavigationEditor from './NavigationEditor.vue';
+import StackEditor from './StackEditor.vue';
 import {movePostOrder} from '../../../../src/post-order.js';
 import {validImageUrl} from '../../../../src/site-model.js';
 const authorized=ref(false),ready=ref(false),busy=ref(false),uploading=ref(false),loading=ref(false);
@@ -122,9 +123,10 @@ onUnmounted(()=>{loadSequence++;cancelCardDrag();window.removeEventListener('bef
     <p v-if="error" class="cms-error">{{error}}</p>
   </div>
   <template v-else>
-    <nav class="cms-section-tabs" aria-label="管理功能"><button :class="{active:panel==='content'}" @click="changePanel('content')">文章与日常</button><button :class="{active:panel==='navigation'}" @click="changePanel('navigation')">顶部导航</button></nav>
+    <nav class="cms-section-tabs" aria-label="管理功能"><button :class="{active:panel==='content'}" @click="changePanel('content')">文章与日常</button><button :class="{active:panel==='navigation'}" @click="changePanel('navigation')">顶部导航</button><button :class="{active:panel==='stack'}" @click="changePanel('stack')">常用栈</button></nav>
     <div class="cms-notification" role="status" v-if="message&&!editor">✓ {{message}}</div><div class="cms-error cms-notification" role="alert" v-if="error&&!editor">{{error}}</div>
     <NavigationEditor v-if="panel==='navigation'" :categories="categoryOptions" @dirty-change="navigationDirty=$event" />
+    <StackEditor v-else-if="panel==='stack'" @dirty-change="navigationDirty=$event" />
     <div class="cms-card-workspace" v-else>
       <section class="cms-library" aria-label="我的内容">
         <div class="cms-library-toolbar"><h2>我的内容 <small>{{total}}</small></h2>

@@ -1,28 +1,74 @@
 <script setup>
-const STACK_ITEMS = [
-  { name: 'C++', note: '主力 · 算法', icon: '/icons/tech/cplusplus.svg', primary: true },
-  { name: 'Python', note: '脚本 · 工具', icon: '/icons/tech/python.svg', primary: true },
-  { name: 'Git', note: '版本管理', icon: '/icons/tech/git.svg' },
-  { name: 'Linux', note: '开发环境', svg: 'terminal' },
-  { name: 'VS Code', note: '主力编辑器', icon: '/icons/tech/vscode.svg' },
-  { name: 'Cloudflare', note: '边缘部署', icon: '/icons/tech/cloudflare.svg' },
-];
+import { ref, onMounted, onUnmounted } from 'vue';
+import { api } from './cms-client';
+import StackIcon from './StackIcon.vue';
+import { DEFAULT_TECH_STACK, visibleTechStack } from '../../../../src/site-model.js';
+
+const items = ref(visibleTechStack(DEFAULT_TECH_STACK));
+let pending = null;
+
+async function refresh() {
+  if (pending) return pending;
+  pending = (async () => {
+    try {
+      const data = await api('/api/tech-stack');
+      if (Array.isArray(data.techStack)) items.value = data.techStack;
+    } catch {
+      // Keep default/cached stack visible if offline.
+    } finally {
+      pending = null;
+    }
+  })();
+  return pending;
+}
+
+function onVisible() {
+  if (!document.hidden) refresh();
+}
+
+const isExternal = (link) => /^https?:\/\//i.test(link || '');
+
+onMounted(() => {
+  refresh();
+  document.addEventListener('visibilitychange', onVisible);
+  window.addEventListener('site-tech-stack-updated', refresh);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('visibilitychange', onVisible);
+  window.removeEventListener('site-tech-stack-updated', refresh);
+});
 </script>
 
 <template>
-<section class="stack-card" aria-label="常用技术栈">
+<section v-if="items.length" class="stack-card" aria-label="常用技术栈">
   <header class="stack-card-head">
     <h2>常用栈</h2>
-    <span>{{ STACK_ITEMS.length }} 项</span>
+    <span>{{ items.length }} 项</span>
   </header>
   <ul class="stack-grid">
-    <li v-for="item in STACK_ITEMS" :key="item.name" class="stack-chip" :class="{ 'is-primary': item.primary }" :title="`${item.name} · ${item.note}`">
-      <img v-if="item.icon" :src="item.icon" :alt="item.name" width="16" height="16" loading="lazy" decoding="async" />
-      <svg v-else class="stack-terminal-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <rect x="2" y="2.75" width="12" height="10.5" rx="2"/>
-        <path d="m5 6.5 2 1.75L5 10M8.5 10h2.5"/>
-      </svg>
-      <span>{{ item.name }}</span>
+    <li v-for="item in items" :key="item.id">
+      <a
+        v-if="item.link"
+        class="stack-chip is-link"
+        :class="{ 'is-primary': item.primary }"
+        :href="item.link"
+        :target="isExternal(item.link) ? '_blank' : undefined"
+        :rel="isExternal(item.link) ? 'noopener noreferrer' : undefined"
+        :title="item.note ? `${item.name} · ${item.note}` : item.name"
+      >
+        <StackIcon :icon="item.icon" :name="item.name" />
+        <span>{{ item.name }}</span>
+      </a>
+      <div
+        v-else
+        class="stack-chip"
+        :class="{ 'is-primary': item.primary }"
+        :title="item.note ? `${item.name} · ${item.note}` : item.name"
+      >
+        <StackIcon :icon="item.icon" :name="item.name" />
+        <span>{{ item.name }}</span>
+      </div>
     </li>
   </ul>
 </section>

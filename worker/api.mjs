@@ -1,7 +1,8 @@
-import {canonicalCategory,categoryLabel,DEFAULT_NAVIGATION,normalizeNavigation,validImageUrl,visibleNavigation} from '../src/site-model.js';
+import {canonicalCategory,categoryLabel,DEFAULT_NAVIGATION,DEFAULT_TECH_STACK,normalizeNavigation,normalizeTechStack,validImageUrl,visibleNavigation,visibleTechStack} from '../src/site-model.js';
 import {authenticateAdmin,authStatus,clearLoginFailures,createSessionToken,hasAccessAuth,hasPasswordAuth,isLoginRateLimited,recordLoginFailure,sessionCookieHeader,verifyAdminPassword} from './auth.mjs';
 export const json=(body,status=200,extraHeaders={})=>Response.json(body,{status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff',...extraHeaders}});
 async function readNavigation(db){const row=await db.prepare("SELECT value,version,updated_at FROM site_settings WHERE id='navigation'").first();return row?{navigation:JSON.parse(row.value),version:row.version,updatedAt:row.updated_at}:{navigation:structuredClone(DEFAULT_NAVIGATION),version:0,updatedAt:null};}
+async function readTechStack(db){const row=await db.prepare("SELECT value,version,updated_at FROM site_settings WHERE id='tech-stack'").first();return row?{techStack:JSON.parse(row.value),version:row.version,updatedAt:row.updated_at}:{techStack:structuredClone(DEFAULT_TECH_STACK),version:0,updatedAt:null};}
 async function readPostOrder(db){const row=await db.prepare("SELECT value,version FROM site_settings WHERE id='post-order'").first();return row?{...JSON.parse(row.value),version:row.version}:{orderedIds:[],pinnedIds:[],version:0};}
 async function orderLibrary(db){
   const [settings,rows]=await Promise.all([readPostOrder(db),db.prepare(contentCTE+`SELECT ${postFields} FROM content_posts WHERE status NOT IN ('trash','deleted') ORDER BY COALESCE(published_at,updated_at) DESC,id DESC`).all()]);
@@ -115,6 +116,19 @@ export async function routeAPI(request,env,options={}){
     if(!result.meta?.changes)return json({error:'导航已在其他窗口修改，请重新加载后再保存'},409);
     return json(await readNavigation(db));
   }
+  if((path==='/api/tech-stack'||path==='/api/admin/tech-stack')&&method==='GET'){
+    const data=await readTechStack(db);return json(admin?data:{...data,techStack:visibleTechStack(data.techStack)});
+  }
+  if(path==='/api/admin/tech-stack'&&method==='PUT'){
+    if(Number(request.headers.get('content-length')||0)>64000)return json({error:'常用栈配置过大'},413);
+    let input;try{input=await request.json();}catch{return json({error:'请求格式不正确'},400);}
+    if(!Number.isInteger(input?.version)||input.version<0)return json({error:'请重新加载常用栈配置'},400);
+    let techStack;try{techStack=normalizeTechStack(input.techStack);}catch(e){return json({error:e.message},400);}
+    const value=JSON.stringify(techStack),now=new Date().toISOString();
+    const result=input.version===0?await db.prepare("INSERT OR IGNORE INTO site_settings(id,value,version,updated_at) VALUES('tech-stack',?,1,?)").bind(value,now).run():await db.prepare("UPDATE site_settings SET value=?,version=version+1,updated_at=? WHERE id='tech-stack' AND version=?").bind(value,now,input.version).run();
+    if(!result.meta?.changes)return json({error:'常用栈已在其他窗口修改，请重新加载后再保存'},409);
+    return json(await readTechStack(db));
+  }
   if(path==='/api/admin/categories'&&method==='GET'){
     const rows=await db.prepare(contentCTE+"SELECT category AS key,COUNT(*) AS count FROM content_posts WHERE status NOT IN ('trash','deleted') GROUP BY category ORDER BY count DESC,category").all();
     return json({categories:rows.results.map(item=>({...item,label:categoryLabel(item.key)}))});
@@ -128,7 +142,7 @@ export async function routeAPI(request,env,options={}){
   }
   if(path==='/api/admin/export'&&method==='GET'){
     const data=await db.prepare(contentCTE+`SELECT ${postFields},content FROM content_posts WHERE status != 'deleted' ORDER BY created_at,id`).all();
-    return json({format:'naiyael-content-backup',version:2,exportedAt:new Date().toISOString(),posts:data.results.map(decode),siteSettings:await readNavigation(db),postOrder:await readPostOrder(db)});
+    return json({format:'naiyael-content-backup',version:2,exportedAt:new Date().toISOString(),posts:data.results.map(decode),siteSettings:await readNavigation(db),techStack:await readTechStack(db),postOrder:await readPostOrder(db)});
   }
   if(path==='/api/admin/import'&&method==='POST'){
     if(Number(request.headers.get('content-length')||0)>2*1024*1024)return json({error:'备份文件过大（上限 2 MB）'},413);

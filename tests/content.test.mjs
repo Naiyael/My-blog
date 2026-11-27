@@ -703,3 +703,48 @@ test('backup import restores posts with timestamps and pins without duplicating 
     env.DB.close();
   }
 });
+
+
+test('managed tech stack validates fields, enforces owner access, filters hidden items and detects conflicts', async () => {
+  const env = await fixture();
+  try {
+    assert.equal((await routeAPI(req('/api/admin/tech-stack', 'GET', undefined, false), env)).status, 403);
+    const initial = await (await routeAPI(req('/api/tech-stack', 'GET', undefined, false), env)).json();
+    assert.equal(initial.version, 0);
+    assert.equal(initial.techStack.length, 6);
+    assert.equal(initial.techStack[0].name, 'C++');
+
+    const badLink = [{ id: 'x1', name: 'Bad', note: '', icon: 'code', primary: false, hidden: false, link: 'javascript:alert(1)' }];
+    const badIcon = [{ id: 'x2', name: 'BadIcon', note: '', icon: 'http://insecure.test/a.png', primary: false, hidden: false, link: '' }];
+    assert.equal((await routeAPI(req('/api/admin/tech-stack', 'PUT', { techStack: badLink, version: 0 }, true, 'https://evil.test', env), env)).status, 403);
+    assert.equal((await routeAPI(req('/api/admin/tech-stack', 'PUT', { techStack: badLink, version: 0 }, true, 'https://site.test', env), env)).status, 400);
+    assert.equal((await routeAPI(req('/api/admin/tech-stack', 'PUT', { techStack: badIcon, version: 0 }, true, 'https://site.test', env), env)).status, 400);
+
+    const nextStack = [
+      { id: 'cpp', name: 'C++20', note: '主力 · ACM', icon: 'cpp', primary: true, hidden: false, link: '/codeforces.html' },
+      { id: 'rust', name: 'Rust', note: '系统学习中', icon: 'rust', primary: false, hidden: false, link: 'https://www.rust-lang.org/' },
+      { id: 'secret-tool', name: '内部工具', note: '暂不公开', icon: 'https://cdn.example.com/icon.svg', primary: false, hidden: true, link: '' },
+    ];
+    const saved = await (await routeAPI(req('/api/admin/tech-stack', 'PUT', { techStack: nextStack, version: 0 }, true, 'https://site.test', env), env)).json();
+    assert.equal(saved.version, 1);
+    assert.equal(saved.techStack.length, 3);
+
+    // Public endpoint omits hidden items while admin endpoint returns all items.
+    const pub = await (await routeAPI(req('/api/tech-stack', 'GET', undefined, false), env)).json();
+    assert.deepEqual(pub.techStack.map((i) => i.id), ['cpp', 'rust']);
+    assert.equal(pub.techStack[0].link, '/codeforces.html');
+    const adminList = await (await routeAPI(req('/api/admin/tech-stack', 'GET', undefined, true, 'https://site.test', env), env)).json();
+    assert.equal(adminList.techStack.length, 3);
+    assert.equal(adminList.techStack[2].hidden, true);
+
+    // Stale version fails with 409 conflict.
+    assert.equal((await routeAPI(req('/api/admin/tech-stack', 'PUT', { techStack: nextStack.slice(0, 1), version: 0 }, true, 'https://site.test', env), env)).status, 409);
+
+    // Export backup includes the saved tech stack.
+    const exported = await (await routeAPI(req('/api/admin/export', 'GET', undefined, true, 'https://site.test', env), env)).json();
+    assert.equal(exported.techStack.version, 1);
+    assert.equal(exported.techStack.techStack.length, 3);
+  } finally {
+    env.DB.close();
+  }
+});

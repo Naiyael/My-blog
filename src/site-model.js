@@ -9,6 +9,19 @@ export const DEFAULT_NAVIGATION=[
   {id:'about',text:'关于',link:'/about.html',hidden:false,newTab:false},
   {id:'external-cf',text:'Codeforces',link:'https://codeforces.com/profile/qiushan233',hidden:false,newTab:true},
 ];
+export const STACK_ICON_KEYS=[
+  'cpp','python','c','rust','go','java','js','ts','vue','react','node',
+  'git','github','linux','docker','vscode','jetbrains','vim','cloudflare',
+  'database','algorithm','ai','code',
+];
+export const DEFAULT_TECH_STACK=[
+  {id:'cpp',name:'C++',note:'主力 · 算法竞赛',icon:'cpp',primary:true,hidden:false,link:''},
+  {id:'python',name:'Python',note:'脚本 · 工具',icon:'python',primary:true,hidden:false,link:''},
+  {id:'git',name:'Git',note:'版本管理',icon:'git',primary:false,hidden:false,link:''},
+  {id:'linux',name:'Linux',note:'开发环境',icon:'linux',primary:false,hidden:false,link:''},
+  {id:'vscode',name:'VS Code',note:'主力编辑器',icon:'vscode',primary:false,hidden:false,link:''},
+  {id:'cloudflare',name:'Cloudflare',note:'边缘部署',icon:'cloudflare',primary:false,hidden:false,link:''},
+];
 export function validNavLink(value){
   if(typeof value!=='string'||!value||value.length>500||/[\s\\\u0000-\u001f\u007f]/u.test(value))return false;
   if(value.startsWith('/'))return !value.startsWith('//');
@@ -19,6 +32,13 @@ export function validImageUrl(value){
   if(/^\/media\/[a-f0-9-]{36}\.(jpg|png|webp|gif)$/.test(value))return true;
   if(/^\/images\/[a-zA-Z0-9._/-]+$/.test(value))return !value.includes('..')&&!value.includes('//');
   try{const url=new URL(value);return url.protocol==='https:'&&!!url.hostname&&!url.username&&!url.password;}catch{return false;}
+}
+export function validStackIcon(value){
+  if(value===''||value==null)return true;
+  if(typeof value!=='string'||value.length>500||/[\s\\\u0000-\u001f\u007f]/u.test(value))return false;
+  if(STACK_ICON_KEYS.includes(value))return true;
+  if(/^\/icons\/tech\/[a-zA-Z0-9._-]+\.(svg|png|webp|ico)$/.test(value))return !value.includes('..');
+  return validImageUrl(value);
 }
 export function normalizeNavigation(input){
   if(!Array.isArray(input)||input.length>12)throw new Error('顶部导航最多可设置 12 项');
@@ -42,3 +62,25 @@ export function normalizeNavigation(input){
   return input.map(raw=>item(raw,0));
 }
 export function visibleNavigation(items){return items.filter(item=>!item.hidden).map(item=>item.children?{id:item.id,text:item.text,children:visibleNavigation(item.children)}:{id:item.id,text:item.text,link:item.link,newTab:!!item.newTab}).filter(item=>!item.children||item.children.length);}
+export function normalizeTechStack(input){
+  if(!Array.isArray(input)||input.length>16)throw new Error('常用栈最多可设置 16 项');
+  const ids=new Set();
+  return input.map(raw=>{
+    if(!raw||typeof raw!=='object'||typeof raw.id!=='string'||!/^[a-zA-Z0-9_-]{1,64}$/.test(raw.id)||ids.has(raw.id))throw new Error('常用栈项目标识重复或格式不正确');
+    ids.add(raw.id);
+    if(typeof raw.name!=='string'||!raw.name.trim()||raw.name.trim().length>24||/[\u0000-\u001f\u007f]/u.test(raw.name))throw new Error('请填写不超过 24 字的技术栈名称');
+    if(raw.note!=null&&(typeof raw.note!=='string'||raw.note.trim().length>40||/[\u0000-\u001f\u007f]/u.test(raw.note)))throw new Error('说明备注不能超过 40 字');
+    const icon=typeof raw.icon==='string'?raw.icon.trim():'';
+    if(!validStackIcon(icon))throw new Error('图标请选择内置预设，或填写有效的 https:// 图片链接');
+    if(raw.primary!=null&&typeof raw.primary!=='boolean')throw new Error('主力高亮设置不正确');
+    if(raw.hidden!=null&&typeof raw.hidden!=='boolean')throw new Error('显示状态设置不正确');
+    const link=typeof raw.link==='string'?raw.link.trim():'';
+    if(link&&!validNavLink(link))throw new Error('跳转链接请填写站内路径（如 /codeforces.html）或完整的 http(s) 地址');
+    return {id:raw.id,name:raw.name.trim(),note:(raw.note||'').trim(),icon:icon||'code',primary:!!raw.primary,hidden:!!raw.hidden,link};
+  });
+}
+export function visibleTechStack(items){
+  return (Array.isArray(items)?items:[])
+    .filter(item=>item&&!item.hidden)
+    .map(item=>({id:item.id,name:item.name,note:item.note||'',icon:item.icon||'code',primary:!!item.primary,link:item.link||''}));
+}
