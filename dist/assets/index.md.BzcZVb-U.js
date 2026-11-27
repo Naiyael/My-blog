@@ -1,1 +1,0 @@
-import{bQ as e,aL as t,u as a}from"./chunks/framework.C1gZXFVa.js";const m=JSON.parse('{"title":"Naiyael","description":"","frontmatter":{"layout":"home","title":"Naiyael"},"headers":[],"relativePath":"index.md","filePath":"index.md"}'),n={name:"index.md"};function o(r,i,s,c,d,l){return t(),a("div")}const _=e(n,[["render",o]]);export{m as __pageData,_ as default};

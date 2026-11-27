@@ -77,7 +77,7 @@ export default defineConfig({
     ['link', { rel: 'preload', as: 'image', href: '/images/miku-wallpaper-hd-v2.jpg', fetchpriority: 'high' }],
     ['link', { rel: 'icon', type: 'image/jpeg', href: '/images/avatar.jpg' }],
     ['meta', { name: 'theme-color', content: '#f6f7f8' }],
-    ['meta', { property: 'og:image', content: 'https://folio-studio-20261103-n7x.cuteagate.chatgpt.site/images/avatar.jpg' }],
+    ['meta', { property: 'og:image', content: '/images/avatar.jpg' }],
   ],
   markdown: { lineNumbers: true, image: { lazyLoading: true } },
   themeConfig: {

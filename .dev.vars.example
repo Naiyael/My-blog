@@ -1,0 +1,16 @@
+# 复制此文件为 .dev.vars 用于本地 wrangler dev 调试（.dev.vars 已被 .gitignore 忽略，切勿提交到仓库）
+
+# === 模式 1：自建密码登录（开箱即用，推荐必填） ===
+ADMIN_PASSWORD=change-me-local-dev-password
+
+# 可选：独立的 Session HMAC 签名密钥（不填则自动基于 ADMIN_PASSWORD 派生；更换后所有旧登录态立即失效）
+# SESSION_SECRET=replace-with-a-random-32-char-secret
+
+# 可选：若不想在密钥中存明文密码，可用 PBKDF2 哈希替代 ADMIN_PASSWORD：
+# 格式为 pbkdf2$<iterations>$<saltHex>$<hashHex> 或 sha256$<hex>
+# ADMIN_PASSWORD_HASH=
+
+# === 模式 2：Cloudflare Zero Trust Access（可选，与密码登录可同时启用） ===
+# CF_ACCESS_TEAM_DOMAIN=https://your-team.cloudflareaccess.com
+# CF_ACCESS_AUD=your-access-application-audience-tag
+# SITE_ADMIN_EMAIL=you@example.com

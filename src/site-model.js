@@ -14,6 +14,12 @@ export function validNavLink(value){
   if(value.startsWith('/'))return !value.startsWith('//');
   try{const url=new URL(value);return ['http:','https:'].includes(url.protocol)&&!!url.hostname&&!url.username&&!url.password;}catch{return false;}
 }
+export function validImageUrl(value){
+  if(typeof value!=='string'||!value||value.length>500||/[\s\\\u0000-\u001f\u007f]/u.test(value))return false;
+  if(/^\/media\/[a-f0-9-]{36}\.(jpg|png|webp|gif)$/.test(value))return true;
+  if(/^\/images\/[a-zA-Z0-9._/-]+$/.test(value))return !value.includes('..')&&!value.includes('//');
+  try{const url=new URL(value);return url.protocol==='https:'&&!!url.hostname&&!url.username&&!url.password;}catch{return false;}
+}
 export function normalizeNavigation(input){
   if(!Array.isArray(input)||input.length>12)throw new Error('顶部导航最多可设置 12 项');
   const ids=new Set();

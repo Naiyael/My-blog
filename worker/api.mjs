@@ -1,5 +1,6 @@
-import {canonicalCategory,categoryLabel,DEFAULT_NAVIGATION,normalizeNavigation,visibleNavigation} from '../src/site-model.js';
-export const json=(body,status=200)=>Response.json(body,{status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
+import {canonicalCategory,categoryLabel,DEFAULT_NAVIGATION,normalizeNavigation,validImageUrl,visibleNavigation} from '../src/site-model.js';
+import {authenticateAdmin,authStatus,clearLoginFailures,createSessionToken,hasAccessAuth,hasPasswordAuth,isLoginRateLimited,recordLoginFailure,sessionCookieHeader,verifyAdminPassword} from './auth.mjs';
+export const json=(body,status=200,extraHeaders={})=>Response.json(body,{status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff',...extraHeaders}});
 async function readNavigation(db){const row=await db.prepare("SELECT value,version,updated_at FROM site_settings WHERE id='navigation'").first();return row?{navigation:JSON.parse(row.value),version:row.version,updatedAt:row.updated_at}:{navigation:structuredClone(DEFAULT_NAVIGATION),version:0,updatedAt:null};}
 async function readPostOrder(db){const row=await db.prepare("SELECT value,version FROM site_settings WHERE id='post-order'").first();return row?{...JSON.parse(row.value),version:row.version}:{orderedIds:[],pinnedIds:[],version:0};}
 async function orderLibrary(db){
@@ -38,7 +39,7 @@ function pinStatement(db,id,pinned,version,now){
     WHERE EXISTS(SELECT 1 FROM json_each(site_settings.value,'$.pinnedIds') WHERE value=?) != ?
   `).bind(JSON.stringify(pinned?[id]:[]),now,id,version,Number(pinned),id,id,Number(pinned),id,Number(pinned));
 }
-export function canAdmin(request,env){const email=request.headers.get('oai-authenticated-user-email');return !!(email&&env.SITE_ADMIN_EMAIL&&email.toLowerCase().trim()===env.SITE_ADMIN_EMAIL.toLowerCase().trim());}
+export async function canAdmin(request,env,options){return !!(await authenticateAdmin(request,env,options));}
 export function checkWrite(request){return request.headers.get('origin')===new URL(request.url).origin;}
 export function validatePost(input){
   if(!input||typeof input!=='object')return '内容格式不正确';
@@ -50,7 +51,7 @@ export function validatePost(input){
   if(input.status==='published'&&!input.content.trim())return '发布前请填写正文';
   if(input.excerpt!=null&&(typeof input.excerpt!=='string'||input.excerpt.length>400))return '摘要不能超过 400 字';
   if(input.tags!=null&&(!Array.isArray(input.tags)||input.tags.length>10||input.tags.some(t=>typeof t!=='string'||t.length>30)))return '标签格式不正确';
-  if(input.cover&&!(typeof input.cover==='string'&&/^\/media\/[a-f0-9-]{36}\.(jpg|png|webp|gif)$/.test(input.cover)))return '请使用后台上传的封面';
+  if(input.cover&&!validImageUrl(input.cover))return '封面请填写有效的 https:// 图片链接，或站内 /images/ 路径';
   return null;
 }
 export function imageExtension(bytes,mime){
@@ -60,13 +61,31 @@ export function imageExtension(bytes,mime){
   if(mime==='image/webp'&&ascii.startsWith('RIFF')&&ascii.slice(8)==='WEBP')return 'webp';
   if(mime==='image/gif'&&/^GIF8[79]a/.test(ascii))return 'gif';return null;
 }
-export async function routeAPI(request,env){
+export async function routeAPI(request,env,options={}){
   const url=new URL(request.url), path=url.pathname, method=request.method;
+  if(path==='/api/auth/status'&&method==='GET')return json(await authStatus(request,env,options));
+  if(path==='/api/auth/login'&&method==='POST'){
+    if(!checkWrite(request))return json({error:'请求来源不正确'},403);
+    if(!hasPasswordAuth(env))return json({error:'站点尚未配置密码登录，请使用 Cloudflare Access 或设置 ADMIN_PASSWORD'},503);
+    if(isLoginRateLimited(request))return json({error:'登录尝试次数过多，请稍后再试'},429);
+    let input;try{input=await request.json();}catch{return json({error:'请求格式不正确'},400);}
+    if(typeof input?.password!=='string'||!input.password)return json({error:'请输入管理密码'},400);
+    const valid=await verifyAdminPassword(input.password,env);
+    if(!valid){recordLoginFailure(request);return json({error:'管理密码不正确'},401);}
+    clearLoginFailures(request);
+    const token=await createSessionToken(env,options.nowSec);
+    return json({authenticated:true,authMode:'password',name:'Naiyael',uploadsEnabled:!!env.BUCKET},200,{'Set-Cookie':sessionCookieHeader(token,request,false)});
+  }
+  if(path==='/api/auth/logout'&&method==='POST'){
+    if(!checkWrite(request))return json({error:'请求来源不正确'},403);
+    return json({authenticated:false},200,{'Set-Cookie':sessionCookieHeader('',request,true)});
+  }
+  if(path==='/api/health')return json({ok:true,database:!!env.DB,uploads:!!env.BUCKET,auth:{password:hasPasswordAuth(env),access:hasAccessAuth(env)}});
   const admin=path.startsWith('/api/admin/');
-  if(admin&&!canAdmin(request,env))return json({error:'此页面仅供站点管理者使用'},403);
+  const auth=admin?await authenticateAdmin(request,env,options):null;
+  if(admin&&!auth)return json({error:'此页面仅供站点管理者使用'},403);
   if(admin&&!['GET','HEAD'].includes(method)&&!checkWrite(request))return json({error:'请求来源不正确'},403);
-  if(path==='/api/admin/session'&&method==='GET')return json({authenticated:true,name:'Naiyael'});
-  if(path==='/api/health')return json({ok:true,database:!!env.DB,uploads:!!env.BUCKET});
+  if(path==='/api/admin/session'&&method==='GET')return json({authenticated:true,name:'Naiyael',authMode:auth.mode,...(auth.email?{email:auth.email}:{}),uploadsEnabled:!!env.BUCKET});
   if(!env.DB)return json({error:'服务暂不可用，请稍后再试'},503);
   const db=env.DB;
   if(path==='/api/admin/post-order'&&method==='GET')return json(await orderLibrary(db));
@@ -148,7 +167,7 @@ export async function routeAPI(request,env){
     const now=new Date().toISOString(),id=match?.[2]??crypto.randomUUID();
     const tags=JSON.stringify([...new Set(input.tags??[])]),excerpt=(input.excerpt||input.content.replace(/[#*`>\[\]()!]/g,'').replace(/\s+/g,' ').trim().slice(0,130));
     if(method==='POST'){
-      const insert=db.prepare('INSERT INTO posts (id,title,content,excerpt,category,status,tags,cover,author_id,created_at,updated_at,published_at,version) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(id,input.title.trim(),input.content,excerpt,input.category,input.status,tags,input.cover||'',request.headers.get('oai-authenticated-user-id')||'owner',now,now,input.status==='published'?now:null,1);
+      const insert=db.prepare('INSERT INTO posts (id,title,content,excerpt,category,status,tags,cover,author_id,created_at,updated_at,published_at,version) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(id,input.title.trim(),input.content,excerpt,input.category,input.status,tags,input.cover||'',auth.userId||'owner',now,now,input.status==='published'?now:null,1);
       if(input.pinned!==undefined)await db.batch([insert,pinStatement(db,id,input.pinned,1,now)]);else await insert.run();
     }else{
       if(!Number.isInteger(input.version)||input.version<1)return json({error:'请先重新加载文章'},400);
@@ -185,21 +204,21 @@ export async function routeAPI(request,env){
     const post=await db.prepare(`SELECT ${postFields},content FROM posts WHERE id=?`).bind(id).first();return json({post:await decodeWithPin(db,post)});
   }
   if(path==='/api/admin/uploads'&&method==='POST'){
-    if(!env.BUCKET)return json({error:'图片服务暂不可用'},503);
+    if(!env.BUCKET)return json({error:'当前站点未启用 R2 图片上传，请直接使用外部 https:// 图片链接'},503);
     if(Number(request.headers.get('content-length')||0)>5*1024*1024)return json({error:'图片不能超过 5 MB'},413);
     const bytes=new Uint8Array(await request.arrayBuffer());if(bytes.length>5*1024*1024)return json({error:'图片不能超过 5 MB'},413);
     const mime=(request.headers.get('content-type')||'').split(';')[0];const ext=imageExtension(bytes,mime);if(!ext)return json({error:'请选择 JPG、PNG、WebP 或 GIF 图片'},400);
     const id=crypto.randomUUID()+'.'+ext,key='images/'+id;
     await env.BUCKET.put(key,bytes,{httpMetadata:{contentType:mime}});
-    try{await db.prepare('INSERT INTO uploads (id,object_key,mime,size,author_id,created_at) VALUES (?,?,?,?,?,?)').bind(id,key,mime,bytes.length,request.headers.get('oai-authenticated-user-id')||'owner',new Date().toISOString()).run();}catch(error){await env.BUCKET.delete(key);throw error;}
+    try{await db.prepare('INSERT INTO uploads (id,object_key,mime,size,author_id,created_at) VALUES (?,?,?,?,?,?)').bind(id,key,mime,bytes.length,auth.userId||'owner',new Date().toISOString()).run();}catch(error){await env.BUCKET.delete(key);throw error;}
     return json({url:'/media/'+id},201);
   }
   return json({error:'接口不存在'},404);
 }
-export async function serveMedia(request,env){
+export async function serveMedia(request,env,options={}){
   const id=new URL(request.url).pathname.slice('/media/'.length);if(!/^[a-f0-9-]{36}\.(jpg|png|webp|gif)$/.test(id)||!env.DB||!env.BUCKET)return new Response('Not found',{status:404});
   const row=await env.DB.prepare('SELECT object_key,mime FROM uploads WHERE id = ?').bind(id).first();if(!row)return new Response('Not found',{status:404});
-  if(!canAdmin(request,env)){const path='/media/'+id;const used=await env.DB.prepare("SELECT id FROM posts WHERE status = 'published' AND (cover = ? OR instr(content, ?) > 0) LIMIT 1").bind(path,path).first();if(!used)return new Response('Not found',{status:404});}
+  if(!(await authenticateAdmin(request,env,options))){const path='/media/'+id;const used=await env.DB.prepare("SELECT id FROM posts WHERE status = 'published' AND (cover = ? OR instr(content, ?) > 0) LIMIT 1").bind(path,path).first();if(!used)return new Response('Not found',{status:404});}
   const object=await env.BUCKET.get(row.object_key);if(!object)return new Response('Not found',{status:404});
   return new Response(request.method==='HEAD'?null:object.body,{headers:{'Content-Type':row.mime,'Cache-Control':'private, max-age=60','X-Content-Type-Options':'nosniff','Content-Disposition':'inline'}});
 }
