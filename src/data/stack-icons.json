@@ -1566,6 +1566,64 @@
     ]
   },
   {
+    "key": "yolo",
+    "label": "YOLO",
+    "category": "ai",
+    "img": "/icons/tech/yolo.svg",
+    "mono": true,
+    "match": [
+      "yolo",
+      "yolov5",
+      "yolov8",
+      "yolo11",
+      "ultralytics",
+      "目标检测",
+      "检测",
+      "object-detection",
+      "视觉",
+      "cv"
+    ]
+  },
+  {
+    "key": "onnx",
+    "label": "ONNX",
+    "category": "ai",
+    "img": "/icons/tech/onnx.svg",
+    "match": [
+      "onnx",
+      "onnxruntime",
+      "推理",
+      "模型部署",
+      "tensorrt"
+    ]
+  },
+  {
+    "key": "nvidia",
+    "label": "NVIDIA / CUDA",
+    "category": "ai",
+    "img": "/icons/tech/nvidia.svg",
+    "match": [
+      "nvidia",
+      "cuda",
+      "gpu",
+      "tensorrt",
+      "cudnn"
+    ]
+  },
+  {
+    "key": "huggingface",
+    "label": "Hugging Face",
+    "category": "ai",
+    "img": "/icons/tech/huggingface.svg",
+    "match": [
+      "huggingface",
+      "hf",
+      "transformers",
+      "llm",
+      "大模型"
+    ]
+  },
+  {
     "key": "kaggle",
     "label": "Kaggle",
     "category": "ai",
