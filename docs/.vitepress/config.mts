@@ -67,7 +67,7 @@ export default defineConfig({
   title: 'Naiyael',
   description: 'Naiyael 的个人主页。ACMer，Codeforces qiushan233，记录算法与日常。',
   lang: 'zh-CN',
-  appearance: false,
+  appearance: true,
   cleanUrls: false,
   outDir: fileURLToPath(new URL('../../dist', import.meta.url)),
   cacheDir: fileURLToPath(new URL('./cache', import.meta.url)),
@@ -76,7 +76,7 @@ export default defineConfig({
   head: [
     ['link', { rel: 'preload', as: 'image', href: '/images/miku-wallpaper-hd-v2.jpg', fetchpriority: 'high' }],
     ['link', { rel: 'icon', type: 'image/jpeg', href: '/images/avatar.jpg' }],
-    ['meta', { name: 'theme-color', content: '#f6f7f8' }],
+    ['meta', { name: 'theme-color', content: '#e8f5f9' }],
     ['meta', { property: 'og:image', content: 'https://naiyael.com/images/avatar.jpg' }],
   ],
   markdown: { lineNumbers: true, image: { lazyLoading: true } },
@@ -85,10 +85,6 @@ export default defineConfig({
     sidebar: false,
     outline: { level: [2, 3], label: '本页目录' },
     docFooter: { prev: '上一篇', next: '下一篇' },
-    search: {
-      provider: 'local',
-      options: { locales: { root: { translations: { button: { buttonText: '搜索', buttonAriaLabel: '搜索本站' }, modal: { noResultsText: '没有找到相关内容', resetButtonTitle: '清除搜索', footer: { selectText: '选择', navigateText: '切换', closeText: '关闭' } } } } } },
-    },
     returnToTopLabel: '回到顶部',
     sidebarMenuLabel: '目录',
   },

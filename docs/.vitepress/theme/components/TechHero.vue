@@ -28,7 +28,7 @@ onBeforeUnmount(()=>{cancelAnimationFrame(frame);resizeObserver?.disconnect();in
       <div class="tech-person"><img src="/images/avatar.jpg" alt="Naiyael 的头像" width="45" height="45"><span>ACMer <i></i> qiushan233</span></div>
       <h1 id="tech-hero-title">Naiyael<span>.</span></h1>
       <p>写代码，也记日常。</p>
-      <div class="tech-hero-actions"><a class="tech-main-link" href="/codeforces.html">算法记录 <span>↗</span></a><a class="tech-about-link" href="/about.html">关于我 <span>→</span></a></div>
+      <div class="tech-hero-actions"><a class="tech-main-link" href="/codeforces.html">算法记录 <svg class="ui-arrow-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a><a class="tech-about-link" href="/about.html">关于我 <svg class="ui-arrow-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9M8.5 4l4 4-4 4"/></svg></a></div>
       <div class="tech-ecosystem-label"><span class="tech-label-line"></span>技术生态 <b>·</b> LANGUAGES / FRAMEWORKS / TOOLS</div>
     </div>
     <div class="tech-visual">

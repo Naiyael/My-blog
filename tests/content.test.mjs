@@ -515,12 +515,18 @@ test('ordinary post deletion, search, filters, counts and private content backup
     assert.equal(search.counts.published, 3);
     assert.equal((await (await routeAPI(req('/api/admin/posts?q=' + encodeURIComponent("' OR 1=1 --"), 'GET', undefined, true, 'https://site.test', env), env)).json()).total, 0);
     assert.equal((await (await routeAPI(req('/api/posts?q=' + encodeURIComponent('图论日记'), 'GET', undefined, false), env)).json()).total, 0);
+    // Body-content search finds published posts by body keywords while keeping drafts private.
+    const pub = (await (await routeAPI(req('/api/admin/posts', 'POST', { ...draft, title: '最小生成树笔记', content: '使用 Kruskal 和并查集求解 MST。', excerpt: '图论专题', status: 'published' }, true, 'https://site.test', env), env)).json()).post;
+    const bodyMatch = await (await routeAPI(req('/api/posts?q=' + encodeURIComponent('Kruskal'), 'GET', undefined, false), env)).json();
+    assert.equal(bodyMatch.total, 1);
+    assert.equal(bodyMatch.posts[0].id, pub.id);
+    assert.equal((await (await routeAPI(req('/api/posts?q=' + encodeURIComponent('测试正文'), 'GET', undefined, false), env)).json()).total, 0);
     const backup = await (await routeAPI(req('/api/admin/export', 'GET', undefined, true, 'https://site.test', env), env)).json();
     assert.equal(backup.posts.find((x) => x.id === p.id).content, draft.content);
     assert.equal((await routeAPI(req('/api/admin/export', 'GET', undefined, false), env)).status, 403);
     assert.equal((await routeAPI(req('/api/admin/posts/' + p.id, 'PATCH', { action: 'trash', version: p.version }, true, 'https://other.test', env), env)).status, 403);
     const t = (await (await routeAPI(req('/api/admin/posts/' + p.id, 'PATCH', { action: 'trash', version: p.version }, true, 'https://site.test', env), env)).json()).post;
-    assert.equal((await (await routeAPI(req('/api/admin/posts', 'GET', undefined, true, 'https://site.test', env), env)).json()).total, 3);
+    assert.equal((await (await routeAPI(req('/api/admin/posts', 'GET', undefined, true, 'https://site.test', env), env)).json()).total, 4);
     assert.equal((await (await routeAPI(req('/api/admin/posts?status=trash', 'GET', undefined, true, 'https://site.test', env), env)).json()).total, 1);
     const restored = (await (await routeAPI(req('/api/admin/posts/' + p.id, 'PATCH', { action: 'restore', version: t.version }, true, 'https://site.test', env), env)).json()).post;
     assert.equal(restored.status, 'draft');

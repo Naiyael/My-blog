@@ -11,7 +11,7 @@ function outside(event){if(root.value&&!root.value.contains(event.target)&&!navP
 function escape(event){if(event.key==='Escape'){closeMenus();toggle.value?.focus();}}
 function visibleRefresh(){if(!document.hidden)refresh();}
 function active(item){return item.children?item.children.some(active):item.link?.split('?')[0]===route.path;}
-function measureLayout(){const available=root.value?.parentElement?.getBoundingClientRect().width||0;const preferred=measure.value?.getBoundingClientRect().width||0;compact.value=window.innerWidth<768||preferred>Math.max(0,available-190);}
+function measureLayout(){const available=root.value?.parentElement?.getBoundingClientRect().width||0;const preferred=measure.value?.getBoundingClientRect().width||0;compact.value=window.innerWidth<768||preferred>Math.max(0,available-245);}
 watch(()=>route.path,closeMenus);
 watch(items,measureLayout,{flush:'post'});watch(compact,closeMenus);
 onMounted(()=>{refresh();measureLayout();resizeObserver=new ResizeObserver(measureLayout);if(root.value?.parentElement)resizeObserver.observe(root.value.parentElement);timer=setInterval(visibleRefresh,60000);document.addEventListener('click',outside);document.addEventListener('keydown',escape);document.addEventListener('visibilitychange',visibleRefresh);window.addEventListener('resize',measureLayout);window.addEventListener('site-navigation-updated',refresh);});
