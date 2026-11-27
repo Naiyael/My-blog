@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {renderMarkdownDocument,renderMarkdown} from '../docs/.vitepress/theme/components/cms-client.js';
+import {renderMarkdownDocument,renderMarkdown,readingStats} from '../docs/.vitepress/theme/components/cms-client.js';
 test('outline recognizes all six heading levels and plain labels from inline formatting',()=>{
   const result=renderMarkdownDocument('# 总览\n## **Kruskal** 算法\n### `DSU` 与 [路径压缩](https://example.com)\n#### 正确性\n##### 复杂度\n###### 小结');
   assert.deepEqual(result.headings.map(h=>[h.level,h.title]),[[1,'总览'],[2,'Kruskal 算法'],[3,'DSU 与 路径压缩'],[4,'正确性'],[5,'复杂度'],[6,'小结']]);
@@ -23,4 +23,19 @@ test('setext headings, entities and image alt text retain readable labels',()=>{
 test('outline rendering preserves Markdown HTML and script-link escaping',()=>{
   const content='## <script>alert(1)</script>\n\n[跳转](javascript:alert(1))';
   for(const html of [renderMarkdown(content),renderMarkdownDocument(content).html]){assert.ok(!html.includes('<script>'));assert.ok(!html.includes('href="javascript:'));assert.ok(html.includes('&lt;script&gt;'));}
+});
+test('fenced code blocks highlight C++ safely with language badge and copy button',()=>{
+  const result=renderMarkdownDocument('```cpp\nint main() { return 0; }\n// <script>alert(1)</script>\n```');
+  assert.ok(result.html.includes('class="code-block"'));
+  assert.ok(result.html.includes('>C++</span>'));
+  assert.ok(result.html.includes('class="code-copy-btn"'));
+  assert.ok(result.html.includes('class="language-cpp"'));
+  assert.ok(result.html.includes('hljs-keyword'));
+  assert.ok(!result.html.includes('<script>alert(1)</script>'));
+});
+test('readingStats computes CJK and English word counts and estimated minutes',()=>{
+  const shortStats=readingStats('## 标题\n\n给定一张连通无向图，求 Kruskal 最小生成树。');
+  assert.ok(shortStats.total>=15);
+  assert.equal(shortStats.minutes,1);
+  assert.ok(shortStats.label.includes('分钟'));
 });
