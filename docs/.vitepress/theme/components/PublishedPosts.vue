@@ -22,7 +22,7 @@ onUnmounted(()=>{mounted=false;sequence++;if(router.onAfterRouteChange===routeHo
 <template>
 <section class="journal-feed" :class="{'journal-archive':!home}" v-if="!home||posts.length">
   <header v-if="!home" class="journal-archive-heading"><div><span>文章 · 题解 · 日常</span><h1>{{props.category?categoryLabel(props.category):'文章'}}</h1></div><span v-if="!loading">{{total}} 篇记录</span></header>
-  <header v-if="home" class="journal-home-heading"><div><span>文章 · 题解 · 日常</span><h2>我的记录 <small>{{total}}</small></h2></div><a href="/journal.html">全部内容 <span aria-hidden="true">↗</span></a></header>
+  <header v-if="home" class="journal-home-heading"><div><span>文章 · 题解 · 日常</span><h2>我的记录 <small>{{total}}</small></h2></div><a class="journal-home-all" href="/journal.html">全部内容<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9M8.5 4l4 4-4 4"/></svg></a></header>
   <div v-if="!home&&!props.category" class="journal-filter"><button :class="{active:!category}" @click="chooseCategory('')">全部</button><button v-for="key in categoryOptions" :key="key" :class="{active:category===key}" @click="chooseCategory(key)">{{categoryLabel(key)}}</button></div>
   <p v-if="tag&&!home" class="journal-selected-tag">标签：<strong>{{tag}}</strong><button @click="clearTag" aria-label="清除标签筛选">清除 ×</button></p>
   <p class="cms-muted" v-if="loading">正在加载…</p><p class="cms-error" v-else-if="error">{{error}} <button @click="load">重试</button></p><p class="cms-muted journal-empty" v-else-if="!posts.length">暂无{{tag?'相关内容':category?categoryLabel(category):'内容'}}。</p>
