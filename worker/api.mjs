@@ -130,6 +130,46 @@ export async function routeAPI(request,env,options={}){
     const data=await db.prepare(contentCTE+`SELECT ${postFields},content FROM content_posts WHERE status != 'deleted' ORDER BY created_at,id`).all();
     return json({format:'naiyael-content-backup',version:2,exportedAt:new Date().toISOString(),posts:data.results.map(decode),siteSettings:await readNavigation(db),postOrder:await readPostOrder(db)});
   }
+  if(path==='/api/admin/import'&&method==='POST'){
+    if(Number(request.headers.get('content-length')||0)>2*1024*1024)return json({error:'备份文件过大（上限 2 MB）'},413);
+    let input;try{const raw=await request.text();if(raw.length>2*1024*1024)return json({error:'备份文件过大（上限 2 MB）'},413);input=JSON.parse(raw);}catch{return json({error:'备份文件不是有效的 JSON'},400);}
+    if(input?.format!=='naiyael-content-backup'||!Array.isArray(input.posts)||input.posts.length>500)return json({error:'不支持的备份文件格式'},400);
+    const now=new Date().toISOString(),importedIds=[];let skipped=0;
+    for(const item of input.posts){
+      if(!item||typeof item.id!=='string'||!/^[a-f0-9-]{36}$/.test(item.id))return json({error:'备份中包含无效的文章编号'},400);
+      const status=item.status==='trash'?'trash':item.status;
+      const checkStatus=status==='trash'?'draft':status;
+      const invalid=validatePost({...item,status:checkStatus});if(invalid)return json({error:`文章《${item.title||item.id}》校验失败：${invalid}`},400);
+      const category=canonicalCategory(item.category);
+      const tags=JSON.stringify([...new Set(item.tags??[])]);
+      const excerpt=item.excerpt||item.content.replace(/[#*`>\[\]()!]/g,'').replace(/\s+/g,' ').trim().slice(0,130);
+      const createdAt=typeof item.createdAt==='string'&&item.createdAt?item.createdAt:now;
+      const updatedAt=typeof item.updatedAt==='string'&&item.updatedAt?item.updatedAt:createdAt;
+      const publishedAt=typeof item.publishedAt==='string'&&item.publishedAt?item.publishedAt:(status==='published'?createdAt:null);
+      const version=Number.isInteger(item.version)&&item.version>=1?item.version:1;
+      const pageKey=typeof item.pageKey==='string'&&['codeforces','luogu','about'].includes(item.pageKey)?item.pageKey:null;
+      const trashedAt=status==='trash'&&typeof item.trashedAt==='string'?item.trashedAt:null;
+      const previousStatus=status==='trash'&&['draft','published','archived'].includes(item.previousStatus)?item.previousStatus:null;
+      const res=await db.prepare('INSERT OR IGNORE INTO posts (id,title,content,excerpt,category,status,tags,cover,author_id,created_at,updated_at,published_at,version,page_key,trashed_at,previous_status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(item.id,item.title.trim(),item.content,excerpt,category,status,tags,item.cover||'',auth.userId||'owner',createdAt,updatedAt,publishedAt,version,pageKey,trashedAt,previousStatus).run();
+      if(res.meta?.changes)importedIds.push(item.id);else skipped++;
+    }
+    if(importedIds.length){
+      const importedSet=new Set(importedIds);
+      const backupPins=new Set([
+        ...(Array.isArray(input.postOrder?.pinnedIds)?input.postOrder.pinnedIds:[]),
+        ...input.posts.filter(p=>p.pinned).map(p=>p.id),
+      ].filter(id=>importedSet.has(id)));
+      if(backupPins.size){
+        const current=await readPostOrder(db);
+        const mergedPins=[...new Set([...backupPins,...current.pinnedIds])];
+        const mergedOrder=[...new Set([...(Array.isArray(input.postOrder?.orderedIds)?input.postOrder.orderedIds.filter(id=>importedSet.has(id)):[]),...current.orderedIds])];
+        const value=JSON.stringify({orderedIds:mergedOrder,pinnedIds:mergedPins});
+        if(current.version===0)await db.prepare("INSERT OR IGNORE INTO site_settings(id,value,version,updated_at) VALUES('post-order',?,1,?)").bind(value,now).run();
+        else await db.prepare("UPDATE site_settings SET value=?,version=version+1,updated_at=? WHERE id='post-order'").bind(value,now).run();
+      }
+    }
+    return json({imported:importedIds.length,skipped});
+  }
   const pageMatch=path.match(/^\/api\/pages\/(codeforces|luogu|about)$/);
   if(pageMatch&&method==='GET'){
     const row=await db.prepare(contentCTE+`SELECT ${postFields},content FROM content_posts WHERE page_key=? AND status='published'`).bind(pageMatch[1]).first();

@@ -1,9 +1,13 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "naiyael-blog",
+  "name": "my-blog",
   "main": "worker/index.js",
   "compatibility_date": "2026-11-23",
   "compatibility_flags": ["nodejs_compat"],
+  "routes": [
+    { "pattern": "naiyael.com", "custom_domain": true },
+    { "pattern": "www.naiyael.com", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",

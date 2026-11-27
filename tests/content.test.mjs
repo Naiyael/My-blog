@@ -653,3 +653,47 @@ test('managed navigation validates links, enforces owner access, filters hidden 
     env.DB.close();
   }
 });
+
+test('backup import restores posts with timestamps and pins without duplicating existing rows', async () => {
+  const env = await fixture({ withBucket: false });
+  try {
+    const payload = {
+      format: 'naiyael-content-backup',
+      version: 2,
+      posts: [
+        {
+          id: '01ad2093-286b-48fb-9322-ef7b21761834',
+          title: '最小生成树(C++实现)',
+          content: '## Kruskal\n\n并查集实现。',
+          excerpt: '最小生成树笔记',
+          category: 'solution',
+          status: 'published',
+          tags: ['最小生成树', '图论'],
+          cover: '',
+          createdAt: '2026-11-04T13:00:29.090Z',
+          updatedAt: '2026-11-21T09:43:25.994Z',
+          publishedAt: '2026-11-04T13:00:29.090Z',
+          version: 6,
+          pinned: true,
+        },
+      ],
+      postOrder: { orderedIds: ['01ad2093-286b-48fb-9322-ef7b21761834'], pinnedIds: ['01ad2093-286b-48fb-9322-ef7b21761834'] },
+    };
+    assert.equal((await routeAPI(req('/api/admin/import', 'POST', payload, false), env)).status, 403);
+    assert.equal((await routeAPI(req('/api/admin/import', 'POST', payload, true, 'https://evil.test', env), env)).status, 403);
+    assert.equal((await routeAPI(req('/api/admin/import', 'POST', { format: 'wrong', posts: [] }, true, 'https://site.test', env), env)).status, 400);
+
+    const first = await (await routeAPI(req('/api/admin/import', 'POST', payload, true, 'https://site.test', env), env)).json();
+    assert.deepEqual(first, { imported: 1, skipped: 0 });
+
+    const second = await (await routeAPI(req('/api/admin/import', 'POST', payload, true, 'https://site.test', env), env)).json();
+    assert.deepEqual(second, { imported: 0, skipped: 1 });
+
+    const listed = await (await routeAPI(req('/api/posts', 'GET', undefined, false), env)).json();
+    assert.equal(listed.posts[0].id, '01ad2093-286b-48fb-9322-ef7b21761834');
+    assert.equal(listed.posts[0].pinned, true);
+    assert.equal(listed.posts[0].publishedAt, '2026-11-04T13:00:29.090Z');
+  } finally {
+    env.DB.close();
+  }
+});
