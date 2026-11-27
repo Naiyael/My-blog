@@ -1,0 +1,2989 @@
+[
+  {
+    "key": "cplusplus",
+    "label": "C++",
+    "category": "lang",
+    "img": "/icons/tech/cplusplus.svg",
+    "match": [
+      "cplusplus",
+      "c++",
+      "cpp",
+      "stl",
+      "acm",
+      "language"
+    ]
+  },
+  {
+    "key": "c",
+    "label": "C",
+    "category": "lang",
+    "img": "/icons/tech/c.svg",
+    "match": [
+      "c",
+      "c语言",
+      "language"
+    ]
+  },
+  {
+    "key": "python",
+    "label": "Python",
+    "category": "lang",
+    "img": "/icons/tech/python.svg",
+    "match": [
+      "python",
+      "py",
+      "pip",
+      "programming",
+      "language"
+    ]
+  },
+  {
+    "key": "rust",
+    "label": "Rust",
+    "category": "lang",
+    "img": "/icons/tech/rust.svg",
+    "mono": true,
+    "match": [
+      "rust",
+      "cargo",
+      "programming",
+      "language"
+    ]
+  },
+  {
+    "key": "go",
+    "label": "Go",
+    "category": "lang",
+    "img": "/icons/tech/go.svg",
+    "match": [
+      "go",
+      "golang",
+      "language"
+    ]
+  },
+  {
+    "key": "java",
+    "label": "Java",
+    "category": "lang",
+    "img": "/icons/tech/java.svg",
+    "match": [
+      "java",
+      "jvm",
+      "programming",
+      "language"
+    ]
+  },
+  {
+    "key": "javascript",
+    "label": "JavaScript",
+    "category": "lang",
+    "img": "/icons/tech/javascript.svg",
+    "match": [
+      "javascript",
+      "js",
+      "es6",
+      "programming",
+      "language"
+    ]
+  },
+  {
+    "key": "typescript",
+    "label": "TypeScript",
+    "category": "lang",
+    "img": "/icons/tech/typescript.svg",
+    "match": [
+      "typescript",
+      "ts",
+      "programming",
+      "transpiler",
+      "javascript",
+      "language"
+    ]
+  },
+  {
+    "key": "csharp",
+    "label": "C#",
+    "category": "lang",
+    "img": "/icons/tech/csharp.svg",
+    "match": [
+      "csharp",
+      "c#",
+      "cs",
+      "dotnet",
+      "language"
+    ]
+  },
+  {
+    "key": "kotlin",
+    "label": "Kotlin",
+    "category": "lang",
+    "img": "/icons/tech/kotlin.svg",
+    "match": [
+      "kotlin",
+      "kt",
+      "language",
+      "jetbrains",
+      "jvm"
+    ]
+  },
+  {
+    "key": "swift",
+    "label": "Swift",
+    "category": "lang",
+    "img": "/icons/tech/swift.svg",
+    "match": [
+      "swift",
+      "ios",
+      "language"
+    ]
+  },
+  {
+    "key": "php",
+    "label": "PHP",
+    "category": "lang",
+    "img": "/icons/tech/php.svg",
+    "match": [
+      "php",
+      "programming",
+      "language"
+    ]
+  },
+  {
+    "key": "ruby",
+    "label": "Ruby",
+    "category": "lang",
+    "img": "/icons/tech/ruby.svg",
+    "match": [
+      "ruby",
+      "rb",
+      "programming",
+      "language"
+    ]
+  },
+  {
+    "key": "dart",
+    "label": "Dart",
+    "category": "lang",
+    "img": "/icons/tech/dart.svg",
+    "match": [
+      "dart",
+      "programming",
+      "language"
+    ]
+  },
+  {
+    "key": "lua",
+    "label": "Lua",
+    "category": "lang",
+    "img": "/icons/tech/lua.svg",
+    "match": [
+      "lua",
+      "programming",
+      "language",
+      "object-oriented",
+      "scripting"
+    ]
+  },
+  {
+    "key": "scala",
+    "label": "Scala",
+    "category": "lang",
+    "img": "/icons/tech/scala.svg",
+    "match": [
+      "scala",
+      "programming",
+      "language",
+      "jvm"
+    ]
+  },
+  {
+    "key": "r",
+    "label": "R",
+    "category": "lang",
+    "img": "/icons/tech/r.svg",
+    "match": [
+      "r",
+      "统计",
+      "programming",
+      "language"
+    ]
+  },
+  {
+    "key": "elixir",
+    "label": "Elixir",
+    "category": "lang",
+    "img": "/icons/tech/elixir.svg",
+    "match": [
+      "elixir",
+      "language"
+    ]
+  },
+  {
+    "key": "haskell",
+    "label": "Haskell",
+    "category": "lang",
+    "img": "/icons/tech/haskell.svg",
+    "match": [
+      "haskell",
+      "hs",
+      "language",
+      "functional"
+    ]
+  },
+  {
+    "key": "clojure",
+    "label": "Clojure",
+    "category": "lang",
+    "img": "/icons/tech/clojure.svg",
+    "match": [
+      "clojure",
+      "language",
+      "jvm"
+    ]
+  },
+  {
+    "key": "zig",
+    "label": "Zig",
+    "category": "lang",
+    "img": "/icons/tech/zig.svg",
+    "match": [
+      "zig",
+      "language"
+    ]
+  },
+  {
+    "key": "perl",
+    "label": "Perl",
+    "category": "lang",
+    "img": "/icons/tech/perl.svg",
+    "match": [
+      "perl",
+      "programming",
+      "language"
+    ]
+  },
+  {
+    "key": "matlab",
+    "label": "MATLAB",
+    "category": "lang",
+    "img": "/icons/tech/matlab.svg",
+    "match": [
+      "matlab",
+      "数学",
+      "仿真",
+      "programming",
+      "language"
+    ]
+  },
+  {
+    "key": "julia",
+    "label": "Julia",
+    "category": "lang",
+    "img": "/icons/tech/julia.svg",
+    "match": [
+      "julia",
+      "programming",
+      "language"
+    ]
+  },
+  {
+    "key": "solidity",
+    "label": "Solidity",
+    "category": "lang",
+    "img": "/icons/tech/solidity.svg",
+    "match": [
+      "solidity",
+      "web3",
+      "programming",
+      "language",
+      "blockchain"
+    ]
+  },
+  {
+    "key": "wasm",
+    "label": "WebAssembly",
+    "category": "lang",
+    "img": "/icons/tech/wasm.svg",
+    "match": [
+      "wasm",
+      "webassembly",
+      "binary",
+      "programming",
+      "virtual machine",
+      "web"
+    ]
+  },
+  {
+    "key": "ocaml",
+    "label": "OCaml",
+    "category": "lang",
+    "img": "/icons/tech/ocaml.svg",
+    "match": [
+      "ocaml",
+      "programming",
+      "language"
+    ]
+  },
+  {
+    "key": "fsharp",
+    "label": "F#",
+    "category": "lang",
+    "img": "/icons/tech/fsharp.svg",
+    "match": [
+      "fsharp",
+      "f#",
+      "language"
+    ]
+  },
+  {
+    "key": "erlang",
+    "label": "Erlang",
+    "category": "lang",
+    "img": "/icons/tech/erlang.svg",
+    "match": [
+      "erlang"
+    ]
+  },
+  {
+    "key": "fortran",
+    "label": "Fortran",
+    "category": "lang",
+    "img": "/icons/tech/fortran.svg",
+    "match": [
+      "fortran",
+      "programming",
+      "language"
+    ]
+  },
+  {
+    "key": "groovy",
+    "label": "Groovy",
+    "category": "lang",
+    "img": "/icons/tech/groovy.svg",
+    "match": [
+      "groovy",
+      "programming",
+      "language",
+      "jvm"
+    ]
+  },
+  {
+    "key": "objectivec",
+    "label": "Objective-C",
+    "category": "lang",
+    "img": "/icons/tech/objectivec.svg",
+    "match": [
+      "objectivec",
+      "objective-c",
+      "objc",
+      "programming",
+      "language"
+    ]
+  },
+  {
+    "key": "nim",
+    "label": "Nim",
+    "category": "lang",
+    "img": "/icons/tech/nim.svg",
+    "match": [
+      "nim",
+      "programming",
+      "functional",
+      "object-oriented",
+      "procedural"
+    ]
+  },
+  {
+    "key": "latex",
+    "label": "LaTeX",
+    "category": "lang",
+    "img": "/icons/tech/latex.svg",
+    "mono": true,
+    "match": [
+      "latex",
+      "tex",
+      "论文",
+      "公式",
+      "latex3",
+      "latex2e",
+      "markup"
+    ]
+  },
+  {
+    "key": "markdown",
+    "label": "Markdown",
+    "category": "lang",
+    "img": "/icons/tech/markdown.svg",
+    "mono": true,
+    "match": [
+      "markdown",
+      "md",
+      "文档",
+      "markup",
+      "language"
+    ]
+  },
+  {
+    "key": "bash",
+    "label": "Bash",
+    "category": "lang",
+    "img": "/icons/tech/bash.svg",
+    "mono": true,
+    "match": [
+      "bash",
+      "shell",
+      "sh",
+      "command",
+      "scripting"
+    ]
+  },
+  {
+    "key": "powershell",
+    "label": "PowerShell",
+    "category": "lang",
+    "img": "/icons/tech/powershell.svg",
+    "match": [
+      "powershell",
+      "pwsh",
+      "ps1",
+      "command-line",
+      "shell",
+      "terminal",
+      "cli"
+    ]
+  },
+  {
+    "key": "html5",
+    "label": "HTML5",
+    "category": "frontend",
+    "img": "/icons/tech/html5.svg",
+    "match": [
+      "html5",
+      "html",
+      "programming",
+      "language"
+    ]
+  },
+  {
+    "key": "css3",
+    "label": "CSS3",
+    "category": "frontend",
+    "img": "/icons/tech/css3.svg",
+    "match": [
+      "css3",
+      "css",
+      "language",
+      "programming"
+    ]
+  },
+  {
+    "key": "sass",
+    "label": "Sass",
+    "category": "frontend",
+    "img": "/icons/tech/sass.svg",
+    "match": [
+      "sass",
+      "scss",
+      "pre-processor",
+      "css"
+    ]
+  },
+  {
+    "key": "less",
+    "label": "Less",
+    "category": "frontend",
+    "img": "/icons/tech/less.svg",
+    "match": [
+      "less",
+      "css",
+      "pre-processor"
+    ]
+  },
+  {
+    "key": "tailwindcss",
+    "label": "Tailwind CSS",
+    "category": "frontend",
+    "img": "/icons/tech/tailwindcss.svg",
+    "match": [
+      "tailwindcss",
+      "tailwind css",
+      "tailwind",
+      "css",
+      "framework"
+    ]
+  },
+  {
+    "key": "bootstrap",
+    "label": "Bootstrap",
+    "category": "frontend",
+    "img": "/icons/tech/bootstrap.svg",
+    "match": [
+      "bootstrap",
+      "css",
+      "framework",
+      "html",
+      "javascript"
+    ]
+  },
+  {
+    "key": "vuejs",
+    "label": "Vue",
+    "category": "frontend",
+    "img": "/icons/tech/vuejs.svg",
+    "match": [
+      "vuejs",
+      "vue",
+      "vitepress",
+      "framework"
+    ]
+  },
+  {
+    "key": "react",
+    "label": "React",
+    "category": "frontend",
+    "img": "/icons/tech/react.svg",
+    "match": [
+      "react",
+      "jsx",
+      "tsx",
+      "framework"
+    ]
+  },
+  {
+    "key": "angular",
+    "label": "Angular",
+    "category": "frontend",
+    "img": "/icons/tech/angular.svg",
+    "match": [
+      "angular",
+      "ng",
+      "framework",
+      "javascript"
+    ]
+  },
+  {
+    "key": "svelte",
+    "label": "Svelte",
+    "category": "frontend",
+    "img": "/icons/tech/svelte.svg",
+    "match": [
+      "svelte",
+      "javascript",
+      "framework",
+      "compiler"
+    ]
+  },
+  {
+    "key": "solidjs",
+    "label": "SolidJS",
+    "category": "frontend",
+    "img": "/icons/tech/solidjs.svg",
+    "match": [
+      "solidjs",
+      "solid",
+      "javascript",
+      "framework",
+      "frontend"
+    ]
+  },
+  {
+    "key": "nextjs",
+    "label": "Next.js",
+    "category": "frontend",
+    "img": "/icons/tech/nextjs.svg",
+    "mono": true,
+    "match": [
+      "nextjs",
+      "next.js",
+      "next",
+      "framework"
+    ]
+  },
+  {
+    "key": "nuxtjs",
+    "label": "Nuxt",
+    "category": "frontend",
+    "img": "/icons/tech/nuxtjs.svg",
+    "match": [
+      "nuxtjs",
+      "nuxt",
+      "js",
+      "javascript",
+      "framework",
+      "frontend"
+    ]
+  },
+  {
+    "key": "astro",
+    "label": "Astro",
+    "category": "frontend",
+    "img": "/icons/tech/astro.svg",
+    "match": [
+      "astro",
+      "static site generator",
+      "framework",
+      "web-development"
+    ]
+  },
+  {
+    "key": "gatsby",
+    "label": "Gatsby",
+    "category": "frontend",
+    "img": "/icons/tech/gatsby.svg",
+    "match": [
+      "gatsby",
+      "reactjs",
+      "framework"
+    ]
+  },
+  {
+    "key": "electron",
+    "label": "Electron",
+    "category": "frontend",
+    "img": "/icons/tech/electron.svg",
+    "match": [
+      "electron",
+      "桌面",
+      "framework"
+    ]
+  },
+  {
+    "key": "tauri",
+    "label": "Tauri",
+    "category": "frontend",
+    "img": "/icons/tech/tauri.svg",
+    "match": [
+      "tauri",
+      "桌面",
+      "rust",
+      "nodejs",
+      "desktop",
+      "framework"
+    ]
+  },
+  {
+    "key": "flutter",
+    "label": "Flutter",
+    "category": "frontend",
+    "img": "/icons/tech/flutter.svg",
+    "match": [
+      "flutter",
+      "跨端",
+      "framework",
+      "sdk"
+    ]
+  },
+  {
+    "key": "android",
+    "label": "Android",
+    "category": "frontend",
+    "img": "/icons/tech/android.svg",
+    "match": [
+      "android",
+      "安卓",
+      "os",
+      "mobile"
+    ]
+  },
+  {
+    "key": "apple",
+    "label": "Apple / iOS",
+    "category": "frontend",
+    "img": "/icons/tech/apple.svg",
+    "mono": true,
+    "match": [
+      "apple",
+      "apple / ios",
+      "ios",
+      "macos",
+      "mac",
+      "brand",
+      "mobile"
+    ]
+  },
+  {
+    "key": "ionic",
+    "label": "Ionic",
+    "category": "frontend",
+    "img": "/icons/tech/ionic.svg",
+    "match": [
+      "ionic",
+      "framework"
+    ]
+  },
+  {
+    "key": "threejs",
+    "label": "Three.js",
+    "category": "frontend",
+    "img": "/icons/tech/threejs.svg",
+    "mono": true,
+    "match": [
+      "threejs",
+      "three.js",
+      "3d",
+      "webgl",
+      "javascript",
+      "framework"
+    ]
+  },
+  {
+    "key": "d3js",
+    "label": "D3.js",
+    "category": "frontend",
+    "img": "/icons/tech/d3js.svg",
+    "match": [
+      "d3js",
+      "d3.js",
+      "可视化"
+    ]
+  },
+  {
+    "key": "redux",
+    "label": "Redux",
+    "category": "frontend",
+    "img": "/icons/tech/redux.svg",
+    "match": [
+      "redux",
+      "framework"
+    ]
+  },
+  {
+    "key": "antdesign",
+    "label": "Ant Design",
+    "category": "frontend",
+    "img": "/icons/tech/antdesign.svg",
+    "match": [
+      "antdesign",
+      "ant design",
+      "antd",
+      "reactjs",
+      "design",
+      "language"
+    ]
+  },
+  {
+    "key": "materialui",
+    "label": "Material UI",
+    "category": "frontend",
+    "img": "/icons/tech/materialui.svg",
+    "match": [
+      "materialui",
+      "material ui",
+      "mui",
+      "framework",
+      "design",
+      "ui"
+    ]
+  },
+  {
+    "key": "vuetify",
+    "label": "Vuetify",
+    "category": "frontend",
+    "img": "/icons/tech/vuetify.svg",
+    "match": [
+      "vuetify",
+      "css",
+      "framework",
+      "vuejs-library",
+      "material-design"
+    ]
+  },
+  {
+    "key": "quasar",
+    "label": "Quasar",
+    "category": "frontend",
+    "img": "/icons/tech/quasar.svg",
+    "match": [
+      "quasar",
+      "framework",
+      "javascript"
+    ]
+  },
+  {
+    "key": "storybook",
+    "label": "Storybook",
+    "category": "frontend",
+    "img": "/icons/tech/storybook.svg",
+    "match": [
+      "storybook",
+      "framework",
+      "documentation",
+      "ui"
+    ]
+  },
+  {
+    "key": "jquery",
+    "label": "jQuery",
+    "category": "frontend",
+    "img": "/icons/tech/jquery.svg",
+    "match": [
+      "jquery",
+      "library",
+      "javascript"
+    ]
+  },
+  {
+    "key": "alpinejs",
+    "label": "Alpine.js",
+    "category": "frontend",
+    "img": "/icons/tech/alpinejs.svg",
+    "match": [
+      "alpinejs",
+      "alpine.js",
+      "framework",
+      "javascript"
+    ]
+  },
+  {
+    "key": "htmx",
+    "label": "HTMX",
+    "category": "frontend",
+    "img": "/icons/tech/htmx.svg",
+    "mono": true,
+    "match": [
+      "htmx",
+      "framework",
+      "web",
+      "html",
+      "ui"
+    ]
+  },
+  {
+    "key": "qwik",
+    "label": "Qwik",
+    "category": "frontend",
+    "img": "/icons/tech/qwik.svg",
+    "match": [
+      "qwik",
+      "framework",
+      "open-source"
+    ]
+  },
+  {
+    "key": "p5js",
+    "label": "p5.js",
+    "category": "frontend",
+    "img": "/icons/tech/p5js.svg",
+    "match": [
+      "p5js",
+      "p5.js",
+      "javascript",
+      "js",
+      "library"
+    ]
+  },
+  {
+    "key": "qt",
+    "label": "Qt",
+    "category": "frontend",
+    "img": "/icons/tech/qt.svg",
+    "match": [
+      "qt",
+      "gui",
+      "c++",
+      "framework"
+    ]
+  },
+  {
+    "key": "nodejs",
+    "label": "Node.js",
+    "category": "backend",
+    "img": "/icons/tech/nodejs.svg",
+    "match": [
+      "nodejs",
+      "node.js",
+      "node",
+      "javascript",
+      "language"
+    ]
+  },
+  {
+    "key": "denojs",
+    "label": "Deno",
+    "category": "backend",
+    "img": "/icons/tech/denojs.svg",
+    "mono": true,
+    "match": [
+      "denojs",
+      "deno",
+      "javascript",
+      "rust",
+      "runtime"
+    ]
+  },
+  {
+    "key": "bun",
+    "label": "Bun",
+    "category": "backend",
+    "img": "/icons/tech/bun.svg",
+    "match": [
+      "bun",
+      "javascript",
+      "zig",
+      "language"
+    ]
+  },
+  {
+    "key": "express",
+    "label": "Express",
+    "category": "backend",
+    "img": "/icons/tech/express.svg",
+    "mono": true,
+    "match": [
+      "express",
+      "framework"
+    ]
+  },
+  {
+    "key": "nestjs",
+    "label": "NestJS",
+    "category": "backend",
+    "img": "/icons/tech/nestjs.svg",
+    "match": [
+      "nestjs",
+      "nest",
+      "framework"
+    ]
+  },
+  {
+    "key": "fastify",
+    "label": "Fastify",
+    "category": "backend",
+    "img": "/icons/tech/fastify.svg",
+    "mono": true,
+    "match": [
+      "fastify",
+      "framework",
+      "web",
+      "node.js",
+      "javascript"
+    ]
+  },
+  {
+    "key": "spring",
+    "label": "Spring",
+    "category": "backend",
+    "img": "/icons/tech/spring.svg",
+    "match": [
+      "spring",
+      "springboot",
+      "framework"
+    ]
+  },
+  {
+    "key": "quarkus",
+    "label": "Quarkus",
+    "category": "backend",
+    "img": "/icons/tech/quarkus.svg",
+    "match": [
+      "quarkus",
+      "java",
+      "framework"
+    ]
+  },
+  {
+    "key": "django",
+    "label": "Django",
+    "category": "backend",
+    "img": "/icons/tech/django.svg",
+    "match": [
+      "django"
+    ]
+  },
+  {
+    "key": "flask",
+    "label": "Flask",
+    "category": "backend",
+    "img": "/icons/tech/flask.svg",
+    "mono": true,
+    "match": [
+      "flask",
+      "python",
+      "framework"
+    ]
+  },
+  {
+    "key": "fastapi",
+    "label": "FastAPI",
+    "category": "backend",
+    "img": "/icons/tech/fastapi.svg",
+    "match": [
+      "fastapi",
+      "python",
+      "framework"
+    ]
+  },
+  {
+    "key": "laravel",
+    "label": "Laravel",
+    "category": "backend",
+    "img": "/icons/tech/laravel.svg",
+    "match": [
+      "laravel",
+      "php",
+      "framework"
+    ]
+  },
+  {
+    "key": "symfony",
+    "label": "Symfony",
+    "category": "backend",
+    "img": "/icons/tech/symfony.svg",
+    "mono": true,
+    "match": [
+      "symfony",
+      "framework",
+      "php"
+    ]
+  },
+  {
+    "key": "rails",
+    "label": "Rails",
+    "category": "backend",
+    "img": "/icons/tech/rails.svg",
+    "match": [
+      "rails",
+      "ruby on rails",
+      "framework"
+    ]
+  },
+  {
+    "key": "dotnetcore",
+    "label": ".NET",
+    "category": "backend",
+    "img": "/icons/tech/dotnetcore.svg",
+    "match": [
+      "dotnetcore",
+      ".net",
+      "dotnet",
+      "asp.net",
+      "framework"
+    ]
+  },
+  {
+    "key": "phoenix",
+    "label": "Phoenix",
+    "category": "backend",
+    "img": "/icons/tech/phoenix.svg",
+    "match": [
+      "phoenix",
+      "framework",
+      "build",
+      "web",
+      "web-development"
+    ]
+  },
+  {
+    "key": "graphql",
+    "label": "GraphQL",
+    "category": "backend",
+    "img": "/icons/tech/graphql.svg",
+    "match": [
+      "graphql",
+      "gql",
+      "language",
+      "data",
+      "query"
+    ]
+  },
+  {
+    "key": "grpc",
+    "label": "gRPC",
+    "category": "backend",
+    "img": "/icons/tech/grpc.svg",
+    "match": [
+      "grpc",
+      "rpc",
+      "programming",
+      "c++",
+      "java",
+      "python"
+    ]
+  },
+  {
+    "key": "trpc",
+    "label": "tRPC",
+    "category": "backend",
+    "img": "/icons/tech/trpc.svg",
+    "match": [
+      "trpc",
+      "typescript",
+      "javascript",
+      "typesafe",
+      "api"
+    ]
+  },
+  {
+    "key": "socketio",
+    "label": "Socket.IO",
+    "category": "backend",
+    "img": "/icons/tech/socketio.svg",
+    "mono": true,
+    "match": [
+      "socketio",
+      "socket.io",
+      "websocket",
+      "library",
+      "networking",
+      "websockets"
+    ]
+  },
+  {
+    "key": "prisma",
+    "label": "Prisma",
+    "category": "backend",
+    "img": "/icons/tech/prisma.svg",
+    "mono": true,
+    "match": [
+      "prisma",
+      "orm",
+      "nodejs",
+      "typescript"
+    ]
+  },
+  {
+    "key": "hibernate",
+    "label": "Hibernate",
+    "category": "backend",
+    "img": "/icons/tech/hibernate.svg",
+    "match": [
+      "hibernate",
+      "database",
+      "framework",
+      "java"
+    ]
+  },
+  {
+    "key": "sequelize",
+    "label": "Sequelize",
+    "category": "backend",
+    "img": "/icons/tech/sequelize.svg",
+    "match": [
+      "sequelize",
+      "database",
+      "language"
+    ]
+  },
+  {
+    "key": "sqlalchemy",
+    "label": "SQLAlchemy",
+    "category": "backend",
+    "img": "/icons/tech/sqlalchemy.svg",
+    "mono": true,
+    "match": [
+      "sqlalchemy",
+      "python",
+      "orm"
+    ]
+  },
+  {
+    "key": "openapi",
+    "label": "OpenAPI",
+    "category": "backend",
+    "img": "/icons/tech/openapi.svg",
+    "match": [
+      "openapi",
+      "specification",
+      "api",
+      "open-source"
+    ]
+  },
+  {
+    "key": "swagger",
+    "label": "Swagger",
+    "category": "backend",
+    "img": "/icons/tech/swagger.svg",
+    "match": [
+      "swagger",
+      "api",
+      "development",
+      "software",
+      "tool"
+    ]
+  },
+  {
+    "key": "postgresql",
+    "label": "PostgreSQL",
+    "category": "data",
+    "img": "/icons/tech/postgresql.svg",
+    "match": [
+      "postgresql",
+      "postgres",
+      "pg",
+      "sql",
+      "数据库",
+      "database"
+    ]
+  },
+  {
+    "key": "mysql",
+    "label": "MySQL",
+    "category": "data",
+    "img": "/icons/tech/mysql.svg",
+    "match": [
+      "mysql",
+      "sql",
+      "数据库",
+      "database",
+      "language"
+    ]
+  },
+  {
+    "key": "mariadb",
+    "label": "MariaDB",
+    "category": "data",
+    "img": "/icons/tech/mariadb.svg",
+    "match": [
+      "mariadb",
+      "sql",
+      "database",
+      "open-source"
+    ]
+  },
+  {
+    "key": "sqlite",
+    "label": "SQLite",
+    "category": "data",
+    "img": "/icons/tech/sqlite.svg",
+    "match": [
+      "sqlite",
+      "d1",
+      "sql",
+      "database",
+      "db"
+    ]
+  },
+  {
+    "key": "mongodb",
+    "label": "MongoDB",
+    "category": "data",
+    "img": "/icons/tech/mongodb.svg",
+    "match": [
+      "mongodb",
+      "mongo",
+      "nosql",
+      "database"
+    ]
+  },
+  {
+    "key": "redis",
+    "label": "Redis",
+    "category": "data",
+    "img": "/icons/tech/redis.svg",
+    "match": [
+      "redis",
+      "缓存",
+      "server"
+    ]
+  },
+  {
+    "key": "oracle",
+    "label": "Oracle",
+    "category": "data",
+    "img": "/icons/tech/oracle.svg",
+    "match": [
+      "oracle",
+      "sql",
+      "database"
+    ]
+  },
+  {
+    "key": "microsoftsqlserver",
+    "label": "SQL Server",
+    "category": "data",
+    "img": "/icons/tech/microsoftsqlserver.svg",
+    "match": [
+      "microsoftsqlserver",
+      "sql server",
+      "mssql",
+      "database",
+      "sql",
+      "db"
+    ]
+  },
+  {
+    "key": "elasticsearch",
+    "label": "Elasticsearch",
+    "category": "data",
+    "img": "/icons/tech/elasticsearch.svg",
+    "match": [
+      "elasticsearch",
+      "es",
+      "搜索",
+      "elastic",
+      "data",
+      "logs"
+    ]
+  },
+  {
+    "key": "cassandra",
+    "label": "Cassandra",
+    "category": "data",
+    "img": "/icons/tech/cassandra.svg",
+    "match": [
+      "cassandra",
+      "nosql",
+      "database",
+      "open-source"
+    ]
+  },
+  {
+    "key": "dynamodb",
+    "label": "DynamoDB",
+    "category": "data",
+    "img": "/icons/tech/dynamodb.svg",
+    "match": [
+      "dynamodb",
+      "key-value",
+      "database",
+      "java"
+    ]
+  },
+  {
+    "key": "influxdb",
+    "label": "InfluxDB",
+    "category": "data",
+    "img": "/icons/tech/influxdb.svg",
+    "match": [
+      "influxdb",
+      "database",
+      "monitoring",
+      "open-source",
+      "api"
+    ]
+  },
+  {
+    "key": "neo4j",
+    "label": "Neo4j",
+    "category": "data",
+    "img": "/icons/tech/neo4j.svg",
+    "match": [
+      "neo4j",
+      "图数据库",
+      "database"
+    ]
+  },
+  {
+    "key": "firebase",
+    "label": "Firebase",
+    "category": "data",
+    "img": "/icons/tech/firebase.svg",
+    "match": [
+      "firebase",
+      "auth",
+      "hosting",
+      "storage",
+      "cloud"
+    ]
+  },
+  {
+    "key": "supabase",
+    "label": "Supabase",
+    "category": "data",
+    "img": "/icons/tech/supabase.svg",
+    "match": [
+      "supabase",
+      "authentication",
+      "cloud-computing-platform",
+      "database",
+      "storage"
+    ]
+  },
+  {
+    "key": "appwrite",
+    "label": "Appwrite",
+    "category": "data",
+    "img": "/icons/tech/appwrite.svg",
+    "match": [
+      "appwrite",
+      "cloud",
+      "platform",
+      "server"
+    ]
+  },
+  {
+    "key": "apachekafka",
+    "label": "Kafka",
+    "category": "data",
+    "img": "/icons/tech/apachekafka.svg",
+    "match": [
+      "apachekafka",
+      "kafka",
+      "消息队列",
+      "mq",
+      "streaming",
+      "open-source"
+    ]
+  },
+  {
+    "key": "rabbitmq",
+    "label": "RabbitMQ",
+    "category": "data",
+    "img": "/icons/tech/rabbitmq.svg",
+    "match": [
+      "rabbitmq",
+      "消息队列",
+      "mq",
+      "message-broker",
+      "open-source"
+    ]
+  },
+  {
+    "key": "pytorch",
+    "label": "PyTorch",
+    "category": "ai",
+    "img": "/icons/tech/pytorch.svg",
+    "match": [
+      "pytorch",
+      "torch",
+      "深度学习",
+      "ai",
+      "programming",
+      "framework",
+      "machine-learning",
+      "python"
+    ]
+  },
+  {
+    "key": "tensorflow",
+    "label": "TensorFlow",
+    "category": "ai",
+    "img": "/icons/tech/tensorflow.svg",
+    "match": [
+      "tensorflow",
+      "tf",
+      "深度学习",
+      "ai",
+      "library",
+      "machine-learning",
+      "deep-learning"
+    ]
+  },
+  {
+    "key": "keras",
+    "label": "Keras",
+    "category": "ai",
+    "img": "/icons/tech/keras.svg",
+    "match": [
+      "keras",
+      "ai",
+      "machine-learning",
+      "python",
+      "library"
+    ]
+  },
+  {
+    "key": "scikitlearn",
+    "label": "scikit-learn",
+    "category": "ai",
+    "img": "/icons/tech/scikitlearn.svg",
+    "match": [
+      "scikitlearn",
+      "scikit-learn",
+      "sklearn",
+      "机器学习",
+      "machine-learning",
+      "python",
+      "tool",
+      "library"
+    ]
+  },
+  {
+    "key": "numpy",
+    "label": "NumPy",
+    "category": "ai",
+    "img": "/icons/tech/numpy.svg",
+    "match": [
+      "numpy",
+      "科学计算",
+      "library",
+      "python"
+    ]
+  },
+  {
+    "key": "pandas",
+    "label": "Pandas",
+    "category": "ai",
+    "img": "/icons/tech/pandas.svg",
+    "mono": true,
+    "match": [
+      "pandas",
+      "数据分析",
+      "library",
+      "python"
+    ]
+  },
+  {
+    "key": "matplotlib",
+    "label": "Matplotlib",
+    "category": "ai",
+    "img": "/icons/tech/matplotlib.svg",
+    "match": [
+      "matplotlib",
+      "绘图",
+      "plotting",
+      "library",
+      "math",
+      "visualization"
+    ]
+  },
+  {
+    "key": "jupyter",
+    "label": "Jupyter",
+    "category": "ai",
+    "img": "/icons/tech/jupyter.svg",
+    "match": [
+      "jupyter",
+      "notebook",
+      "programming",
+      "language"
+    ]
+  },
+  {
+    "key": "anaconda",
+    "label": "Anaconda",
+    "category": "ai",
+    "img": "/icons/tech/anaconda.svg",
+    "match": [
+      "anaconda",
+      "conda",
+      "python",
+      "data-science"
+    ]
+  },
+  {
+    "key": "opencv",
+    "label": "OpenCV",
+    "category": "ai",
+    "img": "/icons/tech/opencv.svg",
+    "match": [
+      "opencv",
+      "cv",
+      "视觉",
+      "library",
+      "c/c++",
+      "computer-vision"
+    ]
+  },
+  {
+    "key": "kaggle",
+    "label": "Kaggle",
+    "category": "ai",
+    "img": "/icons/tech/kaggle.svg",
+    "mono": true,
+    "match": [
+      "kaggle",
+      "竞赛",
+      "platform",
+      "auth",
+      "machine-learning"
+    ]
+  },
+  {
+    "key": "apachespark",
+    "label": "Spark",
+    "category": "ai",
+    "img": "/icons/tech/apachespark.svg",
+    "match": [
+      "apachespark",
+      "spark",
+      "大数据",
+      "data-processing",
+      "data-science",
+      "machine-learning"
+    ]
+  },
+  {
+    "key": "hadoop",
+    "label": "Hadoop",
+    "category": "ai",
+    "img": "/icons/tech/hadoop.svg",
+    "match": [
+      "hadoop",
+      "大数据",
+      "framework",
+      "big data",
+      "open-source",
+      "software"
+    ]
+  },
+  {
+    "key": "apacheairflow",
+    "label": "Airflow",
+    "category": "ai",
+    "img": "/icons/tech/apacheairflow.svg",
+    "match": [
+      "apacheairflow",
+      "airflow",
+      "platform",
+      "pipeline",
+      "orchestrator",
+      "open-source"
+    ]
+  },
+  {
+    "key": "plotly",
+    "label": "Plotly",
+    "category": "ai",
+    "img": "/icons/tech/plotly.svg",
+    "match": [
+      "plotly",
+      "frontend",
+      "machine-learning",
+      "dashboard"
+    ]
+  },
+  {
+    "key": "streamlit",
+    "label": "Streamlit",
+    "category": "ai",
+    "img": "/icons/tech/streamlit.svg",
+    "match": [
+      "streamlit",
+      "python",
+      "machine-learning",
+      "data-science"
+    ]
+  },
+  {
+    "key": "opengl",
+    "label": "OpenGL",
+    "category": "ai",
+    "img": "/icons/tech/opengl.svg",
+    "match": [
+      "opengl",
+      "图形学",
+      "library",
+      "graphics",
+      "game",
+      "3d"
+    ]
+  },
+  {
+    "key": "blender",
+    "label": "Blender",
+    "category": "ai",
+    "img": "/icons/tech/blender.svg",
+    "match": [
+      "blender",
+      "3d",
+      "建模",
+      "modelling",
+      "python",
+      "animation"
+    ]
+  },
+  {
+    "key": "unity",
+    "label": "Unity",
+    "category": "ai",
+    "img": "/icons/tech/unity.svg",
+    "mono": true,
+    "match": [
+      "unity",
+      "游戏",
+      "C#",
+      "c-sharp",
+      "csharp",
+      "engine"
+    ]
+  },
+  {
+    "key": "unrealengine",
+    "label": "Unreal Engine",
+    "category": "ai",
+    "img": "/icons/tech/unrealengine.svg",
+    "mono": true,
+    "match": [
+      "unrealengine",
+      "unreal engine",
+      "ue",
+      "虚幻",
+      "c++",
+      "engine",
+      "game-engine"
+    ]
+  },
+  {
+    "key": "godot",
+    "label": "Godot",
+    "category": "ai",
+    "img": "/icons/tech/godot.svg",
+    "match": [
+      "godot",
+      "游戏",
+      "game-engine",
+      "open-source"
+    ]
+  },
+  {
+    "key": "cloudflare",
+    "label": "Cloudflare",
+    "category": "cloud",
+    "img": "/icons/tech/cloudflare.svg",
+    "match": [
+      "cloudflare",
+      "cf",
+      "cdn",
+      "边缘",
+      "web",
+      "dns",
+      "proxy"
+    ]
+  },
+  {
+    "key": "cloudflareworkers",
+    "label": "CF Workers",
+    "category": "cloud",
+    "img": "/icons/tech/cloudflareworkers.svg",
+    "match": [
+      "cloudflareworkers",
+      "cf workers",
+      "workers",
+      "wrangler",
+      "d1",
+      "platform",
+      "serverless",
+      "deploy",
+      "performance"
+    ]
+  },
+  {
+    "key": "amazonwebservices",
+    "label": "AWS",
+    "category": "cloud",
+    "img": "/icons/tech/amazonwebservices.svg",
+    "match": [
+      "amazonwebservices",
+      "aws",
+      "亚马逊云",
+      "cloud",
+      "hosting",
+      "server"
+    ]
+  },
+  {
+    "key": "azure",
+    "label": "Azure",
+    "category": "cloud",
+    "img": "/icons/tech/azure.svg",
+    "match": [
+      "azure",
+      "微软云",
+      "cloud",
+      "devops"
+    ]
+  },
+  {
+    "key": "googlecloud",
+    "label": "Google Cloud",
+    "category": "cloud",
+    "img": "/icons/tech/googlecloud.svg",
+    "match": [
+      "googlecloud",
+      "google cloud",
+      "gcp",
+      "google",
+      "cloud"
+    ]
+  },
+  {
+    "key": "digitalocean",
+    "label": "DigitalOcean",
+    "category": "cloud",
+    "img": "/icons/tech/digitalocean.svg",
+    "match": [
+      "digitalocean",
+      "cloud",
+      "hosting",
+      "database",
+      "storage"
+    ]
+  },
+  {
+    "key": "vercel",
+    "label": "Vercel",
+    "category": "cloud",
+    "img": "/icons/tech/vercel.svg",
+    "mono": true,
+    "match": [
+      "vercel",
+      "hosting",
+      "platform",
+      "deployment",
+      "git"
+    ]
+  },
+  {
+    "key": "netlify",
+    "label": "Netlify",
+    "category": "cloud",
+    "img": "/icons/tech/netlify.svg",
+    "match": [
+      "netlify",
+      "cloud hosting",
+      "serverless",
+      "dynamic websites",
+      "web applications"
+    ]
+  },
+  {
+    "key": "heroku",
+    "label": "Heroku",
+    "category": "cloud",
+    "img": "/icons/tech/heroku.svg",
+    "match": [
+      "heroku",
+      "cloud"
+    ]
+  },
+  {
+    "key": "railway",
+    "label": "Railway",
+    "category": "cloud",
+    "img": "/icons/tech/railway.svg",
+    "mono": true,
+    "match": [
+      "railway",
+      "hosting",
+      "platform",
+      "deployment"
+    ]
+  },
+  {
+    "key": "docker",
+    "label": "Docker",
+    "category": "cloud",
+    "img": "/icons/tech/docker.svg",
+    "match": [
+      "docker",
+      "容器",
+      "platform",
+      "deploy"
+    ]
+  },
+  {
+    "key": "podman",
+    "label": "Podman",
+    "category": "cloud",
+    "img": "/icons/tech/podman.svg",
+    "match": [
+      "podman",
+      "容器",
+      "container",
+      "pods",
+      "docker"
+    ]
+  },
+  {
+    "key": "kubernetes",
+    "label": "Kubernetes",
+    "category": "cloud",
+    "img": "/icons/tech/kubernetes.svg",
+    "match": [
+      "kubernetes",
+      "k8s",
+      "container",
+      "deployment"
+    ]
+  },
+  {
+    "key": "helm",
+    "label": "Helm",
+    "category": "cloud",
+    "img": "/icons/tech/helm.svg",
+    "match": [
+      "helm",
+      "package",
+      "manager",
+      "kubernetes"
+    ]
+  },
+  {
+    "key": "terraform",
+    "label": "Terraform",
+    "category": "cloud",
+    "img": "/icons/tech/terraform.svg",
+    "match": [
+      "terraform",
+      "iac",
+      "deployment",
+      "architecture",
+      "automation"
+    ]
+  },
+  {
+    "key": "ansible",
+    "label": "Ansible",
+    "category": "cloud",
+    "img": "/icons/tech/ansible.svg",
+    "match": [
+      "ansible",
+      "automation",
+      "provisioning",
+      "deployment",
+      "continuous-delivery"
+    ]
+  },
+  {
+    "key": "pulumi",
+    "label": "Pulumi",
+    "category": "cloud",
+    "img": "/icons/tech/pulumi.svg",
+    "match": [
+      "pulumi",
+      "infrastructure-as-code",
+      "cloud"
+    ]
+  },
+  {
+    "key": "nginx",
+    "label": "Nginx",
+    "category": "cloud",
+    "img": "/icons/tech/nginx.svg",
+    "match": [
+      "nginx",
+      "代理",
+      "server"
+    ]
+  },
+  {
+    "key": "apache",
+    "label": "Apache",
+    "category": "cloud",
+    "img": "/icons/tech/apache.svg",
+    "match": [
+      "apache",
+      "php"
+    ]
+  },
+  {
+    "key": "traefikproxy",
+    "label": "Traefik",
+    "category": "cloud",
+    "img": "/icons/tech/traefikproxy.svg",
+    "match": [
+      "traefikproxy",
+      "traefik",
+      "proxy",
+      "router"
+    ]
+  },
+  {
+    "key": "prometheus",
+    "label": "Prometheus",
+    "category": "cloud",
+    "img": "/icons/tech/prometheus.svg",
+    "match": [
+      "prometheus",
+      "监控",
+      "monitoring",
+      "observability",
+      "analysis"
+    ]
+  },
+  {
+    "key": "grafana",
+    "label": "Grafana",
+    "category": "cloud",
+    "img": "/icons/tech/grafana.svg",
+    "match": [
+      "grafana",
+      "监控",
+      "面板",
+      "monitoring",
+      "analytics",
+      "metrics",
+      "logs"
+    ]
+  },
+  {
+    "key": "sentry",
+    "label": "Sentry",
+    "category": "cloud",
+    "img": "/icons/tech/sentry.svg",
+    "match": [
+      "sentry",
+      "monitoring",
+      "analytics",
+      "metrics"
+    ]
+  },
+  {
+    "key": "githubactions",
+    "label": "GitHub Actions",
+    "category": "cloud",
+    "img": "/icons/tech/githubactions.svg",
+    "match": [
+      "githubactions",
+      "github actions",
+      "ci",
+      "cd",
+      "devops",
+      "integration"
+    ]
+  },
+  {
+    "key": "gitlab",
+    "label": "GitLab",
+    "category": "cloud",
+    "img": "/icons/tech/gitlab.svg",
+    "match": [
+      "gitlab",
+      "ci",
+      "version-control"
+    ]
+  },
+  {
+    "key": "jenkins",
+    "label": "Jenkins",
+    "category": "cloud",
+    "img": "/icons/tech/jenkins.svg",
+    "match": [
+      "jenkins",
+      "ci",
+      "platform",
+      "integration",
+      "server"
+    ]
+  },
+  {
+    "key": "argocd",
+    "label": "Argo CD",
+    "category": "cloud",
+    "img": "/icons/tech/argocd.svg",
+    "match": [
+      "argocd",
+      "argo cd",
+      "gitops",
+      "continuous-delivery"
+    ]
+  },
+  {
+    "key": "sonarqube",
+    "label": "SonarQube",
+    "category": "cloud",
+    "img": "/icons/tech/sonarqube.svg",
+    "match": [
+      "sonarqube",
+      "tool",
+      "security"
+    ]
+  },
+  {
+    "key": "vagrant",
+    "label": "Vagrant",
+    "category": "cloud",
+    "img": "/icons/tech/vagrant.svg",
+    "match": [
+      "vagrant",
+      "platform"
+    ]
+  },
+  {
+    "key": "git",
+    "label": "Git",
+    "category": "tools",
+    "img": "/icons/tech/git.svg",
+    "match": [
+      "git",
+      "版本控制",
+      "version-control"
+    ]
+  },
+  {
+    "key": "github",
+    "label": "GitHub",
+    "category": "tools",
+    "img": "/icons/tech/github.svg",
+    "mono": true,
+    "match": [
+      "github",
+      "开源",
+      "version-control"
+    ]
+  },
+  {
+    "key": "bitbucket",
+    "label": "Bitbucket",
+    "category": "tools",
+    "img": "/icons/tech/bitbucket.svg",
+    "match": [
+      "bitbucket",
+      "version-control"
+    ]
+  },
+  {
+    "key": "vscode",
+    "label": "VS Code",
+    "category": "tools",
+    "img": "/icons/tech/vscode.svg",
+    "match": [
+      "vscode",
+      "vs code",
+      "code",
+      "编辑器",
+      "editor",
+      "ide"
+    ]
+  },
+  {
+    "key": "visualstudio",
+    "label": "Visual Studio",
+    "category": "tools",
+    "img": "/icons/tech/visualstudio.svg",
+    "match": [
+      "visualstudio",
+      "visual studio",
+      "vs",
+      "editor"
+    ]
+  },
+  {
+    "key": "clion",
+    "label": "CLion",
+    "category": "tools",
+    "img": "/icons/tech/clion.svg",
+    "match": [
+      "clion",
+      "jetbrains",
+      "c++",
+      "ide",
+      "editor",
+      "c"
+    ]
+  },
+  {
+    "key": "pycharm",
+    "label": "PyCharm",
+    "category": "tools",
+    "img": "/icons/tech/pycharm.svg",
+    "match": [
+      "pycharm",
+      "jetbrains",
+      "python",
+      "ide",
+      "editor"
+    ]
+  },
+  {
+    "key": "intellij",
+    "label": "IntelliJ IDEA",
+    "category": "tools",
+    "img": "/icons/tech/intellij.svg",
+    "match": [
+      "intellij",
+      "intellij idea",
+      "idea",
+      "jetbrains",
+      "java",
+      "editor"
+    ]
+  },
+  {
+    "key": "webstorm",
+    "label": "WebStorm",
+    "category": "tools",
+    "img": "/icons/tech/webstorm.svg",
+    "match": [
+      "webstorm",
+      "jetbrains",
+      "editor"
+    ]
+  },
+  {
+    "key": "goland",
+    "label": "GoLand",
+    "category": "tools",
+    "img": "/icons/tech/goland.svg",
+    "match": [
+      "goland",
+      "jetbrains",
+      "ide",
+      "go"
+    ]
+  },
+  {
+    "key": "rider",
+    "label": "Rider",
+    "category": "tools",
+    "img": "/icons/tech/rider.svg",
+    "match": [
+      "rider",
+      "jetbrains",
+      "ide",
+      "editor",
+      "dotnet"
+    ]
+  },
+  {
+    "key": "datagrip",
+    "label": "DataGrip",
+    "category": "tools",
+    "img": "/icons/tech/datagrip.svg",
+    "match": [
+      "datagrip",
+      "jetbrains",
+      "sql",
+      "ide",
+      "database"
+    ]
+  },
+  {
+    "key": "phpstorm",
+    "label": "PhpStorm",
+    "category": "tools",
+    "img": "/icons/tech/phpstorm.svg",
+    "match": [
+      "phpstorm",
+      "jetbrains",
+      "editor",
+      "php",
+      "web"
+    ]
+  },
+  {
+    "key": "androidstudio",
+    "label": "Android Studio",
+    "category": "tools",
+    "img": "/icons/tech/androidstudio.svg",
+    "match": [
+      "androidstudio",
+      "android studio",
+      "application",
+      "editor",
+      "jetbrains",
+      "ide"
+    ]
+  },
+  {
+    "key": "xcode",
+    "label": "Xcode",
+    "category": "tools",
+    "img": "/icons/tech/xcode.svg",
+    "match": [
+      "xcode",
+      "application",
+      "editor",
+      "ide",
+      "ios"
+    ]
+  },
+  {
+    "key": "vim",
+    "label": "Vim",
+    "category": "tools",
+    "img": "/icons/tech/vim.svg",
+    "match": [
+      "vim",
+      "编辑器",
+      "editor"
+    ]
+  },
+  {
+    "key": "neovim",
+    "label": "Neovim",
+    "category": "tools",
+    "img": "/icons/tech/neovim.svg",
+    "match": [
+      "neovim",
+      "nvim",
+      "编辑器",
+      "text editor",
+      "editor",
+      "ide",
+      "IDE"
+    ]
+  },
+  {
+    "key": "emacs",
+    "label": "Emacs",
+    "category": "tools",
+    "img": "/icons/tech/emacs.svg",
+    "match": [
+      "emacs",
+      "editor"
+    ]
+  },
+  {
+    "key": "cmake",
+    "label": "CMake",
+    "category": "tools",
+    "img": "/icons/tech/cmake.svg",
+    "match": [
+      "cmake",
+      "构建",
+      "c++",
+      "build"
+    ]
+  },
+  {
+    "key": "gcc",
+    "label": "GCC",
+    "category": "tools",
+    "img": "/icons/tech/gcc.svg",
+    "match": [
+      "gcc",
+      "g++",
+      "编译器",
+      "compiler",
+      "linux"
+    ]
+  },
+  {
+    "key": "llvm",
+    "label": "LLVM / Clang",
+    "category": "tools",
+    "img": "/icons/tech/llvm.svg",
+    "match": [
+      "llvm",
+      "llvm / clang",
+      "clang",
+      "编译器",
+      "compiler",
+      "framework",
+      "c++",
+      "open-source"
+    ]
+  },
+  {
+    "key": "gradle",
+    "label": "Gradle",
+    "category": "tools",
+    "img": "/icons/tech/gradle.svg",
+    "match": [
+      "gradle",
+      "open-source",
+      "task-runner"
+    ]
+  },
+  {
+    "key": "maven",
+    "label": "Maven",
+    "category": "tools",
+    "img": "/icons/tech/maven.svg",
+    "match": [
+      "maven",
+      "build"
+    ]
+  },
+  {
+    "key": "vitejs",
+    "label": "Vite",
+    "category": "tools",
+    "img": "/icons/tech/vitejs.svg",
+    "match": [
+      "vitejs",
+      "vite",
+      "构建",
+      "javascript",
+      "build",
+      "compiler",
+      "esbuild"
+    ]
+  },
+  {
+    "key": "webpack",
+    "label": "Webpack",
+    "category": "tools",
+    "img": "/icons/tech/webpack.svg",
+    "match": [
+      "webpack",
+      "package",
+      "manager"
+    ]
+  },
+  {
+    "key": "rollup",
+    "label": "Rollup",
+    "category": "tools",
+    "img": "/icons/tech/rollup.svg",
+    "match": [
+      "rollup",
+      "bundler",
+      "build",
+      "javascript"
+    ]
+  },
+  {
+    "key": "babel",
+    "label": "Babel",
+    "category": "tools",
+    "img": "/icons/tech/babel.svg",
+    "match": [
+      "babel",
+      "javascript",
+      "transpiler"
+    ]
+  },
+  {
+    "key": "eslint",
+    "label": "ESLint",
+    "category": "tools",
+    "img": "/icons/tech/eslint.svg",
+    "match": [
+      "eslint",
+      "linter",
+      "javascript",
+      "code-quality",
+      "coding-style"
+    ]
+  },
+  {
+    "key": "npm",
+    "label": "npm",
+    "category": "tools",
+    "img": "/icons/tech/npm.svg",
+    "match": [
+      "npm",
+      "package",
+      "manager"
+    ]
+  },
+  {
+    "key": "pnpm",
+    "label": "pnpm",
+    "category": "tools",
+    "img": "/icons/tech/pnpm.svg",
+    "match": [
+      "pnpm",
+      "package",
+      "manager"
+    ]
+  },
+  {
+    "key": "yarn",
+    "label": "Yarn",
+    "category": "tools",
+    "img": "/icons/tech/yarn.svg",
+    "match": [
+      "yarn",
+      "package",
+      "manager",
+      "javascript",
+      "js"
+    ]
+  },
+  {
+    "key": "poetry",
+    "label": "Poetry",
+    "category": "tools",
+    "img": "/icons/tech/poetry.svg",
+    "match": [
+      "poetry",
+      "package-manager",
+      "python"
+    ]
+  },
+  {
+    "key": "homebrew",
+    "label": "Homebrew",
+    "category": "tools",
+    "img": "/icons/tech/homebrew.svg",
+    "mono": true,
+    "match": [
+      "homebrew",
+      "brew",
+      "package",
+      "manager",
+      "linux",
+      "apple"
+    ]
+  },
+  {
+    "key": "postman",
+    "label": "Postman",
+    "category": "tools",
+    "img": "/icons/tech/postman.svg",
+    "match": [
+      "postman",
+      "api",
+      "调试",
+      "tool",
+      "testing"
+    ]
+  },
+  {
+    "key": "insomnia",
+    "label": "Insomnia",
+    "category": "tools",
+    "img": "/icons/tech/insomnia.svg",
+    "match": [
+      "insomnia",
+      "api",
+      "open-source",
+      "Rest API",
+      "Soap API",
+      "JSON-XML"
+    ]
+  },
+  {
+    "key": "figma",
+    "label": "Figma",
+    "category": "tools",
+    "img": "/icons/tech/figma.svg",
+    "match": [
+      "figma",
+      "设计",
+      "design"
+    ]
+  },
+  {
+    "key": "photoshop",
+    "label": "Photoshop",
+    "category": "tools",
+    "img": "/icons/tech/photoshop.svg",
+    "match": [
+      "photoshop",
+      "ps",
+      "editor",
+      "graphic"
+    ]
+  },
+  {
+    "key": "notion",
+    "label": "Notion",
+    "category": "tools",
+    "img": "/icons/tech/notion.svg",
+    "mono": true,
+    "match": [
+      "notion",
+      "笔记",
+      "project-management"
+    ]
+  },
+  {
+    "key": "jira",
+    "label": "Jira",
+    "category": "tools",
+    "img": "/icons/tech/jira.svg",
+    "match": [
+      "jira",
+      "platform",
+      "organize"
+    ]
+  },
+  {
+    "key": "slack",
+    "label": "Slack",
+    "category": "tools",
+    "img": "/icons/tech/slack.svg",
+    "match": [
+      "slack",
+      "chat"
+    ]
+  },
+  {
+    "key": "vitest",
+    "label": "Vitest",
+    "category": "tools",
+    "img": "/icons/tech/vitest.svg",
+    "match": [
+      "vitest",
+      "测试",
+      "framework",
+      "open-source",
+      "testing",
+      "vite"
+    ]
+  },
+  {
+    "key": "jest",
+    "label": "Jest",
+    "category": "tools",
+    "img": "/icons/tech/jest.svg",
+    "match": [
+      "jest",
+      "测试",
+      "testing",
+      "javascript"
+    ]
+  },
+  {
+    "key": "mocha",
+    "label": "Mocha",
+    "category": "tools",
+    "img": "/icons/tech/mocha.svg",
+    "match": [
+      "mocha",
+      "测试",
+      "testing"
+    ]
+  },
+  {
+    "key": "pytest",
+    "label": "Pytest",
+    "category": "tools",
+    "img": "/icons/tech/pytest.svg",
+    "match": [
+      "pytest",
+      "测试",
+      "python",
+      "framework",
+      "testing"
+    ]
+  },
+  {
+    "key": "playwright",
+    "label": "Playwright",
+    "category": "tools",
+    "img": "/icons/tech/playwright.svg",
+    "match": [
+      "playwright",
+      "测试",
+      "testing",
+      "framework"
+    ]
+  },
+  {
+    "key": "selenium",
+    "label": "Selenium",
+    "category": "tools",
+    "img": "/icons/tech/selenium.svg",
+    "match": [
+      "selenium",
+      "测试",
+      "webdrive",
+      "automation"
+    ]
+  },
+  {
+    "key": "cypressio",
+    "label": "Cypress",
+    "category": "tools",
+    "img": "/icons/tech/cypressio.svg",
+    "match": [
+      "cypressio",
+      "cypress",
+      "测试",
+      "testing",
+      "framework"
+    ]
+  },
+  {
+    "key": "junit",
+    "label": "JUnit",
+    "category": "tools",
+    "img": "/icons/tech/junit.svg",
+    "match": [
+      "junit",
+      "测试",
+      "testing",
+      "framework",
+      "java"
+    ]
+  },
+  {
+    "key": "tmux",
+    "label": "Tmux",
+    "category": "tools",
+    "img": "/icons/tech/tmux.svg",
+    "match": [
+      "tmux",
+      "终端",
+      "cli",
+      "terminal",
+      "multiplexer"
+    ]
+  },
+  {
+    "key": "ssh",
+    "label": "SSH",
+    "category": "tools",
+    "img": "/icons/tech/ssh.svg",
+    "mono": true,
+    "match": [
+      "ssh",
+      "远程",
+      "security"
+    ]
+  },
+  {
+    "key": "ohmyzsh",
+    "label": "Oh My Zsh",
+    "category": "tools",
+    "img": "/icons/tech/ohmyzsh.svg",
+    "mono": true,
+    "match": [
+      "ohmyzsh",
+      "oh my zsh",
+      "zsh",
+      "终端",
+      "shell",
+      "script",
+      "scripting",
+      "language"
+    ]
+  },
+  {
+    "key": "linux",
+    "label": "Linux",
+    "category": "os",
+    "img": "/icons/tech/linux.svg",
+    "match": [
+      "linux",
+      "系统",
+      "wsl",
+      "os"
+    ]
+  },
+  {
+    "key": "ubuntu",
+    "label": "Ubuntu",
+    "category": "os",
+    "img": "/icons/tech/ubuntu.svg",
+    "match": [
+      "ubuntu",
+      "linux",
+      "os",
+      "open-source"
+    ]
+  },
+  {
+    "key": "debian",
+    "label": "Debian",
+    "category": "os",
+    "img": "/icons/tech/debian.svg",
+    "match": [
+      "debian",
+      "linux",
+      "os",
+      "server"
+    ]
+  },
+  {
+    "key": "archlinux",
+    "label": "Arch Linux",
+    "category": "os",
+    "img": "/icons/tech/archlinux.svg",
+    "match": [
+      "archlinux",
+      "arch linux",
+      "arch",
+      "linux",
+      "distribution",
+      "desktop"
+    ]
+  },
+  {
+    "key": "fedora",
+    "label": "Fedora",
+    "category": "os",
+    "img": "/icons/tech/fedora.svg",
+    "match": [
+      "fedora",
+      "linux",
+      "distribution",
+      "desktop"
+    ]
+  },
+  {
+    "key": "centos",
+    "label": "CentOS",
+    "category": "os",
+    "img": "/icons/tech/centos.svg",
+    "match": [
+      "centos",
+      "linux",
+      "server"
+    ]
+  },
+  {
+    "key": "nixos",
+    "label": "NixOS",
+    "category": "os",
+    "img": "/icons/tech/nixos.svg",
+    "match": [
+      "nixos",
+      "nix",
+      "linux",
+      "os"
+    ]
+  },
+  {
+    "key": "kalilinux",
+    "label": "Kali Linux",
+    "category": "os",
+    "img": "/icons/tech/kalilinux.svg",
+    "match": [
+      "kalilinux",
+      "kali linux",
+      "kali",
+      "安全",
+      "linux",
+      "operating-system",
+      "security"
+    ]
+  },
+  {
+    "key": "gentoo",
+    "label": "Gentoo",
+    "category": "os",
+    "img": "/icons/tech/gentoo.svg",
+    "match": [
+      "gentoo",
+      "linux",
+      "distribution",
+      "desktop"
+    ]
+  },
+  {
+    "key": "opensuse",
+    "label": "openSUSE",
+    "category": "os",
+    "img": "/icons/tech/opensuse.svg",
+    "match": [
+      "opensuse",
+      "linux",
+      "distribution",
+      "desktop"
+    ]
+  },
+  {
+    "key": "redhat",
+    "label": "Red Hat",
+    "category": "os",
+    "img": "/icons/tech/redhat.svg",
+    "match": [
+      "redhat",
+      "red hat",
+      "rhel",
+      "server",
+      "linux"
+    ]
+  },
+  {
+    "key": "windows11",
+    "label": "Windows",
+    "category": "os",
+    "img": "/icons/tech/windows11.svg",
+    "match": [
+      "windows11",
+      "windows",
+      "win",
+      "win11",
+      "os"
+    ]
+  },
+  {
+    "key": "raspberrypi",
+    "label": "Raspberry Pi",
+    "category": "os",
+    "img": "/icons/tech/raspberrypi.svg",
+    "match": [
+      "raspberrypi",
+      "raspberry pi",
+      "树莓派",
+      "硬件",
+      "arm",
+      "computer"
+    ]
+  },
+  {
+    "key": "arduino",
+    "label": "Arduino",
+    "category": "os",
+    "img": "/icons/tech/arduino.svg",
+    "match": [
+      "arduino",
+      "单片机",
+      "硬件",
+      "microcontroller",
+      "hardware"
+    ]
+  },
+  {
+    "key": "embeddedc",
+    "label": "Embedded C",
+    "category": "os",
+    "img": "/icons/tech/embeddedc.svg",
+    "match": [
+      "embeddedc",
+      "embedded c",
+      "嵌入式",
+      "language",
+      "programming"
+    ]
+  },
+  {
+    "key": "ros",
+    "label": "ROS",
+    "category": "os",
+    "img": "/icons/tech/ros.svg",
+    "match": [
+      "ros",
+      "机器人",
+      "robotics"
+    ]
+  },
+  {
+    "key": "algorithm",
+    "label": "算法 / OJ",
+    "category": "general",
+    "kind": "algorithm",
+    "match": [
+      "algorithm",
+      "acm",
+      "oi",
+      "cf",
+      "codeforces",
+      "luogu",
+      "洛谷",
+      "算法",
+      "刷题",
+      "leetcode"
+    ]
+  },
+  {
+    "key": "ai",
+    "label": "AI / 大模型",
+    "category": "general",
+    "kind": "ai",
+    "match": [
+      "ai",
+      "llm",
+      "openai",
+      "claude",
+      "gemini",
+      "agent",
+      "人工智能",
+      "大模型"
+    ]
+  },
+  {
+    "key": "terminal",
+    "label": "终端 / CLI",
+    "category": "general",
+    "kind": "terminal",
+    "match": [
+      "terminal",
+      "cli",
+      "shell",
+      "终端",
+      "命令行"
+    ]
+  },
+  {
+    "key": "database",
+    "label": "数据库 / SQL",
+    "category": "general",
+    "kind": "database",
+    "match": [
+      "database",
+      "db",
+      "sql",
+      "数据库"
+    ]
+  },
+  {
+    "key": "code",
+    "label": "通用代码",
+    "category": "general",
+    "kind": "code",
+    "match": [
+      "code",
+      "代码",
+      "开发"
+    ]
+  }
+]

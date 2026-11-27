@@ -1,8 +1,8 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue';
 import { api } from './cms-client';
-import StackIcon, { STACK_ICON_PRESETS, isPresetIconKey, suggestIconKey } from './StackIcon.vue';
-import { DEFAULT_TECH_STACK, normalizeTechStack } from '../../../../src/site-model.js';
+import StackIcon, { STACK_ICON_CATEGORIES, STACK_ICON_PRESETS, getPresetMeta, isPresetIconKey, suggestIconKey } from './StackIcon.vue';
+import { DEFAULT_TECH_STACK, normalizeTechStack, resolveStackIconKey } from '../../../../src/site-model.js';
 import { reorderNavigation } from '../../../../src/navigation-order.js';
 
 const emit = defineEmits(['dirty-change']);
@@ -21,10 +21,25 @@ const nameInput = ref(null);
 const removing = ref(false);
 const iconMode = ref('preset');
 const manualIcon = ref(false);
+const iconQuery = ref('');
+const iconCategory = ref('all');
 
 const dirty = computed(() => !!draft.value && JSON.stringify(draft.value) !== draftBase.value);
 const isNew = computed(() => !!draft.value && !items.value.some((item) => item.id === draft.value.id));
 const visible = computed(() => items.value.filter((item) => !item.hidden));
+const selectedPreset = computed(() => (draft.value ? getPresetMeta(draft.value.icon) : null));
+const filteredPresets = computed(() => {
+  const q = iconQuery.value.trim().toLowerCase();
+  return STACK_ICON_PRESETS.filter((preset) => {
+    if (iconCategory.value !== 'all' && preset.category !== iconCategory.value) return false;
+    if (!q) return true;
+    return (
+      preset.key.includes(q) ||
+      preset.label.toLowerCase().includes(q) ||
+      (Array.isArray(preset.match) && preset.match.some((kw) => kw.toLowerCase().includes(q)))
+    );
+  });
+});
 
 watch([dirty, busy], () => emit('dirty-change', dirty.value || busy.value));
 
@@ -83,10 +98,12 @@ async function persist(candidate, text) {
 
 function edit(item = null) {
   if (busy.value) return;
-  draft.value = item ? clone(item) : newItem();
+  draft.value = item ? clone({ ...item, icon: resolveStackIconKey(item.icon) || 'code' }) : newItem();
   draftBase.value = JSON.stringify(draft.value);
   iconMode.value = isPresetIconKey(draft.value.icon) ? 'preset' : 'custom';
   manualIcon.value = !!item;
+  iconQuery.value = '';
+  iconCategory.value = 'all';
   removing.value = false;
   error.value = '';
   nextTick(() => {
@@ -449,27 +466,65 @@ onUnmounted(() => {
 
         <div class="cms-field">
           <div class="cms-stack-icon-head">
-            <span>图标</span>
+            <span class="cms-stack-icon-label">
+              图标
+              <span class="cms-stack-selected-pill">
+                <StackIcon :icon="draft.icon" :name="draft.name" />
+                <b>{{ selectedPreset ? selectedPreset.label : (draft.icon ? '自定义链接' : '未选择') }}</b>
+              </span>
+            </span>
             <div class="cms-stack-mode-tabs">
-              <button type="button" :class="{ active: iconMode === 'preset' }" @click="switchIconMode('preset')">内置图标</button>
+              <button type="button" :class="{ active: iconMode === 'preset' }" @click="switchIconMode('preset')">内置图标 ({{ STACK_ICON_PRESETS.length }})</button>
               <button type="button" :class="{ active: iconMode === 'custom' }" @click="switchIconMode('custom')">自定义链接</button>
             </div>
           </div>
 
-          <div v-if="iconMode === 'preset'" class="cms-icon-picker" role="radiogroup" aria-label="选择内置图标">
-            <button
-              v-for="preset in STACK_ICON_PRESETS"
-              :key="preset.key"
-              type="button"
-              class="cms-icon-option"
-              :class="{ 'is-selected': draft.icon === preset.key }"
-              :aria-checked="draft.icon === preset.key"
-              role="radio"
-              @click="choosePresetIcon(preset.key)"
-            >
-              <StackIcon :icon="preset.key" :name="preset.label" />
-              <span>{{ preset.label }}</span>
-            </button>
+          <div v-if="iconMode === 'preset'" class="cms-icon-browser">
+            <div class="cms-icon-search-row">
+              <svg class="cms-icon-search-svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="7.25" cy="7.25" r="4.75"/><path d="m13.5 13.5-2.8-2.8"/>
+              </svg>
+              <input
+                v-model="iconQuery"
+                type="search"
+                class="cms-icon-search-input"
+                placeholder="搜索 230+ 技术栈图标（如 CLion、Rust、PyTorch、SQL、Docker…）"
+                aria-label="搜索内置技术栈图标"
+              />
+              <button v-if="iconQuery" type="button" class="cms-icon-search-clear" @click="iconQuery = ''" aria-label="清除图标搜索">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" aria-hidden="true"><path d="m4.5 4.5 7 7M11.5 4.5l-7 7"/></svg>
+              </button>
+              <span class="cms-icon-search-count">{{ filteredPresets.length }} 项</span>
+            </div>
+
+            <div class="cms-icon-cats" role="tablist" aria-label="图标分类">
+              <button
+                v-for="cat in STACK_ICON_CATEGORIES"
+                :key="cat.key"
+                type="button"
+                role="tab"
+                :aria-selected="iconCategory === cat.key"
+                :class="{ active: iconCategory === cat.key }"
+                @click="iconCategory = cat.key"
+              >{{ cat.label }}</button>
+            </div>
+
+            <div v-if="filteredPresets.length" class="cms-icon-picker" role="radiogroup" aria-label="选择内置图标">
+              <button
+                v-for="preset in filteredPresets"
+                :key="preset.key"
+                type="button"
+                class="cms-icon-option"
+                :class="{ 'is-selected': resolveStackIconKey(draft.icon) === preset.key }"
+                :aria-checked="resolveStackIconKey(draft.icon) === preset.key"
+                role="radio"
+                @click="choosePresetIcon(preset.key)"
+              >
+                <StackIcon :icon="preset.key" :name="preset.label" />
+                <span>{{ preset.label }}</span>
+              </button>
+            </div>
+            <p v-else class="cms-icon-empty">没有匹配的内置图标，可清空搜索或切换到「自定义链接」粘贴任意图片地址。</p>
           </div>
           <div v-else class="cms-stack-custom-icon">
             <span class="cms-stack-icon-box"><StackIcon :icon="draft.icon" :name="draft.name" /></span>
