@@ -1,18 +1,27 @@
 <script setup>
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import { usePlatform } from './platform-state';
+
 const props = defineProps({ platform: { type: String, default: 'cf' } });
 const { data } = usePlatform(props.platform);
 const cf = computed(() => (props.platform === 'cf' ? data.value : { tags: {}, problems: [] }));
 const groups = computed(() => (props.platform === 'luogu' ? data.value.groups : []));
 const query = ref(''), selected = ref(''), page = ref(1);
+const widgetRef = ref(null);
+
 const labels = {
   graphs: '图论', dp: '动态规划', greedy: '贪心', 'data structures': '数据结构', strings: '字符串',
   math: '数学', 'shortest paths': '最短路', 'binary search': '二分', 'two pointers': '双指针',
   dsu: '并查集', 'dfs and similar': '搜索', 'number theory': '数论', 'constructive algorithms': '构造',
   implementation: '模拟', 'brute force': '枚举', sortings: '排序',
 };
-const tagOptions = ['graphs', 'dp', 'data structures', 'greedy', 'math', 'strings', 'binary search', 'shortest paths', 'dsu'];
+
+const tagOptions = [
+  'greedy', 'math', 'strings', 'dp', 'graphs', 'data structures',
+  'sortings', 'binary search', 'constructive algorithms', 'dfs and similar',
+  'number theory', 'two pointers', 'shortest paths', 'dsu',
+];
+
 const filtered = computed(() =>
   props.platform === 'cf'
     ? cf.value.problems.filter(
@@ -28,6 +37,7 @@ const filtered = computed(() =>
           `${p.id} ${p.name}`.toLowerCase().includes(query.value.trim().toLowerCase())
       )
 );
+
 const size = computed(() => (props.platform === 'cf' ? 10 : 30));
 const totalPages = computed(() => Math.max(1, Math.ceil(filtered.value.length / size.value)));
 const visible = computed(() => filtered.value.slice((page.value - 1) * size.value, page.value * size.value));
@@ -38,9 +48,20 @@ const url = (p) =>
   props.platform === 'cf'
     ? `https://codeforces.com/${p.gym ? 'gym' : 'contest'}/${p.contestId}/problem/${p.index}`
     : `https://www.luogu.com.cn/problem/${p.id}`;
+
+onMounted(() => {
+  if (props.platform !== 'cf' || typeof window === 'undefined') return;
+  const tagParam = new URLSearchParams(window.location.search).get('tag');
+  if (tagParam && tagOptions.includes(tagParam)) {
+    selected.value = tagParam;
+    if (window.location.hash === '#problems') {
+      requestAnimationFrame(() => widgetRef.value?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+    }
+  }
+});
 </script>
 <template>
-<div class="archive-widget">
+<div id="problems" ref="widgetRef" class="archive-widget">
   <div class="archive-controls">
     <label class="archive-search">
       <svg class="archive-search-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7.25" cy="7.25" r="4.75"/><path d="m13.5 13.5-2.8-2.8"/></svg>
@@ -52,7 +73,7 @@ const url = (p) =>
     <select v-model="selected" :aria-label="platform==='cf'?'按算法筛选':'按难度筛选'">
       <option value="">{{ platform==='cf' ? '全部算法' : '全部难度' }}</option>
       <template v-if="platform==='cf'">
-        <option v-for="tag in tagOptions" :key="tag" :value="tag">{{ labels[tag] }} · {{ cf.tags[tag] }}</option>
+        <option v-for="tag in tagOptions" :key="tag" :value="tag">{{ labels[tag] }} · {{ cf.tags[tag] || 0 }}</option>
       </template>
       <template v-else>
         <option v-for="g in groups" :key="g.name" :value="g.name">{{ g.name }} · {{ g.ids.length }}</option>
@@ -60,7 +81,7 @@ const url = (p) =>
     </select>
   </div>
   <div v-if="platform==='cf'" class="archive-topics">
-    <button v-for="tag in tagOptions.slice(0,6)" :key="tag" :class="{active:selected===tag}" @click="selected=selected===tag?'':tag">{{ labels[tag] }} <span>{{ cf.tags[tag] }}</span></button>
+    <button v-for="tag in tagOptions.slice(0,6)" :key="tag" :class="{active:selected===tag}" @click="selected=selected===tag?'':tag">{{ labels[tag] }} <span>{{ cf.tags[tag] || 0 }}</span></button>
   </div>
   <div v-else class="luogu-legend">
     <span v-for="g in groups" :key="g.name"><i :style="{background:g.color}"></i>{{ g.name }} <b>{{ g.ids.length }}</b></span>

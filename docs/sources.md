@@ -9,7 +9,7 @@ article: false
 
 ## 技术图标
 
-各技术官网与官方品牌资源，以及 [Devicon](https://github.com/devicons/devicon)。图标用于展示技术生态。
+各技术官网与官方品牌资源，以及 [Devicon](https://github.com/devicons/devicon)。图标用于展示常用语言与工具。
 
 ## 算法平台
 
