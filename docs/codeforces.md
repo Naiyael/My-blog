@@ -6,11 +6,11 @@ layout: page
 <ClientOnly>
 <ManagedPage page-key="codeforces">
 
-## Rating
+<PlatformSummary platform="cf" />
+
+## Rating 曲线
 
 <RatingHistory />
-
-<PlatformSummary platform="cf" />
 
 ## 提交动态
 

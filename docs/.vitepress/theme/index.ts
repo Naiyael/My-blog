@@ -21,6 +21,7 @@ import PlatformSummary from './components/PlatformSummary.vue';
 import RecentSubmissions from './components/RecentSubmissions.vue';
 import ManagedPage from './components/ManagedPage.vue';
 import ContentStats from './components/ContentStats.vue';
+import LuoguInsights from './components/LuoguInsights.vue';
 export default {
   extends: Teek,
   Layout,
@@ -34,5 +35,6 @@ export default {
     app.component('RecentSubmissions', RecentSubmissions);
     app.component('ManagedPage', ManagedPage);
     app.component('ContentStats', ContentStats);
+    app.component('LuoguInsights', LuoguInsights);
   },
 };

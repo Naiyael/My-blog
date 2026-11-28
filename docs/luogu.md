@@ -8,6 +8,8 @@ layout: page
 
 <PlatformSummary platform="luogu" />
 
+<LuoguInsights />
+
 ## 通过题目
 
 <ProblemArchive platform="luogu" />
