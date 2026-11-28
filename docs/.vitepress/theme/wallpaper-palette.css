@@ -3769,3 +3769,15 @@ html.dark .cms-studio-actions .cms-danger-text:hover:not(:disabled) {
   background: rgba(244, 114, 152, .16);
   color: #ffb0c7;
 }
+
+.cms-cover-url-row .cms-cover-thumb {
+  width: 56px;
+  height: 36px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid #cce0ea;
+}
+html.dark .cms-cover-url-row .cms-cover-thumb {
+  border-color: rgba(102, 182, 209, .28);
+}

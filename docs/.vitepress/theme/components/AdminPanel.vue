@@ -2,7 +2,6 @@
 import {ref,computed,watch,onMounted,onUnmounted,nextTick} from 'vue';
 import {api,categoryLabel,dateLabel,readingStats} from './cms-client';
 import ArticleContent from './ArticleContent.vue';
-import CoverPreview from './CoverPreview.vue';
 import NavigationEditor from './NavigationEditor.vue';
 import StackEditor from './StackEditor.vue';
 import {movePostOrder} from '../../../../src/post-order.js';
@@ -228,7 +227,7 @@ onUnmounted(()=>{loadSequence++;cancelCardDrag();window.removeEventListener('bef
               </summary>
               <div class="cms-extra-content">
                 <label class="cms-field"><span>摘要 <small>可留空，保存时自动取正文前 130 字</small></span><textarea v-model="editor.excerpt" rows="2" maxlength="400" placeholder="简短概括文章核心内容…" aria-label="文章摘要"></textarea></label>
-                <div class="cms-cover-field"><span>封面 <small>可选 · 建议 16:9 横图</small></span><p class="cms-field-help">填写 <code>https://</code> 图床链接或站内 <code>/images/</code> 路径{{uploadsEnabled?'，或直接本地上传（最大 5 MB）':''}}。</p><div class="cms-cover-url-row"><input v-model.trim="editor.cover" type="url" maxlength="500" placeholder="https://example.com/cover.jpg 或 /images/mountain-lake.jpg" aria-label="封面图片链接"><button v-if="uploadsEnabled" type="button" @click="coverInput.click()">{{uploading?'上传中…':editor.cover?'更换上传':'上传'}}</button><button v-if="editor.cover" type="button" @click="editor.cover=''">移除封面</button></div><CoverPreview :post="editor" /></div>
+                <div class="cms-cover-field"><span>封面 <small>可选 · 建议 16:9 横图</small></span><p class="cms-field-help">填写 <code>https://</code> 图床链接或站内 <code>/images/</code> 路径{{uploadsEnabled?'，或直接本地上传（最大 5 MB）':''}}。</p><div class="cms-cover-url-row"><img v-if="editor.cover" class="cms-cover-thumb" :src="editor.cover" alt="封面预览"><input v-model.trim="editor.cover" type="url" maxlength="500" placeholder="https://example.com/cover.jpg 或 /images/mountain-lake.jpg" aria-label="封面图片链接"><button v-if="uploadsEnabled" type="button" @click="coverInput.click()">{{uploading?'上传中…':editor.cover?'更换上传':'上传'}}</button><button v-if="editor.cover" type="button" @click="editor.cover=''">移除</button></div></div>
               </div>
             </details>
 
