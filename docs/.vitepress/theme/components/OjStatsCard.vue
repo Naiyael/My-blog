@@ -24,16 +24,6 @@ const TOPIC_META = [
   { key: 'constructive algorithms', label: '构造', tone: 'indigo' },
 ];
 
-const VERDICT_MAP = {
-  OK: { label: 'AC', cls: 'is-ac' },
-  WRONG_ANSWER: { label: 'WA', cls: 'is-wa' },
-  TIME_LIMIT_EXCEEDED: { label: 'TLE', cls: 'is-tle' },
-  MEMORY_LIMIT_EXCEEDED: { label: 'MLE', cls: 'is-tle' },
-  RUNTIME_ERROR: { label: 'RE', cls: 'is-wa' },
-  COMPILATION_ERROR: { label: 'CE', cls: 'is-other' },
-  TESTING: { label: 'RUN', cls: 'is-other' },
-};
-
 const LUOGU_COLORS = {
   Gray: { label: '灰名', hex: '#94a3b8' },
   Blue: { label: '蓝名', hex: '#3b82f6' },
@@ -96,7 +86,6 @@ const luoguGroups = computed(() => {
 });
 
 // Build a compact 42-day (14 x 3) activity heatmap from Luogu dailyCounts.
-// Anchor to today if there is recent activity within 42 days; otherwise anchor to the latest active date so the strip stays meaningful.
 const luoguHeatmap = computed(() => {
   const counts = luoguProfile.value.dailyCounts;
   if (!counts || typeof counts !== 'object') return null;
@@ -134,16 +123,6 @@ const luoguHeatmap = computed(() => {
     range: `${short(cells[0].date)}–${short(cells[cells.length - 1].date)}`,
   };
 });
-
-const recentSubs = computed(() =>
-  (Array.isArray(cf.value.recentSubmissions) ? cf.value.recentSubmissions : []).slice(0, 4).map((sub) => {
-    const v = VERDICT_MAP[sub.verdict] || { label: String(sub.verdict || '—').slice(0, 3), cls: 'is-other' };
-    const date = sub.date
-      ? new Date(sub.date).toLocaleDateString('zh-CN', { timeZone: 'Asia/Shanghai', month: '2-digit', day: '2-digit' })
-      : '';
-    return { ...sub, badge: v.label, badgeCls: v.cls, shortDate: date };
-  })
-);
 </script>
 
 <template>
@@ -184,9 +163,9 @@ const recentSubs = computed(() =>
     </a>
   </div>
 
-  <!-- 3-tab insights: CF Algorithm Topics / Luogu Difficulty + Profile + Heatmap / CF Recent Submissions -->
-  <div v-if="topTopics.length || luoguGroups.length || recentSubs.length" class="oj-insights">
-    <div class="oj-tabs is-three" role="tablist" aria-label="算法画像与刷题动态">
+  <!-- 2-tab symmetric insights: CF Algorithm Topics & Luogu Difficulty + Profile + Heatmap -->
+  <div v-if="topTopics.length || luoguGroups.length" class="oj-insights">
+    <div class="oj-tabs" role="tablist" aria-label="Codeforces 与洛谷刷题画像">
       <button
         type="button"
         role="tab"
@@ -200,14 +179,7 @@ const recentSubs = computed(() =>
         :aria-selected="activeTab === 'luogu'"
         :class="{ 'is-active': activeTab === 'luogu' }"
         @click="activeTab = 'luogu'"
-      >洛谷</button>
-      <button
-        type="button"
-        role="tab"
-        :aria-selected="activeTab === 'recent'"
-        :class="{ 'is-active': activeTab === 'recent' }"
-        @click="activeTab = 'recent'"
-      >最近提交</button>
+      >洛谷难度</button>
     </div>
 
     <!-- Tab 1: Codeforces Top Topics -->
@@ -221,10 +193,14 @@ const recentSubs = computed(() =>
           <span class="oj-topic-bar" :class="'tone-' + topic.tone" :style="{ width: topic.pct + '%' }"></span>
         </div>
       </a>
+      <a href="/codeforces.html" class="oj-panel-more">
+        <span>CF 题库</span>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9M8.5 4l4 4-4 4"/></svg>
+      </a>
     </div>
 
     <!-- Tab 2: Luogu Profile + Difficulty Distribution + Activity Heatmap -->
-    <div v-else-if="activeTab === 'luogu'" class="oj-luogu-panel" role="tabpanel" aria-label="洛谷难度分布与刷题活跃度">
+    <div v-else class="oj-luogu-panel" role="tabpanel" aria-label="洛谷难度分布与刷题活跃度">
       <div v-if="luoguBadge || luoguProfile.gu || luoguProfile.elo" class="oj-lg-badges">
         <span v-if="luoguBadge" class="oj-lg-pill" :style="{ '--lg-color': luoguBadge.hex }">
           <i aria-hidden="true"></i>{{ luoguBadge.label }}
@@ -265,30 +241,6 @@ const recentSubs = computed(() =>
         <span>洛谷题库</span>
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9M8.5 4l4 4-4 4"/></svg>
       </a>
-    </div>
-
-    <!-- Tab 3: Codeforces Recent Submissions -->
-    <div v-else class="oj-recent-panel" role="tabpanel" aria-label="最近 Codeforces 提交">
-      <template v-if="recentSubs.length">
-        <a
-          v-for="sub in recentSubs"
-          :key="sub.id"
-          :href="sub.url"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="oj-sub-row"
-          :title="`${sub.problemId} ${sub.name} (${sub.badge})`"
-        >
-          <span class="oj-sub-verdict" :class="sub.badgeCls">{{ sub.badge }}</span>
-          <span class="oj-sub-title"><b>{{ sub.problemId }}</b> {{ sub.name }}</span>
-          <time class="oj-sub-date">{{ sub.shortDate }}</time>
-        </a>
-        <a href="/codeforces.html" class="oj-panel-more">
-          <span>全部记录</span>
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9M8.5 4l4 4-4 4"/></svg>
-        </a>
-      </template>
-      <p v-else class="oj-empty-note">暂无最近提交记录</p>
     </div>
   </div>
 </section>
