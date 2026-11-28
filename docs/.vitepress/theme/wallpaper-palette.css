@@ -2940,3 +2940,138 @@ html.dark .cms-icon-cats button.active {
   border-color: rgba(56, 201, 220, .42);
   color: #8ce7f2;
 }
+
+
+/* ==========================================================================
+   OJ Stats Card: 3-Tab Switch + Luogu Profile, Difficulty & 42-Day Heatmap
+   ========================================================================== */
+.oj-tabs.is-three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.oj-tabs.is-three button {
+  padding: 5px 4px;
+  font-size: 10.5px;
+  white-space: nowrap;
+}
+.oj-split-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.oj-lg-color-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.oj-luogu-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.oj-lg-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.oj-lg-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2.5px 7px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--lg-color, #22a06b);
+  background: rgba(232, 246, 250, .78);
+  border: 1px solid rgba(196, 224, 234, .85);
+  font-variant-numeric: tabular-nums;
+}
+.oj-lg-pill > i {
+  width: 5.5px;
+  height: 5.5px;
+  border-radius: 50%;
+  background: var(--lg-color, #22a06b);
+  flex-shrink: 0;
+}
+.oj-lg-pill.is-metric {
+  color: #4b6880;
+  background: rgba(238, 232, 249, .72);
+  border-color: #dfd4ee;
+}
+.oj-lg-pill.is-metric b {
+  font-family: var(--vp-font-family-mono);
+  font-weight: 600;
+  color: var(--folio-violet);
+}
+.oj-lg-diff-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.oj-lg-diff-name > i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.oj-heatmap {
+  padding-top: 8px;
+  border-top: 1px dashed rgba(196, 224, 234, .8);
+}
+.oj-heatmap-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 6px;
+  font-size: 10.5px;
+  color: #537086;
+}
+.oj-heatmap-head > span {
+  font-weight: 500;
+}
+.oj-heatmap-head > small {
+  font-family: var(--vp-font-family-mono);
+  font-size: 9.5px;
+  font-variant-numeric: tabular-nums;
+  color: #6b8499;
+}
+.oj-heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(14, minmax(0, 1fr));
+  gap: 3px;
+}
+.oj-heat-cell {
+  aspect-ratio: 1;
+  border-radius: 2.5px;
+  background: rgba(196, 222, 234, .48);
+  transition: transform .14s ease;
+}
+.oj-heat-cell:hover {
+  transform: scale(1.22);
+}
+.oj-heat-cell.lv-1 { background: #9be0d4; }
+.oj-heat-cell.lv-2 { background: #46c1c4; }
+.oj-heat-cell.lv-3 { background: #1496a8; }
+.oj-heat-cell.lv-4 { background: #7860a4; }
+
+/* Dark Glassmorphism for Luogu Tab & Heatmap */
+html.dark .oj-lg-pill {
+  background: rgba(20, 36, 60, .82);
+  border-color: rgba(102, 182, 209, .24);
+}
+html.dark .oj-lg-pill.is-metric {
+  background: rgba(34, 28, 60, .82);
+  border-color: rgba(182, 154, 240, .24);
+  color: #b4cde2;
+}
+html.dark .oj-heatmap { border-top-color: rgba(102, 182, 209, .2); }
+html.dark .oj-heatmap-head { color: #b7d0e5; }
+html.dark .oj-heatmap-head > small { color: #839db5; }
+html.dark .oj-heat-cell { background: rgba(54, 82, 114, .42); }
+html.dark .oj-heat-cell.lv-1 { background: rgba(56, 201, 220, .32); }
+html.dark .oj-heat-cell.lv-2 { background: rgba(56, 201, 220, .58); }
+html.dark .oj-heat-cell.lv-3 { background: #38c9dc; }
+html.dark .oj-heat-cell.lv-4 { background: #b69af0; }

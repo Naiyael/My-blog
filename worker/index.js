@@ -8,7 +8,7 @@ const memory = new Map();
 const pending = new Map();
 
 async function platformData(name, request, ctx) {
-  const key = new Request(new URL('/__platform-cache-v2/' + name, request.url));
+  const key = new Request(new URL('/__platform-cache-v3/' + name, request.url));
   let saved = memory.get(name);
   if (!saved && typeof caches !== 'undefined') {
     try {

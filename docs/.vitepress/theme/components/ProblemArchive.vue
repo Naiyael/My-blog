@@ -50,12 +50,23 @@ const url = (p) =>
     : `https://www.luogu.com.cn/problem/${p.id}`;
 
 onMounted(() => {
-  if (props.platform !== 'cf' || typeof window === 'undefined') return;
-  const tagParam = new URLSearchParams(window.location.search).get('tag');
-  if (tagParam && tagOptions.includes(tagParam)) {
-    selected.value = tagParam;
-    if (window.location.hash === '#problems') {
-      requestAnimationFrame(() => widgetRef.value?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  if (typeof window === 'undefined') return;
+  const params = new URLSearchParams(window.location.search);
+  if (props.platform === 'cf') {
+    const tagParam = params.get('tag');
+    if (tagParam && tagOptions.includes(tagParam)) {
+      selected.value = tagParam;
+      if (window.location.hash === '#problems') {
+        requestAnimationFrame(() => widgetRef.value?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+      }
+    }
+  } else if (props.platform === 'luogu') {
+    const groupParam = params.get('group');
+    if (groupParam && groups.value.some((g) => g.name === groupParam)) {
+      selected.value = groupParam;
+      if (window.location.hash === '#problems') {
+        requestAnimationFrame(() => widgetRef.value?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+      }
     }
   }
 });

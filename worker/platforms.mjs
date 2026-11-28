@@ -15,17 +15,68 @@ export async function fetchCodeforces(fetcher=fetch, delay=wait) {
   return buildCodeforces(users[0],history,submissions);
 }
 export const luoguDifficulties=[['未评级','#a4a4a4'],['入门','#ef667b'],['普及−','#e6a14b'],['普及','#d7b641'],['普及+/提高−','#80b86b'],['提高','#55b9b1'],['省选/NOI−','#8b80c9'],['NOI/NOI+/CTSC','#795486']];
-export function parseLuogu(html, now = new Date().toISOString()) {
-  const match=html.match(/<script\b[^>]*id=["']lentille-context["'][^>]*>([\s\S]*?)<\/script>/i);
-  if(!match)throw new Error('Luogu data unavailable');
-  const context=JSON.parse(match[1]);const d=context.data;
-  if(context.status!==200||!Array.isArray(d?.passed)||d?.user?.uid!==1589332)throw new Error('Luogu practice data unavailable');
-  const unique=new Map(d.passed.map(p=>[p.pid,p]));
-  const problems=[...unique.values()].map(p=>{const [group,color]=luoguDifficulties[p.difficulty]??luoguDifficulties[0];return {id:p.pid,name:p.name,group,color,difficulty:p.difficulty};});
-  const groups=luoguDifficulties.map(([name,color],difficulty)=>({name,color,ids:problems.filter(p=>p.difficulty===difficulty).map(p=>p.id)})).filter(g=>g.ids.length);
-  return {uid:1589332,handle:d.user.name,solved:problems.length,attempted:new Set([...problems.map(p=>p.id),...(d.submitted??[]).map(p=>p.pid)]).size,problems,groups,syncedAt:now};
+function extractLentille(html) {
+  if (typeof html !== 'string' || !html) return null;
+  const match = html.match(/<script\b[^>]*id=["']lentille-context["'][^>]*>([\s\S]*?)<\/script>/i);
+  if (!match) return null;
+  try { return JSON.parse(match[1]); } catch { return null; }
 }
-export async function fetchLuogu(fetcher=fetch) {
-  const r=await fetcher('https://www.luogu.com.cn/user/1589332/practice',{signal:AbortSignal.timeout(18000)});
-  if(!r.ok)throw new Error('Luogu unavailable');return parseLuogu(await r.text());
+function latestLuoguElo(eloList) {
+  if (!Array.isArray(eloList) || !eloList.length) return null;
+  const latest = eloList.find(e => e?.latest) || [...eloList].sort((a, b) => (b?.time ?? 0) - (a?.time ?? 0))[0];
+  return typeof latest?.rating === 'number' ? { rating: latest.rating, contest: latest.contest?.name || '' } : null;
+}
+function sanitizeDailyCounts(raw) {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return {};
+  const out = {};
+  for (const [date, val] of Object.entries(raw)) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) continue;
+    const count = Array.isArray(val) ? Number(val[0]) : Number(val);
+    if (Number.isFinite(count) && count > 0) out[date] = Math.round(count);
+  }
+  return out;
+}
+export function parseLuoguProfile(html) {
+  const ctx = extractLentille(html);
+  const d = ctx?.data;
+  if (ctx?.status !== 200 || d?.user?.uid !== 1589332) return null;
+  const elo = latestLuoguElo(d.elo);
+  return {
+    color: typeof d.user?.color === 'string' ? d.user.color : '',
+    ranking: typeof d.user?.ranking === 'number' ? d.user.ranking : null,
+    gu: typeof d.gu?.rating === 'number' ? d.gu.rating : null,
+    elo: elo?.rating ?? null,
+    eloContest: elo?.contest ?? '',
+    dailyCounts: sanitizeDailyCounts(d.dailyCounts),
+  };
+}
+export function parseLuogu(html, now = new Date().toISOString(), profileHtml = '') {
+  const context = extractLentille(html);
+  if (!context) throw new Error('Luogu data unavailable');
+  const d = context.data;
+  if (context.status !== 200 || !Array.isArray(d?.passed) || d?.user?.uid !== 1589332) throw new Error('Luogu practice data unavailable');
+  const unique = new Map(d.passed.map(p => [p.pid, p]));
+  const problems = [...unique.values()].map(p => { const [group, color] = luoguDifficulties[p.difficulty] ?? luoguDifficulties[0]; return { id: p.pid, name: p.name, group, color, difficulty: p.difficulty }; });
+  const groups = luoguDifficulties.map(([name, color], difficulty) => ({ name, color, ids: problems.filter(p => p.difficulty === difficulty).map(p => p.id) })).filter(g => g.ids.length);
+  const extra = parseLuoguProfile(profileHtml);
+  const fallbackElo = latestLuoguElo(d.elo);
+  const profile = {
+    color: extra?.color || (typeof d.user?.color === 'string' ? d.user.color : ''),
+    ranking: extra?.ranking ?? (typeof d.user?.ranking === 'number' ? d.user.ranking : null),
+    gu: extra?.gu ?? null,
+    elo: extra?.elo ?? fallbackElo?.rating ?? null,
+    eloContest: extra?.eloContest || fallbackElo?.contest || '',
+    dailyCounts: extra?.dailyCounts ?? {},
+  };
+  return { uid: 1589332, handle: d.user.name, solved: problems.length, attempted: new Set([...problems.map(p => p.id), ...(d.submitted ?? []).map(p => p.pid)]).size, problems, groups, profile, syncedAt: now };
+}
+export async function fetchLuogu(fetcher = fetch) {
+  const [practiceRes, profileRes] = await Promise.allSettled([
+    fetcher('https://www.luogu.com.cn/user/1589332/practice', { signal: AbortSignal.timeout(18000) }),
+    fetcher('https://www.luogu.com.cn/user/1589332', { signal: AbortSignal.timeout(12000) }),
+  ]);
+  if (practiceRes.status !== 'fulfilled' || !practiceRes.value.ok) throw new Error('Luogu unavailable');
+  const practiceHtml = await practiceRes.value.text();
+  const profileHtml = profileRes.status === 'fulfilled' && profileRes.value.ok ? await profileRes.value.text().catch(() => '') : '';
+  return parseLuogu(practiceHtml, new Date().toISOString(), profileHtml);
 }
